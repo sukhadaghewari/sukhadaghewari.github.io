@@ -1,0 +1,7 @@
+---
+# The browser-tab icon. It shows the first letter of your name automatically.
+layout: null
+sitemap: false
+---
+{%- assign name_parts = site.title | split: " " -%}
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><circle cx="32" cy="32" r="32" fill="#ECE6FB"/><text x="32" y="44" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="36" font-weight="600" fill="#634E9E">{{ name_parts.first | slice: 0 | xml_escape }}</text></svg>

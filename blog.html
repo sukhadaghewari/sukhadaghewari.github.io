@@ -1,0 +1,62 @@
+---
+title: Blog
+permalink: /blog/
+rail: blog
+---
+<h1 class="sr-only">Blog</h1>
+{%- assign years = site.posts | group_by_exp: "post", "post.date | date: '%Y'" %}
+{%- if years.size == 0 %}
+<p class="empty">No posts yet.</p>
+{%- endif %}
+{%- for year in years %}
+<section class="year-group" aria-labelledby="year-{{ year.name }}">
+  <h2 class="year" id="year-{{ year.name }}">{{ year.name }}</h2>
+  <ul class="posts">
+    {%- for post in year.items %}
+    <li data-tags="{% for t in post.tags %}{{ t | slugify }} {% endfor %}">
+      <div>
+        <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
+        {%- if post.description %}
+        <p>{{ post.description }}</p>
+        {%- endif %}
+      </div>
+      <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%-d %b" }}</time>
+    </li>
+    {%- endfor %}
+  </ul>
+</section>
+{%- endfor %}
+<p class="empty" id="no-match" hidden>No posts on this topic yet.</p>
+
+<script>
+  // Topics filter: show only the posts with the chosen topic.
+  (function () {
+    var buttons = document.querySelectorAll("[data-topic]");
+    if (!buttons.length) return;
+    var posts = document.querySelectorAll(".posts li");
+    var groups = document.querySelectorAll(".year-group");
+    var none = document.getElementById("no-match");
+    function apply(topic) {
+      var shown = 0;
+      posts.forEach(function (li) {
+        var tags = (li.getAttribute("data-tags") || "").split(" ");
+        li.hidden = topic !== "all" && tags.indexOf(topic) === -1;
+        if (!li.hidden) shown++;
+      });
+      groups.forEach(function (g) { g.hidden = !g.querySelector(".posts li:not([hidden])"); });
+      if (none) none.hidden = shown > 0;
+      buttons.forEach(function (b) {
+        b.setAttribute("aria-pressed", b.getAttribute("data-topic") === topic ? "true" : "false");
+      });
+    }
+    buttons.forEach(function (b) {
+      b.addEventListener("click", function () {
+        var topic = b.getAttribute("data-topic");
+        apply(topic);
+        try { history.replaceState(null, "", topic === "all" ? location.pathname : "#topic-" + topic); } catch (e) {}
+      });
+    });
+    var match = location.hash.match(/^#topic-(.+)$/);
+    if (match) apply(decodeURIComponent(match[1]));
+  })();
+</script>

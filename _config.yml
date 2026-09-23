@@ -1,0 +1,96 @@
+# ---------------------------------------------------------------
+# YOUR DETAILS
+# Edit these lines, click "Commit changes", and the site updates
+# in about a minute. Keep the quotes around links.
+# ---------------------------------------------------------------
+
+title: Your Name
+tagline: Applied ML for climate adaptation, forests and health
+description: >-
+  Applied machine learning for climate adaptation, forests and health:
+  early warning for extreme weather, forest monitoring from space, and health AI.
+location: Pune, India
+
+# Small tags under your name on the home page
+topics:
+  - Extreme-weather early warning
+  - Forest monitoring
+  - Health AI
+
+# Links under your name on the home page, in this order.
+# To remove one, delete both of its lines.
+links:
+  - name: Email
+    url: "mailto:you@example.com"
+  - name: GitHub
+    url: "https://github.com/yourusername"
+  - name: Google Scholar
+    url: "https://scholar.google.com/"
+  - name: LinkedIn
+    url: "https://www.linkedin.com/in/yourname"
+  - name: Bluesky
+    url: "https://bsky.app/profile/yourname.bsky.social"
+  - name: X
+    url: "https://x.com/yourusername"
+  - name: Substack
+    url: "https://yourname.substack.com"
+
+# Your photo. Upload a square picture as assets/img/photo.jpg,
+# then remove the # at the start of the next line.
+# Without a photo, your initials are shown instead.
+# photo: /assets/img/photo.jpg
+
+# Your CV as a PDF, for the "Download CV" button on the home page.
+# Upload it as assets/cv.pdf. Delete this line to hide the button.
+cv_pdf: /assets/cv.pdf
+
+# Cover photo: the wide strip at the top of the home page, with your
+# photo overlapping it.
+# Upload yours as assets/img/cover.jpg, then change ".svg" to ".jpg"
+# on the next line. Put a # at the start of the line to hide the cover.
+cover: /assets/img/cover.svg
+# Which part of the photo to keep when it's cropped: top, center or bottom.
+cover_position: center
+
+# Tabs at the top of every page
+nav:
+  - name: Home
+    url: /
+  - name: Blog
+    url: /blog/
+
+
+# ---------------------------------------------------------------
+# SITE SETTINGS
+# You shouldn't need to change anything below this line.
+# ---------------------------------------------------------------
+
+timezone: Asia/Kolkata
+permalink: /blog/:year/:title/
+
+markdown: kramdown
+kramdown:
+  input: GFM
+  hard_wrap: false
+  footnote_backlink: "↩︎"
+
+plugins:
+  - jekyll-feed
+  - jekyll-sitemap
+
+# Every post uses the post layout, and every page the default one,
+# so new files only need a title.
+defaults:
+  - scope:
+      path: ""
+      type: posts
+    values:
+      layout: post
+  - scope:
+      path: ""
+      type: pages
+    values:
+      layout: default
+
+exclude:
+  - README.md
