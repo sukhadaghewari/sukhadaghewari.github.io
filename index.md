@@ -51,8 +51,8 @@ Machine learning for early warning of cyclones that strengthen suddenly, one of 
 
 ## News
 
-- **[Sept 2026]** Poster accepted at the WiML Workshop at NeurIPS 2026: *Which Information Matters for Rapid Intensification of Tropical Cyclones? A Global-Basin Feature Ablation Study*.
-- **[Sept 2026]** Built Forest Sentinel, a prototype at AmazôniaHack: offline AI that drafts traceable environmental inspection reports from field evidence. [*Project page*](https://wiki.amazoniahack.co/wiki/Forest_Sentinel){:target="_blank" rel="noopener"}
-- **[Aug 2026]** Attended Climate Change AI (CCAI) Summer School 2026.
+- **Sep 2026** Poster accepted at the WiML Workshop at NeurIPS 2026: *Which Information Matters for Rapid Intensification of Tropical Cyclones? A Global-Basin Feature Ablation Study*.
+- **Sep 2026** Built Forest Sentinel, a prototype at AmazôniaHack: offline AI that drafts traceable environmental inspection reports from field evidence. [*Project page*](https://wiki.amazoniahack.co/wiki/Forest_Sentinel){:target="_blank" rel="noopener"}
+- **Aug 2026** Attended Climate Change AI (CCAI) Summer School 2026.
 
 
