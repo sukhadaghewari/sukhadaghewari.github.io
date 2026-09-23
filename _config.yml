@@ -15,14 +15,17 @@ location: India
 # Small tags under your name on the home page
 topics:
   - Climate & extreme weather
-  - Forests & land use
-  - Health
+  - Earth observation
+  - Health & clinical AI
+  - Responsible AI
+
+# Your email address, shown on the home page with a button that copies it.
+# Delete this line to leave the address off the site.
+email: sukhada.ghewari@gmail.com
 
 # Links under your name on the home page, in this order.
 # To remove one, delete both of its lines.
 links:
-  - name: Email
-    url: "mailto:sukhada.ghewari@gmail.com"
   - name: GitHub
     url: "https://github.com/sukhadaghewari"
   - name: Google Scholar
@@ -35,10 +38,9 @@ links:
     url: "https://x.com/sukhadathinks"
   
 
-# Your photo. Upload a square picture as assets/img/photo.jpg,
-# then remove the # at the start of the next line.
-# Without a photo, your initials are shown instead.
-# photo: /assets/img/photo.jpg
+# Your photo. Upload a square picture as assets/img/photo.jpg.
+# Put a # at the start of the next line to show your initials instead.
+photo: /assets/img/photo.jpg
 
 # Your CV as a PDF, for the "Download CV" button on the home page.
 # Upload it as assets/cv.pdf. Delete this line to hide the button.
@@ -94,3 +96,6 @@ defaults:
 
 exclude:
   - README.md
+  - Gemfile
+  - Gemfile.lock
+  - vendor

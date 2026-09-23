@@ -6,7 +6,7 @@ rail: blog
 <h1 class="sr-only">Blog</h1>
 {%- assign years = site.posts | group_by_exp: "post", "post.date | date: '%Y'" %}
 {%- if years.size == 0 %}
-<p class="empty">No posts yet.</p>
+<p class="empty">Work in progress :)</p>
 {%- endif %}
 {%- for year in years %}
 <section class="year-group" aria-labelledby="year-{{ year.name }}">
