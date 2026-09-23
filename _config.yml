@@ -4,36 +4,36 @@
 # in about a minute. Keep the quotes around links.
 # ---------------------------------------------------------------
 
-title: Your Name
-tagline: Applied ML for climate adaptation, forests and health
+title: Sukhada Ghewari
+tagline: Applied machine learning for social and environmental good
 description: >-
-  Applied machine learning for climate adaptation, forests and health:
-  early warning for extreme weather, forest monitoring from space, and health AI.
-location: Pune, India
+  Machine learning researcher and engineer building AI for
+  people and the planet: extreme-weather early warning, forest monitoring,
+  health and more.
+location: India
 
 # Small tags under your name on the home page
 topics:
-  - Extreme-weather early warning
-  - Forest monitoring
-  - Health AI
+  - Climate & extreme weather
+  - Forests & land use
+  - Health
 
 # Links under your name on the home page, in this order.
 # To remove one, delete both of its lines.
 links:
   - name: Email
-    url: "mailto:you@example.com"
+    url: "mailto:sukhada.ghewari@gmail.com"
   - name: GitHub
-    url: "https://github.com/yourusername"
+    url: "https://github.com/sukhadaghewari"
   - name: Google Scholar
-    url: "https://scholar.google.com/"
+    url: "https://scholar.google.com/citations?hl=en&user=oeQF_3gAAAAJ"
   - name: LinkedIn
-    url: "https://www.linkedin.com/in/yourname"
+    url: "https://www.linkedin.com/in/sukhada-ghewari/"
   - name: Bluesky
-    url: "https://bsky.app/profile/yourname.bsky.social"
+    url: "https://bsky.app/profile/sukhada.bsky.social"
   - name: X
-    url: "https://x.com/yourusername"
-  - name: Substack
-    url: "https://yourname.substack.com"
+    url: "https://x.com/sukhadathinks"
+  
 
 # Your photo. Upload a square picture as assets/img/photo.jpg,
 # then remove the # at the start of the next line.
@@ -48,7 +48,7 @@ cv_pdf: /assets/cv.pdf
 # photo overlapping it.
 # Upload yours as assets/img/cover.jpg, then change ".svg" to ".jpg"
 # on the next line. Put a # at the start of the line to hide the cover.
-cover: /assets/img/cover.svg
+cover: /assets/img/cover.jpg
 # Which part of the photo to keep when it's cropped: top, center or bottom.
 cover_position: center
 
