@@ -4,20 +4,20 @@
    theme (plus fonts and sizes), the second is the dark theme.
    ================================================================== */
 :root{
-  --ground:#FFFFFF;       /* page background */
-  --surface:#FFFFFF;
-  --wash:#F6F3FC;         /* faint lavender fill */
-  --sunk:#F2EFF8;         /* code and quiet fills */
-  --ink:#1F1B2D;          /* main text */
-  --ink-2:#3B3650;
-  --muted:#5F5A74;        /* secondary text */
-  --faint:#8D88A2;
-  --line:#E6E2EF;         /* hairlines */
-  --accent:#634E9E;       /* deep lavender: links, active tab */
-  --accent-line:#C9BCEB;  /* pastel lavender: underlines, dividers */
-  --accent-soft:#ECE6FB;  /* lavender tint: tags, highlights */
+  --ground:#F4F2ED;       /* page background: soft warm cream */
+  --surface:#FBFAF7;      /* pop-ups that sit above the page */
+  --wash:#EBEDE4;         /* faint sage fill: tags */
+  --sunk:#EAE7E0;         /* code and quiet fills */
+  --ink:#1F221E;          /* main text */
+  --ink-2:#373B35;
+  --muted:#555B52;        /* secondary text */
+  --faint:#777C72;        /* counts, icons */
+  --line:#DDDAD1;         /* hairlines */
+  --accent:#4D6A51;       /* deep sage: links, active tab */
+  --accent-line:#B6C8B0;  /* pale sage: underlines, dividers */
+  --accent-soft:#DDE6D6;  /* sage tint: tags, highlights */
   --img-dim:none;         /* photos at full brightness */
-  --c-comment:#8A84A0; --c-keyword:#634E9E; --c-string:#2E7456; --c-number:#A2541F; --c-func:#2F5C9E;
+  --c-comment:#72776D; --c-keyword:#4D6A51; --c-string:#2B6C80; --c-number:#944B1A; --c-func:#2F5C9E;
   /* Fonts: serif for names, titles, headings and blog posts; sans for everything else; mono for dates and labels */
   --serif:"Newsreader","Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif;
   --sans:"Source Sans 3",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
@@ -28,25 +28,25 @@
   --text-md:17px;         /* body text */
   --text-lg:20px;         /* blog post text, project titles, small headings */
   --text-xl:24px;         /* section headings, post titles on the Blog page */
-  --text-2xl:32px;        /* your name */
+  --text-2xl:28px;        /* your name */
   --text-3xl:40px;        /* a post's title */
   color-scheme:light;
 }
 :root[data-theme="dark"]{
-  --ground:#14121B;
-  --surface:#1A1723;
-  --wash:#1C1827;
-  --sunk:#201C2B;
-  --ink:#EAE7F3;
-  --ink-2:#D0CBE0;
-  --muted:#A8A2BC;
-  --faint:#77718C;
-  --line:#2B2738;
-  --accent:#C4B3F4;
-  --accent-line:#5B4D8C;
-  --accent-soft:#2A2442;
+  --ground:#1e1e19;       /* warm charcoal */
+  --surface:#32322A;
+  --wash:#31312A;
+  --sunk:#34342C;
+  --ink:#ECEBE3;
+  --ink-2:#D3D2C8;
+  --muted:#ADAC9F;
+  --faint:#8C8C80;
+  --line:#3B3B32;
+  --accent:#AFCDA9;       /* soft sage */
+  --accent-line:#5A6D53;
+  --accent-soft:#384432;
   --img-dim:brightness(.86) saturate(.95);
-  --c-comment:#827C99; --c-keyword:#C4B3F4; --c-string:#90D4AF; --c-number:#F0B784; --c-func:#9DBBF3;
+  --c-comment:#8F8F83; --c-keyword:#AFCDA9; --c-string:#8CC8D8; --c-number:#F0B784; --c-func:#9DBBF3;
   color-scheme:dark;
 }
 
@@ -68,7 +68,7 @@ strong,b{font-weight:600}
 /* ---------- Page frame: the same two columns on every page ----------
    Left: your profile (Home), the topics (Blog) or recent posts (a post).
    Right: the page itself, always in the same place. */
-.wrap{max-width:1020px;margin:0 auto;padding-inline:24px;padding-block:48px 16px;display:grid;grid-template-columns:250px minmax(0,1fr);column-gap:64px;grid-template-areas:"nav nav" "side main";grid-template-rows:auto 1fr}
+.wrap{max-width:1120px;margin:0 auto;padding-inline:24px;padding-block:48px 16px;display:grid;grid-template-columns:225px minmax(0,1fr);column-gap:56px;grid-template-areas:"nav nav" "side main";grid-template-rows:auto 1fr}
 .has-cover .wrap{grid-template-areas:"cover cover" "side main";grid-template-rows:auto 1fr;padding-block:24px 16px}
 .content{grid-area:main;min-width:0}
 .content > :first-child{margin-top:0}
@@ -77,9 +77,9 @@ strong,b{font-weight:600}
 .tabs{grid-area:nav;display:flex;align-items:center;gap:24px;border-bottom:1px solid var(--line);margin-bottom:40px}
 /* On the home page the tabs sit on the cover image, in a frosted bar of their
    own so they stay readable whatever the photo underneath is doing. */
-.has-cover .tabs{grid-area:cover;align-self:start;z-index:2;margin:0;padding:2px 20px 5px;border-bottom:0;border-radius:12px 12px 0 0;background:rgba(14,12,19,.72)}
+.has-cover .tabs{grid-area:cover;align-self:start;z-index:2;margin:0;padding:2px 20px 5px;border-bottom:0;border-radius:12px 12px 0 0;background:rgba(20,20,15,.72)}
 @supports (backdrop-filter:blur(2px)) or (-webkit-backdrop-filter:blur(2px)){
-  .has-cover .tabs{background:rgba(14,12,19,.6);-webkit-backdrop-filter:blur(1.3px) saturate(1.1);backdrop-filter:blur(1.3px) saturate(1.1)}
+  .has-cover .tabs{background:rgba(20,20,15,.6);-webkit-backdrop-filter:blur(1.3px) saturate(1.1);backdrop-filter:blur(1.3px) saturate(1.1)}
 }
 .has-cover .tabs a{color:rgba(255,255,255,.92)}
 .has-cover .tabs a:hover{color:#fff;border-bottom-color:rgba(255,255,255,.65)}
@@ -99,7 +99,7 @@ strong,b{font-weight:600}
 
 /* ---------- Cover strip (Home and Blog) ---------- */
 .site-cover{grid-area:cover;margin:0;position:relative;z-index:1}
-.site-cover img{display:block;width:100%;aspect-ratio:9/2.3;object-fit:cover;border-radius:12px;background:var(--wash)}
+.site-cover img{display:block;width:100%;aspect-ratio:9/2.07;object-fit:cover;border-radius:12px;background:var(--wash)}
 .has-cover .content{padding-top:40px}
 
 /* ---------- Sidebar (home page) ---------- */
@@ -127,7 +127,7 @@ strong,b{font-weight:600}
 .links .email .label{display:inline-flex;align-items:center;gap:8px;cursor:default}
 .links .email .label:focus-visible{outline:2px solid var(--accent-line);outline-offset:3px;border-radius:4px}
 /* The address itself: a small bubble on hover or keyboard focus */
-.links .email .addr{position:absolute;left:0;top:calc(100% + 6px);z-index:5;white-space:nowrap;user-select:all;padding:5px 9px;border:1px solid var(--line);border-radius:7px;background:var(--surface);box-shadow:0 8px 20px rgba(31,27,45,.12);font:500 var(--text-xs)/1.5 var(--mono);color:var(--ink-2);opacity:0;visibility:hidden;transition:opacity .12s ease}
+.links .email .addr{position:absolute;left:0;top:calc(100% + 6px);z-index:5;white-space:nowrap;user-select:all;padding:5px 9px;border:1px solid var(--line);border-radius:7px;background:var(--surface);box-shadow:0 8px 20px rgba(28,33,29,.12);font:500 var(--text-xs)/1.5 var(--mono);color:var(--ink-2);opacity:0;visibility:hidden;transition:opacity .12s ease}
 .links .email:hover .addr,.links .email:focus-within .addr{opacity:1;visibility:visible}
 .links .email .copy{flex:none;display:grid;place-items:center;width:24px;height:24px;padding:0;border:0;border-radius:6px;background:none;color:var(--faint);cursor:pointer}
 .links .email .copy:hover{color:var(--accent);background:var(--accent-soft)}
@@ -151,8 +151,10 @@ strong,b{font-weight:600}
 /* ---------- Home sections ---------- */
 .is-home .content h2{font:600 var(--text-xl)/1.25 var(--serif);margin:48px 0 14px;color:var(--ink);letter-spacing:-.005em}
 .is-home .content h2:first-child{margin-top:0}
-/* Home and Blog share one text width (about 80 characters a line); Home text is a touch smaller */
-.is-home .content,.is-blog .content{max-width:39.6rem}
+/* A faint sage line between the home page sections (About, Selected work, News) */
+.is-home .content h2:not(:first-child){padding-top:40px;border-top:1px solid var(--accent-line);border-top-color:color-mix(in srgb,var(--accent-line) 55%,transparent)}
+/* Home and Blog share one text width (about 88 characters a line); Home text is a touch smaller */
+.is-home .content,.is-blog .content{max-width:44rem}
 .is-home .content{font-size:16px}
 :where(.content) p{margin:0 0 14px}
 .is-home .content h3{font:600 var(--text-lg)/1.3 var(--serif);margin:0;padding-top:22px;border-top:1px solid var(--line);color:var(--ink)}
@@ -163,12 +165,16 @@ strong,b{font-weight:600}
 .is-home .content li{margin:4px 0}
 .is-home .content li::marker{color:var(--accent-line)}
 #news + ul{list-style:none;padding:0;margin:0;display:grid;gap:10px}
-#news + ul li{position:relative;padding-left:6.5rem;margin:0}
+#news + ul li{position:relative;padding-left:5rem;margin:0}
 #news + ul li > strong:first-child{position:absolute;left:0;top:.18em;font:500 var(--text-xs)/1.6 var(--mono);color:var(--accent);font-variant-numeric:tabular-nums}
 
 .post-cover img,.post-body img{filter:var(--img-dim)}
 
 /* ---------- Blog list ---------- */
+.kind-tabs{display:flex;flex-wrap:wrap;gap:4px;margin:0 0 34px;padding:4px;width:max-content;max-width:100%;border:1px solid var(--line);border-radius:9px}
+.kind-tabs button{padding:6px 16px;border:0;border-radius:6px;background:none;color:var(--muted);font:500 var(--text-sm)/1.3 var(--sans);cursor:pointer}
+.kind-tabs button:hover{color:var(--accent)}
+.kind-tabs button[aria-pressed="true"]{background:var(--accent-soft);color:var(--accent);font-weight:600}
 .year-group + .year-group{margin-top:44px}
 .content .year{display:flex;align-items:center;gap:14px;margin:0 0 16px;font:500 var(--text-xs)/1.4 var(--mono);letter-spacing:.1em;color:var(--accent)}
 .content .year::after{content:"";flex:1;height:1px;background:var(--line)}
@@ -179,6 +185,22 @@ strong,b{font-weight:600}
 .posts a:hover{color:var(--accent);text-decoration:underline;text-decoration-color:var(--accent-line);text-decoration-thickness:2px}
 .posts p{margin:6px 0 0;color:var(--muted);font-size:var(--text-sm);line-height:1.5}
 .empty{color:var(--muted)}
+
+/* ---------- Full timeline, opened from News on the home page ---------- */
+.timeline-toggle{padding:0;border:0;background:none;color:var(--accent);font:600 var(--text-sm)/1.4 var(--sans);cursor:pointer}
+.timeline-toggle:hover{text-decoration:underline;text-decoration-color:var(--accent-line);text-underline-offset:3px}
+.is-home .content .more{margin:18px 0 0}
+/* The open timeline sits in a thin outline, on the page background */
+.timeline-full{margin-top:24px;padding:24px 28px 28px;border:1px solid var(--line);border-radius:12px}
+.timeline-full .kind-tabs{margin-bottom:28px}
+.is-home .content .timeline-full .year{padding-top:0;border-top:0;margin:0 0 14px;font:500 var(--text-xs)/1.4 var(--mono);letter-spacing:.1em;color:var(--accent)}
+.timeline-full .year-group + .year-group{margin-top:30px}
+/* Each entry: month, the text, and its tag on the right */
+.is-home .content .timeline{list-style:none;margin:0;padding:0;display:grid;gap:12px}
+.is-home .content .timeline li{display:grid;grid-template-columns:2.75rem minmax(0,1fr) 5.5rem;column-gap:14px;align-items:start;margin:0}
+.timeline time{font:500 var(--text-xs)/1.6 var(--mono);color:var(--accent);font-variant-numeric:tabular-nums;padding-top:.2em}
+.tl-text{min-width:0}
+.tl-kind{justify-self:end;margin-top:3px;padding:0 8px;border:1px solid var(--accent-soft);border-radius:5px;background:var(--wash);font-size:var(--text-xs);line-height:1.6;color:var(--ink-2);white-space:nowrap}
 
 /* ---------- A post ---------- */
 .post-head{margin-bottom:36px}
@@ -234,7 +256,7 @@ strong,b{font-weight:600}
 .highlight .nf,.highlight .fm,.highlight .nc,.highlight .nn{color:var(--c-func)}
 
 /* ---------- Footer ---------- */
-.foot{max-width:1020px;margin:0 auto;padding:28px 24px 56px;display:flex;flex-wrap:wrap;align-items:center;gap:8px;font-size:var(--text-xs);color:var(--faint)}
+.foot{max-width:1120px;margin:0 auto;padding:28px 24px 56px;display:flex;flex-wrap:wrap;align-items:center;gap:8px;font-size:var(--text-xs);color:var(--faint)}
 .foot a{color:var(--muted)}
 
 /* ---------- Phones ---------- */
@@ -251,14 +273,18 @@ strong,b{font-weight:600}
   .post-rail{display:none}
   .tabs{gap:20px;margin-bottom:28px}
   .has-cover .tabs{padding:0 12px 4px;border-radius:10px 10px 0 0}
-  .site-cover img{aspect-ratio:2/1.15;border-radius:10px}
+  .site-cover img{aspect-ratio:2/1.035;border-radius:10px}
   .side{position:static;margin-bottom:40px}
   .rail{position:static;margin-top:48px;padding-top:24px;border-top:1px solid var(--line)}
   .photo{width:132px;height:132px}
   .has-cover .content{padding-top:0}
+  .site-cover + .content{padding-top:24px}
   .has-cover .side,.has-cover .rail{padding-top:24px}
   .links{display:flex;flex-wrap:wrap;gap:8px 20px}
   #news + ul li{padding-left:0;padding-top:1.45em}
+  .timeline-full{padding:18px 16px 22px}
+  .is-home .content .timeline li{grid-template-columns:2.4rem minmax(0,1fr);column-gap:12px}
+  .tl-kind{grid-column:2;justify-self:start;margin-top:6px}
   .posts li{grid-template-columns:minmax(0,1fr);row-gap:4px}
   .post-nav{grid-template-columns:1fr}
   .post-nav .next{text-align:left;grid-column:auto}

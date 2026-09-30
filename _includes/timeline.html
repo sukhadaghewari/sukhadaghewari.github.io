@@ -1,0 +1,74 @@
+{%- comment -%}
+  The News section on the home page, from _data/timeline.yml: the newest
+  entries, and a button that opens the full timeline by year, with
+  filters, underneath them. Use as {% include timeline.html latest=5 %}.
+{%- endcomment -%}
+{%- assign entries = site.data.timeline | reverse | sort: "date" | reverse %}
+<ul class="news-latest">
+{%- for e in entries limit: include.latest %}
+<li><strong>{% if e.date.size > 4 %}{{ e.date | append: "-01" | date: "%b %Y" }}{% else %}{{ e.date }}{% endif %}</strong> {{ e.text | markdownify | remove: "<p>" | remove: "</p>" | strip }}</li>
+{%- endfor %}
+</ul>
+<p class="more"><button type="button" class="timeline-toggle" aria-expanded="false" aria-controls="timeline" hidden>Show full timeline ↓</button></p>
+<div class="timeline-full" id="timeline" hidden>
+  <div class="kind-tabs" role="group" aria-label="Filter the timeline">
+    <button type="button" data-filter="all" aria-pressed="true">All</button>
+    {%- for k in site.timeline_kinds %}
+    <button type="button" data-filter="{{ k | slugify }}" aria-pressed="false">{{ k }}</button>
+    {%- endfor %}
+  </div>
+  {%- assign years = entries | group_by_exp: "e", "e.date | slice: 0, 4" %}
+  {%- for year in years %}
+  <section class="year-group" aria-labelledby="year-{{ year.name }}">
+    <h3 class="year" id="year-{{ year.name }}">{{ year.name }}</h3>
+    <ul class="timeline">
+      {%- for e in year.items %}
+      <li data-kind="{{ e.kind | slugify }}">
+        {%- if e.date.size > 4 %}
+        <time datetime="{{ e.date }}">{{ e.date | append: "-01" | date: "%b" }}</time>
+        {%- else %}
+        <span></span>
+        {%- endif %}
+        <div class="tl-text">{{ e.text | markdownify | remove: "<p>" | remove: "</p>" | strip }}</div>
+        <span class="tl-kind">{{ e.kind }}</span>
+      </li>
+      {%- endfor %}
+    </ul>
+  </section>
+  {%- endfor %}
+</div>
+<script>
+  // "Show full timeline": open everything, by year, under the newest
+  // entries, and filter it by kind. Without JavaScript the newest entries still show.
+  (function () {
+    var toggle = document.querySelector(".timeline-toggle");
+    var full = document.getElementById("timeline");
+    if (!toggle || !full) return;
+    var filters = full.querySelectorAll("[data-filter]");
+    var entries = full.querySelectorAll(".timeline li");
+    var groups = full.querySelectorAll(".year-group");
+
+    function open(isOpen) {
+      full.hidden = !isOpen;
+      toggle.setAttribute("aria-expanded", isOpen ? "true" : "false");
+      toggle.textContent = isOpen ? "Hide full timeline ↑" : "Show full timeline ↓";
+    }
+    function filter(kind) {
+      entries.forEach(function (li) {
+        li.hidden = kind !== "all" && li.getAttribute("data-kind") !== kind;
+      });
+      groups.forEach(function (g) { g.hidden = !g.querySelector(".timeline li:not([hidden])"); });
+      filters.forEach(function (b) {
+        b.setAttribute("aria-pressed", b.getAttribute("data-filter") === kind ? "true" : "false");
+      });
+    }
+
+    toggle.hidden = false;
+    toggle.addEventListener("click", function () { open(full.hidden); });
+    filters.forEach(function (b) {
+      b.addEventListener("click", function () { filter(b.getAttribute("data-filter")); });
+    });
+    // A link to /#timeline opens it straight away.
+    if (location.hash === "#timeline") open(true);
+  })();
+</script>

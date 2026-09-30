@@ -14,7 +14,9 @@ I like finding out whether an idea actually works, then building it into somethi
 
 ### Which Information Matters for Rapid Intensification of Tropical Cyclones? A Global-Basin Feature Ablation Study
 
-**NeurIPS 2026 · WiML Workshop poster · with Prof. Adway Mitra (IIT Kharagpur)**
+*Sukhada Ghewari · Shardul Deshpande*
+
+**NeurIPS 2026 · WiML Workshop poster**
 
 Rapid intensification, a jump of 30+ knots in peak winds within 24 hours, is one of the hardest problems in cyclone forecasting and leaves coastal communities little time to prepare. Using 80,000+ observations from 4,000+ storms worldwide (IBTrACS and ERA5, 1980–2025), I tested which information actually drives prediction, using 5-fold cross-validated feature ablations on the training years.
 
@@ -51,8 +53,4 @@ Machine learning for early warning of cyclones that strengthen suddenly, one of 
 
 ## News
 
-- **Sep 2026** Poster accepted at the WiML Workshop at NeurIPS 2026: *Which Information Matters for Rapid Intensification of Tropical Cyclones? A Global-Basin Feature Ablation Study*.
-- **Sep 2026** Built Forest Sentinel, a prototype at AmazôniaHack: offline AI that drafts traceable environmental inspection reports from field evidence. [*Project page*](https://wiki.amazoniahack.co/wiki/Forest_Sentinel){:target="_blank" rel="noopener"}
-- **Aug 2026** Attended Climate Change AI (CCAI) Summer School 2026.
-
-
+{% include timeline.html latest=5 %}

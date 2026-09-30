@@ -5,6 +5,14 @@ rail: blog
 ---
 <h1 class="sr-only">Blog</h1>
 {%- assign years = site.posts | group_by_exp: "post", "post.date | date: '%Y'" %}
+{%- if site.post_kinds %}
+<nav class="kind-tabs" aria-label="Kind of post">
+  <button type="button" data-kind="all" aria-pressed="true">All</button>
+  {%- for k in site.post_kinds %}
+  <button type="button" data-kind="{{ k.id }}" aria-pressed="false">{{ k.name }}</button>
+  {%- endfor %}
+</nav>
+{%- endif %}
 {%- if years.size == 0 %}
 <p class="empty">Work in progress :)</p>
 {%- endif %}
@@ -13,7 +21,7 @@ rail: blog
   <h2 class="year" id="year-{{ year.name }}">{{ year.name }}</h2>
   <ul class="posts">
     {%- for post in year.items %}
-    <li data-tags="{% for t in post.tags %}{{ t | slugify }} {% endfor %}">
+    <li data-kind="{{ post.kind }}" data-tags="{% for t in post.tags %}{{ t | slugify }} {% endfor %}">
       <div>
         <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
         {%- if post.description %}
@@ -26,37 +34,74 @@ rail: blog
   </ul>
 </section>
 {%- endfor %}
-<p class="empty" id="no-match" hidden>No posts on this topic yet.</p>
+<p class="empty" id="no-match" hidden>Nothing here yet.</p>
 
 <script>
-  // Topics filter: show only the posts with the chosen topic.
+  // Filters: the kind tabs above the list and the topics on the left.
+  // Both apply at once, e.g. only Technical posts about Climate.
   (function () {
-    var buttons = document.querySelectorAll("[data-topic]");
-    if (!buttons.length) return;
+    var kindButtons = document.querySelectorAll(".kind-tabs [data-kind]");
+    var topicButtons = document.querySelectorAll("[data-topic]");
     var posts = document.querySelectorAll(".posts li");
     var groups = document.querySelectorAll(".year-group");
     var none = document.getElementById("no-match");
-    function apply(topic) {
+    var state = { kind: "all", topic: "all" };
+
+    function tagsOf(li) { return (li.getAttribute("data-tags") || "").split(" "); }
+    function kindMatches(li) { return state.kind === "all" || li.getAttribute("data-kind") === state.kind; }
+
+    function apply() {
       var shown = 0;
       posts.forEach(function (li) {
-        var tags = (li.getAttribute("data-tags") || "").split(" ");
-        li.hidden = topic !== "all" && tags.indexOf(topic) === -1;
+        li.hidden = !kindMatches(li) || (state.topic !== "all" && tagsOf(li).indexOf(state.topic) === -1);
         if (!li.hidden) shown++;
       });
       groups.forEach(function (g) { g.hidden = !g.querySelector(".posts li:not([hidden])"); });
-      if (none) none.hidden = shown > 0;
-      buttons.forEach(function (b) {
-        b.setAttribute("aria-pressed", b.getAttribute("data-topic") === topic ? "true" : "false");
+      if (none) none.hidden = shown > 0 || !posts.length;
+      kindButtons.forEach(function (b) {
+        b.setAttribute("aria-pressed", b.getAttribute("data-kind") === state.kind ? "true" : "false");
+      });
+      // Topic counts follow the chosen kind; topics with no posts of that kind are hidden.
+      topicButtons.forEach(function (b) {
+        var topic = b.getAttribute("data-topic");
+        var n = 0;
+        posts.forEach(function (li) {
+          if (kindMatches(li) && (topic === "all" || tagsOf(li).indexOf(topic) !== -1)) n++;
+        });
+        var count = b.querySelector(".count");
+        if (count) count.textContent = n;
+        b.parentNode.hidden = topic !== "all" && n === 0 && topic !== state.topic;
+        b.setAttribute("aria-pressed", topic === state.topic ? "true" : "false");
       });
     }
-    buttons.forEach(function (b) {
+
+    function save() {
+      var parts = [];
+      if (state.kind !== "all") parts.push(state.kind);
+      if (state.topic !== "all") parts.push("topic-" + state.topic);
+      try { history.replaceState(null, "", parts.length ? "#" + parts.join("/") : location.pathname); } catch (e) {}
+    }
+
+    kindButtons.forEach(function (b) {
       b.addEventListener("click", function () {
-        var topic = b.getAttribute("data-topic");
-        apply(topic);
-        try { history.replaceState(null, "", topic === "all" ? location.pathname : "#topic-" + topic); } catch (e) {}
+        state.kind = b.getAttribute("data-kind");
+        // Drop the chosen topic if it has no posts of this kind.
+        var any = Array.prototype.some.call(posts, function (li) {
+          return kindMatches(li) && (state.topic === "all" || tagsOf(li).indexOf(state.topic) !== -1);
+        });
+        if (!any) state.topic = "all";
+        apply(); save();
       });
     });
-    var match = location.hash.match(/^#topic-(.+)$/);
-    if (match) apply(decodeURIComponent(match[1]));
+    topicButtons.forEach(function (b) {
+      b.addEventListener("click", function () { state.topic = b.getAttribute("data-topic"); apply(); save(); });
+    });
+
+    // Links like /blog/#thoughts, /blog/#topic-climate or /blog/#technical/topic-climate
+    decodeURIComponent(location.hash.slice(1)).split("/").forEach(function (part) {
+      if (part.indexOf("topic-") === 0) state.topic = part.slice(6);
+      else if (document.querySelector('.kind-tabs [data-kind="' + part + '"]')) state.kind = part;
+    });
+    apply();
   })();
 </script>

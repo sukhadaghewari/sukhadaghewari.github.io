@@ -1,6 +1,7 @@
 ---
 title: "Why I'm working on rapid intensification"
 description: "Cyclones that strengthen suddenly are among the hardest to forecast, and they leave the least time to prepare."
+kind: thoughts
 tags: [Climate, Cyclones]
 published: false   # hidden for now; set to true (or delete this line) to publish
 ---

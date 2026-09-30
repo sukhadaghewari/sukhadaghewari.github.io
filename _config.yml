@@ -51,8 +51,10 @@ cv_pdf: /assets/cv.pdf
 # Upload yours as assets/img/cover.jpg, then change ".svg" to ".jpg"
 # on the next line. Put a # at the start of the line to hide the cover.
 cover: /assets/img/cover.jpg
-# Which part of the photo to keep when it's cropped: top, center or bottom.
-cover_position: center
+# Which part of the photo to keep when it's cropped: top, center or bottom,
+# or a percentage from the top ("center 46%" keeps the same top edge as
+# center did before the strip was made 10% shorter).
+cover_position: center 46%
 
 # Tabs at the top of every page
 nav:
@@ -60,6 +62,25 @@ nav:
     url: /
   - name: Blog
     url: /blog/
+
+# The filters above your full timeline on the home page, in this order.
+# Every entry in _data/timeline.yml uses one of these as its kind.
+timeline_kinds:
+  - Research
+  - Projects
+  - Education
+  - Learning
+  - Role
+  - Service
+
+# The two kinds of blog post, shown as tabs above the Blog list.
+# Each post picks one in its top section, e.g. `kind: thoughts`.
+# You can rename a tab by changing its name; keep the id as it is.
+post_kinds:
+  - id: technical
+    name: Technical
+  - id: thoughts
+    name: Thoughts
 
 
 # ---------------------------------------------------------------

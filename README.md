@@ -57,7 +57,7 @@ edit, then click **Commit changes**. The site updates in about a minute.
 
 | I want to… | Do this |
 |---|---|
-| Add a news item | `index.md` → add a line at the top of the News list: `- **Oct 2026** What happened.` |
+| Add a news item or anything I've done | `_data/timeline.yml` → add an entry (date, kind, text). It shows in News on the home page while it's among the newest 5, and in the full timeline for good |
 | Add a project | `index.md` → copy one `###` block under *Selected work* and edit it |
 | Update my CV | Upload a new `assets/cv.pdf`. The same name replaces the old one |
 | Change a link or my tagline | `_config.yml` |
@@ -74,11 +74,19 @@ edit, then click **Commit changes**. The site updates in about a minute.
    ---
    title: "Your post title"
    description: "One sentence shown under the title and on the Blog page."
+   kind: technical
    tags: [Climate]
    ---
    ```
 
 4. Click **Commit changes**.
+
+### Technical or Thoughts
+
+The `kind` line puts a post under one of the two tabs at the top of the Blog:
+`kind: technical` for write-ups of methods, data and results, or `kind: thoughts`
+for opinions, reflections and anything else. Every post needs one of the two.
+To rename a tab, change its `name` under `post_kinds` in `_config.yml`.
 
 ### Topics
 

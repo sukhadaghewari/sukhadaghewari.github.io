@@ -1,0 +1,97 @@
+# ---------------------------------------------------------------
+# YOUR TIMELINE
+# Everything you've done, one entry per item. The News section on the
+# home page shows the newest 5; "Show full timeline" opens all of it,
+# by year. Add each item here once and never delete old ones.
+#
+# Each entry has three lines:
+#   date: "2026-09"   year and month, in quotes. Use just "2025"
+#                     when the month doesn't matter.
+#   kind: Research    one of the filters listed under timeline_kinds
+#                     in _config.yml: Research, Projects, Education,
+#                     Learning, Role or Service
+#   text: >-          one or two sentences. Links work as usual:
+#                     [Project page](https://...)
+#
+# Order doesn't matter: entries are sorted by date on the site.
+# ---------------------------------------------------------------
+
+- date: "2026-09"
+  kind: Service
+  text: >-
+    Peer reviewer for the Machine Learning for Health (ML4H) Symposium.
+
+- date: "2026-09"
+  kind: Research
+  text: >-
+    Poster accepted at the WiML Workshop at NeurIPS 2026: *Which Information Matters for Rapid Intensification of Tropical Cyclones? A Global-Basin Feature Ablation Study*.
+
+- date: "2026-09"
+  kind: Projects
+  text: >-
+    Built Forest Sentinel, a prototype at AmazôniaHack: offline AI that drafts traceable environmental inspection reports from field evidence. [*Project page*](https://wiki.amazoniahack.co/wiki/Forest_Sentinel){:target="_blank" rel="noopener"}
+
+- date: "2026-08"
+  kind: Learning
+  text: >-
+    Attended Climate Change AI (CCAI) Summer School 2026.
+
+- date: "2026-07"
+  kind: Research
+  text: >-
+    Started independent research on rapid intensification of tropical cyclones.
+
+- date: "2025-12"
+  kind: Role
+  text: >-
+    Left Oracle. Moved back to India! 
+
+- date: "2023-05"
+  kind: Role
+  text: >-
+    Joined Oracle, building data and LLM tools for healthcare analytics.
+
+- date: "2023-03"
+  kind: Education
+  text: >-
+    Graduated from UC San Diego with a Master's in Computer Science with AI specialization.
+
+- date: "2022-06"
+  kind: Role
+  text: >-
+    Software development intern at Oracle: built a system that recommends fixes for failing CI/CD pipelines.
+
+- date: "2022"
+  kind: Projects
+  text: >-
+    Crop type mapping on smallholder farms in Kenya from Sentinel-2 satellite time series. [*Project Page*](https://github.com/sukhadaghewari/ECE228_Project_SP22)
+
+- date: "2021-10"
+  kind: Research
+  text: >-
+    Joined the Ideker Lab at UC San Diego as a graduate student researcher, building a synapse protein ontology for psychiatric disease prediction.
+
+- date: "2021-09"
+  kind: Education
+  text: >-
+    Started Master's in Computer Science at UC San Diego.
+
+- date: "2021-12"
+  kind: Research
+  text: >-
+    *When Diversity Meets Hostility: A Study of Domain Squatting Abuse in Online Banking*, published at APWG Symposium (eCrime 2021), with a related patent filed in India.
+
+- date: "2019-07"
+  kind: Role
+  text: >-
+    Joined TCS Research as a researcher, working in Cybersecurity + ML area.
+
+- date: "2019-05"
+  kind: Education
+  text: >-
+    Graduated from Walchand College of Engineering with B.Tech (Bachelors) in Computer Science and Engineering (Gold Medalist, CGPA: 9.51/10).
+
+- date: "2019-01"
+  kind: Role
+  text: >-
+    Started my first professional internship at AlgoAnalytics, working on ML for healthcare (Semi-automated ICD-9 coding using ML on MIMIC-III dataset).
