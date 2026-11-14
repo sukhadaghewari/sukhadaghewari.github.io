@@ -1,0 +1,19 @@
+{%- comment -%}
+  The left column of the CV page: the PDF, and filters for the timeline
+  by kind (from timeline_kinds in _config.yml), with a count for each.
+{%- endcomment -%}
+<aside class="rail cv-rail" aria-label="Filter the timeline">
+  {% include cv-button.html %}
+  <div>
+    <p class="rail-label">Show</p>
+    <ul class="topic-list">
+      <li><button type="button" data-kind="all" aria-pressed="true">Everything<span class="count">{{ site.data.timeline.size }}</span></button></li>
+      {%- for k in site.timeline_kinds %}
+      {%- assign n = site.data.timeline | where: "kind", k | size %}
+      {%- if n > 0 %}
+      <li><button type="button" data-kind="{{ k | slugify }}" aria-pressed="false">{{ k }}<span class="count">{{ n }}</span></button></li>
+      {%- endif %}
+      {%- endfor %}
+    </ul>
+  </div>
+</aside>

@@ -11,11 +11,16 @@
   {%- assign page_description = page.description | default: site.description | default: site.tagline | strip_html | strip_newlines -%}
   <title>{{ page_title | strip_html }}</title>
   <meta name="description" content="{{ page_description | escape }}">
-  <link rel="canonical" href="{{ page.url | absolute_url }}">
+  {%- assign canonical = page.url | absolute_url -%}
+  {%- if page.external_url -%}{%- assign canonical = page.external_url -%}{%- endif %}
+  {%- if page.external_url %}
+  <meta http-equiv="refresh" content="0; url={{ page.external_url }}">
+  {%- endif %}
+  <link rel="canonical" href="{{ canonical }}">
   <meta property="og:type" content="{% if page.layout == 'post' %}article{% else %}website{% endif %}">
   <meta property="og:title" content="{{ page.title | default: site.title | escape }}">
   <meta property="og:description" content="{{ page_description | escape }}">
-  <meta property="og:url" content="{{ page.url | absolute_url }}">
+  <meta property="og:url" content="{{ canonical }}">
   {%- if page.image %}
   <meta property="og:image" content="{{ page.image | absolute_url }}">
   <meta name="twitter:card" content="summary_large_image">
@@ -49,8 +54,9 @@
 {%- if is_home -%}{%- assign page_kind = "is-home" -%}
 {%- elsif page.layout == "post" -%}{%- assign page_kind = "is-post" -%}
 {%- elsif page.rail == "blog" -%}{%- assign page_kind = "is-blog" -%}
+{%- elsif page.rail == "cv" -%}{%- assign page_kind = "is-cv" -%}
 {%- else -%}{%- assign page_kind = "is-page" -%}{%- endif -%}
-{%- comment -%} The cover strip tops the Home and Blog pages, with the tabs on it. {%- endcomment -%}
+{%- comment -%} The cover strip tops the Home, Blog and CV pages, with the tabs on it. {%- endcomment -%}
 {%- assign show_cover = false -%}
 {%- if site.cover and page_kind != "is-post" and page_kind != "is-page" -%}{%- assign show_cover = true -%}{%- endif %}
 <body class="{{ page_kind }}{% if show_cover %} has-cover{% endif %}{% if page.body_class %} {{ page.body_class }}{% endif %}">
@@ -58,6 +64,8 @@
   <div class="wrap">
     <nav class="tabs" aria-label="Site">
       {%- for item in site.nav %}
+        {%- comment -%} The Writing tab appears once there is a published post. {%- endcomment -%}
+        {%- if item.url == "/blog/" and site.posts.size == 0 %}{% continue %}{% endif -%}
         {%- assign active = false -%}
         {%- if page.url == item.url -%}{%- assign active = true -%}{%- endif -%}
         {%- if item.url != "/" and page.url contains item.url -%}{%- assign active = true -%}{%- endif -%}
@@ -93,9 +101,7 @@
         {%- endfor %}
       </ul>
       {%- endif %}
-      {%- if site.cv_pdf %}
-      <a class="cv-button" href="{{ site.cv_pdf | relative_url }}" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg>Download CV</a>
-      {%- endif %}
+      {% include cv-button.html %}
       <ul class="links">
       {%- if site.email %}
       <li class="email">
@@ -116,6 +122,8 @@
     {%- include post-rail.html %}
     {%- elsif page_kind == "is-blog" %}
     {%- include blog-rail.html %}
+    {%- elsif page_kind == "is-cv" %}
+    {%- include cv-rail.html %}
     {%- endif %}
     <main class="content" id="main">
       {{ content }}

@@ -57,7 +57,7 @@ edit, then click **Commit changes**. The site updates in about a minute.
 
 | I want to… | Do this |
 |---|---|
-| Add a news item or anything I've done | `_data/timeline.yml` → add an entry (date, kind, text). It shows in News on the home page while it's among the newest 5, and in the full timeline for good |
+| Add a news item or anything I've done | `_data/timeline.yml` → add an entry (date, kind, text). It shows in News on the home page while it's among the newest 5, and on the CV page for good |
 | Add a project | `index.md` → copy one `###` block under *Selected work* and edit it |
 | Update my CV | Upload a new `assets/cv.pdf`. The same name replaces the old one |
 | Change a link or my tagline | `_config.yml` |
@@ -87,6 +87,28 @@ The `kind` line puts a post under one of the two tabs at the top of the Blog:
 `kind: technical` for write-ups of methods, data and results, or `kind: thoughts`
 for opinions, reflections and anything else. Every post needs one of the two.
 To rename a tab, change its `name` under `post_kinds` in `_config.yml`.
+
+### A post on Substack
+
+Thoughts and essays usually go on Substack. To list one on the Writing page too:
+
+1. Publish it on Substack and copy its link.
+2. In `_posts`, create `YYYY-MM-DD-short-title.md` with the date it went out, and paste:
+
+   ```
+   ---
+   title: "The title of your Substack post"
+   description: "One sentence shown under the title on the Writing page."
+   kind: thoughts
+   tags: [Climate]
+   external_url: "https://sukhada14.substack.com/p/your-post"
+   ---
+   ```
+
+3. Click **Commit changes**. Nothing goes below the top section. The post appears in the
+   list with a *Substack ↗* label, and clicking it opens Substack.
+
+The same lines are in **`_templates/substack-post.md`**.
 
 ### Topics
 

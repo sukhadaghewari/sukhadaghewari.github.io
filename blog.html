@@ -1,11 +1,11 @@
 ---
-title: Blog
+title: Writing
 permalink: /blog/
 rail: blog
 ---
-<h1 class="sr-only">Blog</h1>
+<h1 class="sr-only">Writing</h1>
 {%- assign years = site.posts | group_by_exp: "post", "post.date | date: '%Y'" %}
-{%- if site.post_kinds %}
+{%- if site.post_kinds and site.posts.size > 0 %}
 <nav class="kind-tabs" aria-label="Kind of post">
   <button type="button" data-kind="all" aria-pressed="true">All</button>
   {%- for k in site.post_kinds %}
@@ -23,7 +23,11 @@ rail: blog
     {%- for post in year.items %}
     <li data-kind="{{ post.kind }}" data-tags="{% for t in post.tags %}{{ t | slugify }} {% endfor %}">
       <div>
+        {%- if post.external_url %}
+        <a href="{{ post.external_url }}" target="_blank" rel="noopener">{{ post.title }}</a><span class="via">Substack ↗</span>
+        {%- else %}
         <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
+        {%- endif %}
         {%- if post.description %}
         <p>{{ post.description }}</p>
         {%- endif %}
@@ -35,6 +39,9 @@ rail: blog
 </section>
 {%- endfor %}
 <p class="empty" id="no-match" hidden>Nothing here yet.</p>
+{%- if site.substack %}
+<p class="subscribe">Essays and reflections also go out by email. <a href="{{ site.substack }}" target="_blank" rel="noopener">Subscribe on Substack ↗</a></p>
+{%- endif %}
 
 <script>
   // Filters: the kind tabs above the list and the topics on the left.

@@ -28,12 +28,12 @@ layout: default
   {%- if page.previous or page.next %}
   <nav class="post-nav" aria-label="More posts">
     {%- if page.previous %}
-    <a class="prev" href="{{ page.previous.url | relative_url }}"><small>← Older</small>{{ page.previous.title }}</a>
+    <a class="prev" href="{{ page.previous.external_url | default: page.previous.url | relative_url }}"><small>← Older</small>{{ page.previous.title }}{% if page.previous.external_url %} ↗{% endif %}</a>
     {%- else %}
     <span></span>
     {%- endif %}
     {%- if page.next %}
-    <a class="next" href="{{ page.next.url | relative_url }}"><small>Newer →</small>{{ page.next.title }}</a>
+    <a class="next" href="{{ page.next.external_url | default: page.next.url | relative_url }}"><small>Newer →</small>{{ page.next.title }}{% if page.next.external_url %} ↗{% endif %}</a>
     {%- endif %}
   </nav>
   {%- endif %}

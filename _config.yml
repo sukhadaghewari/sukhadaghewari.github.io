@@ -23,6 +23,10 @@ topics:
 # Delete this line to leave the address off the site.
 email: sukhada.ghewari@gmail.com
 
+# Your Substack. The Writing page invites readers to subscribe there.
+# Delete this line to hide the invitation.
+substack: "https://substack.com/@sukhada14"
+
 # Links under your name on the home page, in this order.
 # To remove one, delete both of its lines.
 links:
@@ -30,8 +34,12 @@ links:
     url: "https://github.com/sukhadaghewari"
   - name: Google Scholar
     url: "https://scholar.google.com/citations?hl=en&user=oeQF_3gAAAAJ"
+  - name: OpenReview
+    url: "https://openreview.net/profile?id=%7ESukhada_Ghewari1"
   - name: LinkedIn
     url: "https://www.linkedin.com/in/sukhada-ghewari/"
+  - name: Substack
+    url: "https://substack.com/@sukhada14"
   - name: Bluesky
     url: "https://bsky.app/profile/sukhada.bsky.social"
   - name: X
@@ -60,20 +68,23 @@ cover_position: center 46%
 nav:
   - name: Home
     url: /
-  - name: Blog
+  - name: Writing
     url: /blog/
+  - name: CV
+    url: /cv/
 
-# The filters above your full timeline on the home page, in this order.
+# The filters next to your full timeline on the CV page, in this order.
 # Every entry in _data/timeline.yml uses one of these as its kind.
 timeline_kinds:
   - Research
-  - Projects
+  - Project
   - Education
   - Learning
   - Role
   - Service
 
-# The two kinds of blog post, shown as tabs above the Blog list.
+# The two kinds of post, shown as tabs above the list on the Writing page.
+# Technical posts usually live here; Thoughts usually live on Substack.
 # Each post picks one in its top section, e.g. `kind: thoughts`.
 # You can rename a tab by changing its name; keep the id as it is.
 post_kinds:

@@ -1,20 +1,30 @@
 # ---------------------------------------------------------------
 # YOUR TIMELINE
 # Everything you've done, one entry per item. The News section on the
-# home page shows the newest 5; "Show full timeline" opens all of it,
-# by year. Add each item here once and never delete old ones.
+# home page shows the newest 5; the CV page shows all of it, by year.
+# Add each item here once and never delete old ones.
 #
 # Each entry has three lines:
 #   date: "2026-09"   year and month, in quotes. Use just "2025"
 #                     when the month doesn't matter.
 #   kind: Research    one of the filters listed under timeline_kinds
-#                     in _config.yml: Research, Projects, Education,
+#                     in _config.yml: Research, Project, Education,
 #                     Learning, Role or Service
 #   text: >-          one or two sentences. Links work as usual:
 #                     [Project page](https://...)
 #
 # Order doesn't matter: entries are sorted by date on the site.
 # ---------------------------------------------------------------
+
+- date: "2026-11"
+  kind: Research
+  text: >-
+    Paper *Can Multimodal LLMs Predict Rapid Intensification? A Leakage-Controlled Zero-Shot Benchmark for Tropical Cyclones* accepted at the GeoCV Workshop at WACV 2027 in Florida.
+
+- date: "2026-10"
+  kind: Research
+  text: >-
+    Tutorial *Tropical Cyclone Rapid Intensification (RI) Prediction using Machine Learning* accepted at the Tackling Climate Change with Machine Learning (TCCML) Workshop at NeurIPS 2026 in Sydney.
 
 - date: "2026-09"
   kind: Service
@@ -24,12 +34,12 @@
 - date: "2026-09"
   kind: Research
   text: >-
-    Poster accepted at the WiML Workshop at NeurIPS 2026: *Which Information Matters for Rapid Intensification of Tropical Cyclones? A Global-Basin Feature Ablation Study*.
+    Poster *Which Information Matters for Rapid Intensification of Tropical Cyclones? A Global-Basin Feature Ablation Study* accepted at the WiML Workshop at NeurIPS 2026.
 
 - date: "2026-09"
-  kind: Projects
+  kind: Project
   text: >-
-    Built Forest Sentinel, a prototype at AmazôniaHack: offline AI that drafts traceable environmental inspection reports from field evidence. [*Project page*](https://wiki.amazoniahack.co/wiki/Forest_Sentinel){:target="_blank" rel="noopener"}
+    Built Forest Sentinel at AmazôniaHack, a prototype offline AI that drafts traceable environmental inspection reports from field evidence. [*Project page*](https://wiki.amazoniahack.co/wiki/Forest_Sentinel){:target="_blank" rel="noopener"}
 
 - date: "2026-08"
   kind: Learning
@@ -44,7 +54,7 @@
 - date: "2025-12"
   kind: Role
   text: >-
-    Left Oracle. Moved back to India! 
+    Moved back to India after two and a half years at Oracle, to focus on machine learning for climate and society.
 
 - date: "2023-05"
   kind: Role
@@ -59,12 +69,12 @@
 - date: "2022-06"
   kind: Role
   text: >-
-    Software development intern at Oracle: built a system that recommends fixes for failing CI/CD pipelines.
+    Software development intern at Oracle, where I built a system that recommends fixes for failing CI/CD pipelines.
 
 - date: "2022"
-  kind: Projects
+  kind: Project
   text: >-
-    Crop type mapping on smallholder farms in Kenya from Sentinel-2 satellite time series. [*Project Page*](https://github.com/sukhadaghewari/ECE228_Project_SP22)
+    Crop type mapping on smallholder farms in Kenya from Sentinel-2 satellite time series. [*Project page*](https://github.com/sukhadaghewari/ECE228_Project_SP22){:target="_blank" rel="noopener"}
 
 - date: "2021-10"
   kind: Research
