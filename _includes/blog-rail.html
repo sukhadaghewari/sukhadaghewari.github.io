@@ -4,9 +4,9 @@
   <div>
     <p class="rail-label">Topics</p>
     <ul class="topic-list">
-      <li><button type="button" data-topic="all" aria-pressed="true">All posts<span class="count">{{ site.posts.size }}</span></button></li>
+      <li><button type="button" data-topic="all" aria-pressed="true">All</button></li>
       {%- for topic in topics %}
-      <li><button type="button" data-topic="{{ topic[0] | slugify }}" aria-pressed="false">{{ topic[0] }}<span class="count">{{ topic[1].size }}</span></button></li>
+      <li><button type="button" data-topic="{{ topic[0] | slugify }}" aria-pressed="false">{{ topic[0] }}</button></li>
       {%- endfor %}
     </ul>
   </div>

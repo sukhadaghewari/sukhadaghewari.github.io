@@ -12,9 +12,11 @@
 #                     Learning, Role or Service
 #   text: >-          one or two sentences. Links work as usual:
 #                     [Project page](https://...)
-#                     For a paper, use the same venue name as in
-#                     _data/publications.yml, e.g. "Paper *Title*
-#                     accepted at the GeoCV Workshop at WACV 2027."
+#                     For a paper, write it as a sentence, put the title
+#                     in quotes and use the same venue name as in
+#                     _data/publications.yml, e.g.
+#                       Our paper "Title" was accepted at the GeoCV
+#                       Workshop at WACV 2027.
 #
 # Order doesn't matter: entries are sorted by date on the site.
 # ---------------------------------------------------------------
@@ -22,12 +24,12 @@
 - date: "2026-11"
   kind: Research
   text: >-
-    Paper *Can Multimodal LLMs Predict Rapid Intensification? A Leakage-Controlled Zero-Shot Benchmark for Tropical Cyclones* accepted at the GeoCV Workshop at WACV 2027 in Florida.
+    Our paper "Can Multimodal LLMs Predict Rapid Intensification? A Leakage-Controlled Zero-Shot Benchmark for Tropical Cyclones" was accepted at the GeoCV Workshop at WACV 2027.
 
 - date: "2026-10"
   kind: Research
   text: >-
-    Tutorial *Tropical Cyclone Rapid Intensification (RI) Prediction using Machine Learning* accepted at the Tackling Climate Change with Machine Learning (TCCML) Workshop at NeurIPS 2026 in Sydney.
+    Our tutorial "Tropical Cyclone Rapid Intensification (RI) Prediction using Machine Learning" was accepted at the Tackling Climate Change with Machine Learning (TCCML) Workshop at NeurIPS 2026.
 
 - date: "2026-09"
   kind: Service
@@ -37,7 +39,7 @@
 - date: "2026-09"
   kind: Research
   text: >-
-    Poster *Which Information Matters for Rapid Intensification of Tropical Cyclones? A Global-Basin Feature Ablation Study* accepted at the WiML Workshop at NeurIPS 2026.
+    Our poster "Which Information Matters for Rapid Intensification of Tropical Cyclones? A Global-Basin Feature Ablation Study" was accepted at the WiML Workshop at NeurIPS 2026.
 
 - date: "2026-09"
   kind: Project
@@ -67,7 +69,7 @@
 - date: "2023-03"
   kind: Education
   text: >-
-    Graduated from UC San Diego with a Master's in Computer Science with AI specialization.
+    Graduated from UC San Diego with a Master's in Computer Science with AI specialization (GPA 3.97/4). Coursework included *ML: Learning Algorithms, Probabilistic Reasoning & Learning, ML for Physical Applications, Data Systems for ML, Data Mining & Analytics, and Algorithm Design & Analysis*.
 
 - date: "2022-06"
   kind: Role
@@ -92,7 +94,7 @@
 - date: "2021-12"
   kind: Research
   text: >-
-    Paper *When Diversity Meets Hostility: A Study of Domain Squatting Abuse in Online Banking* published at the APWG eCrime Symposium 2021, with a related Indian patent. [*Paper*](https://ieeexplore.ieee.org/abstract/document/9738769){:target="_blank" rel="noopener"}
+    Our paper "When Diversity Meets Hostility: A Study of Domain Squatting Abuse in Online Banking" was published at the APWG eCrime Symposium 2021, and the work also led to a granted Indian patent. [*Paper*](https://ieeexplore.ieee.org/abstract/document/9738769){:target="_blank" rel="noopener"}
 
 - date: "2019-07"
   kind: Role
@@ -102,7 +104,7 @@
 - date: "2019-05"
   kind: Education
   text: >-
-    Graduated from Walchand College of Engineering with B.Tech (Bachelor's) in Computer Science and Engineering (Gold Medalist, CGPA: 9.51/10).
+    Graduated from Walchand College of Engineering with B.Tech (Bachelor's) in Computer Science and Engineering (Departmental Gold Medalist, CGPA: 9.51/10). Coursework included *Data Structures, Algorithms, Operating Systems, Database Engineering, Theory of Computation, Machine Learning, Statistics & Fuzzy Systems, Digital Image Processing, and Remote Sensing & GPS*.
 
 - date: "2019-01"
   kind: Role

@@ -59,9 +59,8 @@ cv_pdf: /assets/cv.pdf
 # on the next line. Put a # at the start of the line to hide the cover.
 cover: /assets/img/cover.jpg
 # Which part of the photo to keep when it's cropped: top, center or bottom,
-# or a percentage from the top ("center 46%" keeps the same top edge as
-# center did before the strip was made 10% shorter).
-cover_position: center 46%
+# or a percentage from the top, e.g. "center 40%".
+cover_position: center
 
 # Tabs at the top of every page
 nav:

@@ -9,7 +9,7 @@ Right now I am working on extreme weather prediction, with a focus on tropical c
 
 I like finding out whether an idea actually works, then building it into something people use, picking up whatever new method, tool, or field the problem needs along the way.
 
-I am currently applying to PhD programs, and I am always happy to talk about research collaborations.
+I am currently applying to PhD programs and I am also open to research roles. I am always happy to talk about research collaborations.
 
 
 ## Selected work

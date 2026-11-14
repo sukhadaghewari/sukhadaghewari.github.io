@@ -17,6 +17,9 @@
   <meta http-equiv="refresh" content="0; url={{ page.external_url }}">
   {%- endif %}
   <link rel="canonical" href="{{ canonical }}">
+  {%- if page.rail == "blog" and site.posts.size == 0 %}
+  <meta name="robots" content="noindex">{% comment %} the Writing page is empty until the first post {% endcomment %}
+  {%- endif %}
   <meta property="og:type" content="{% if page.layout == 'post' %}article{% else %}website{% endif %}">
   <meta property="og:title" content="{{ page.title | default: site.title | escape }}">
   <meta property="og:description" content="{{ page_description | escape }}">
