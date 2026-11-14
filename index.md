@@ -5,7 +5,7 @@
 
 I am a machine learning researcher and engineer working on climate, health, and society. I did my MS in Computer Science at UC San Diego and I am currently based in India.
 
-Right now I am working on extreme weather prediction, with a focus on tropical cyclones and early warning. Before this, I built LLM systems for healthcare at Oracle, did research in the [Ideker Lab](https://idekerlab.org/){:target="_blank" rel="noopener"} at UC San Diego, and worked on machine learning for cybersecurity at TCS Research in Pune. I also have a background in clinical NLP and AI fairness.
+Right now I am working on extreme weather prediction, with a focus on tropical cyclones and early warning. Before this, I built LLM systems for healthcare at Oracle, and worked on machine learning for cybersecurity at TCS Research in Pune. I also have a background in clinical NLP and AI fairness.
 
 I like finding out whether an idea actually works, then building it into something people use, picking up whatever new method, tool, or field the problem needs along the way.
 

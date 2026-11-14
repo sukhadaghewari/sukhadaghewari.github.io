@@ -12,10 +12,10 @@
 #                     Learning, Role or Service
 #   text: >-          one or two sentences. Links work as usual:
 #                     [Project page](https://...)
-#                     For a paper, write it as a sentence, put the title
-#                     in quotes and use the same venue name as in
+#                     For a paper, tutorial or poster, start with its
+#                     title in quotes and use the same venue name as in
 #                     _data/publications.yml, e.g.
-#                       Our paper "Title" was accepted at the GeoCV
+#                       "Title" was accepted as a paper at the GeoCV
 #                       Workshop at WACV 2027.
 #
 # Order doesn't matter: entries are sorted by date on the site.
@@ -24,12 +24,12 @@
 - date: "2026-11"
   kind: Research
   text: >-
-    Our paper "Can Multimodal LLMs Predict Rapid Intensification? A Leakage-Controlled Zero-Shot Benchmark for Tropical Cyclones" was accepted at the GeoCV Workshop at WACV 2027.
+    "Can Multimodal LLMs Predict Rapid Intensification? A Leakage-Controlled Zero-Shot Benchmark for Tropical Cyclones" was accepted as a paper at the GeoCV Workshop at WACV 2027.
 
 - date: "2026-10"
   kind: Research
   text: >-
-    Our tutorial "Tropical Cyclone Rapid Intensification (RI) Prediction using Machine Learning" was accepted at the Tackling Climate Change with Machine Learning (TCCML) Workshop at NeurIPS 2026.
+    "Tropical Cyclone Rapid Intensification (RI) Prediction using Machine Learning" was accepted as a tutorial at the Tackling Climate Change with Machine Learning (TCCML) Workshop at NeurIPS 2026.
 
 - date: "2026-09"
   kind: Service
@@ -39,7 +39,7 @@
 - date: "2026-09"
   kind: Research
   text: >-
-    Our poster "Which Information Matters for Rapid Intensification of Tropical Cyclones? A Global-Basin Feature Ablation Study" was accepted at the WiML Workshop at NeurIPS 2026.
+    "Which Information Matters for Rapid Intensification of Tropical Cyclones? A Global-Basin Feature Ablation Study" was accepted as a poster at the WiML Workshop at NeurIPS 2026.
 
 - date: "2026-09"
   kind: Project
@@ -94,7 +94,12 @@
 - date: "2021-12"
   kind: Research
   text: >-
-    Our paper "When Diversity Meets Hostility: A Study of Domain Squatting Abuse in Online Banking" was published at the APWG eCrime Symposium 2021, and the work also led to a granted Indian patent. [*Paper*](https://ieeexplore.ieee.org/abstract/document/9738769){:target="_blank" rel="noopener"}
+    "When Diversity Meets Hostility: A Study of Domain Squatting Abuse in Online Banking" was published at the APWG eCrime Symposium 2021, and the work also led to a granted Indian patent. [*Paper*](https://ieeexplore.ieee.org/abstract/document/9738769){:target="_blank" rel="noopener"}
+
+- date: "2021-03"
+  kind: Service
+  text: >-
+    Session volunteer at the ACM Conference on Fairness, Accountability, and Transparency (FAccT 2021).
 
 - date: "2019-07"
   kind: Role

@@ -33,8 +33,6 @@
 #   note:      one short line under the tags, e.g. a related patent
 #   selected:  true to show it under Selected work on the home page
 #   summary:   two or three sentences for the home page card
-#
-# Co-authors' affiliations for the home page cards are in _data/people.yml.
 # ---------------------------------------------------------------
 
 - title: "Can Multimodal LLMs Predict Rapid Intensification? A Leakage-Controlled Zero-Shot Benchmark for Tropical Cyclones"

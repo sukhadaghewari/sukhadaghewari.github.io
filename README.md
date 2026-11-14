@@ -29,7 +29,6 @@ Text in **[square brackets]** is a placeholder. Replace it before you share the 
 | `_config.yml` | Your name, tagline, location, topics, links, photo, cover photo |
 | `index.md` | Home page: About, Selected work, News |
 | `_data/publications.yml` | Your papers, tutorials, posters and so on: the Research page and Selected work on the home page |
-| `_data/people.yml` | Co-authors' affiliations, shown on the Selected work cards |
 | `assets/cv.pdf` | Your CV. The **Download CV** button under your name links to it (upload yours with this exact name) |
 | `assets/img/photo.jpg` | Your photo (square). Then remove the `#` before `photo:` in `_config.yml` |
 | `assets/img/cover.jpg` | Your cover photo. See *Cover photo* below |

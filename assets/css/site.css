@@ -16,6 +16,8 @@
   --accent:#4D6A51;       /* deep sage: links, active tab */
   --accent-line:#B6C8B0;  /* pale sage: underlines, dividers */
   --accent-soft:#DDE6D6;  /* sage tint: tags, highlights */
+  --tag-fill:#4D6A51;     /* the filled conference tag on papers */
+  --tag-fill-ink:#F2EFE7;
   --img-dim:none;         /* photos at full brightness */
   --c-comment:#72776D; --c-keyword:#4D6A51; --c-string:#2B6C80; --c-number:#944B1A; --c-func:#2F5C9E;
   /* Fonts: serif for names, titles, headings and posts; sans for everything else; mono only for code */
@@ -45,6 +47,8 @@
   --accent:#AFCDA9;       /* soft sage */
   --accent-line:#5A6D53;
   --accent-soft:#384432;
+  --tag-fill:#4A5E45;     /* deeper, muted sage so it doesn't glow */
+  --tag-fill-ink:#E3EBDF;
   --img-dim:brightness(.86) saturate(.95);
   --c-comment:#8F8F83; --c-keyword:#AFCDA9; --c-string:#8CC8D8; --c-number:#F0B784; --c-func:#9DBBF3;
   color-scheme:dark;
@@ -208,7 +212,7 @@ strong,b{font-weight:600}
 /* Tags under each paper: the conference (filled), the workshop and type, then links */
 .pub-tags{display:flex;flex-wrap:wrap;gap:6px;margin:4px 0 2px}
 .tag{font:500 var(--text-xs)/1.5 var(--sans);color:var(--ink-2);background:var(--wash);border:1px solid var(--accent-soft);padding:1px 9px;border-radius:5px;white-space:nowrap}
-.tag-venue{font-weight:600;color:var(--ground);background:var(--accent);border-color:var(--accent)}
+.tag-venue{font-weight:600;color:var(--tag-fill-ink);background:var(--tag-fill);border-color:var(--tag-fill)}
 a.tag-link{color:var(--accent);background:var(--accent-soft);border-color:var(--accent-soft);text-decoration:none}
 a.tag-link:hover{color:var(--ink);border-color:var(--accent-line)}
 a.tag-link::after{content:" \2197"}
