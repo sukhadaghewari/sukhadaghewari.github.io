@@ -43,7 +43,7 @@
   </script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=Source+Sans+3:ital,wght@0,400;0,600;1,400&family=IBM+Plex+Mono:ital,wght@0,500;1,500&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,500;0,600;1,400&family=Source+Sans+3:ital,wght@0,400;0,600;1,400&family=IBM+Plex+Mono:ital,wght@0,500;1,500&display=swap">
   <link rel="stylesheet" href="{{ '/assets/css/site.css' | relative_url }}?v={{ site.time | date: '%s' }}">
   {%- if page.math %}
   <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
@@ -55,8 +55,9 @@
 {%- elsif page.layout == "post" -%}{%- assign page_kind = "is-post" -%}
 {%- elsif page.rail == "blog" -%}{%- assign page_kind = "is-blog" -%}
 {%- elsif page.rail == "cv" -%}{%- assign page_kind = "is-cv" -%}
+{%- elsif page.rail == "research" -%}{%- assign page_kind = "is-research" -%}
 {%- else -%}{%- assign page_kind = "is-page" -%}{%- endif -%}
-{%- comment -%} The cover strip tops the Home, Blog and CV pages, with the tabs on it. {%- endcomment -%}
+{%- comment -%} The cover strip tops the Home, Writing, Research and CV pages, with the tabs on it. {%- endcomment -%}
 {%- assign show_cover = false -%}
 {%- if site.cover and page_kind != "is-post" and page_kind != "is-page" -%}{%- assign show_cover = true -%}{%- endif %}
 <body class="{{ page_kind }}{% if show_cover %} has-cover{% endif %}{% if page.body_class %} {{ page.body_class }}{% endif %}">
@@ -124,6 +125,8 @@
     {%- include blog-rail.html %}
     {%- elsif page_kind == "is-cv" %}
     {%- include cv-rail.html %}
+    {%- elsif page_kind == "is-research" %}
+    {%- include research-rail.html %}
     {%- endif %}
     <main class="content" id="main">
       {{ content }}

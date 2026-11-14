@@ -4,22 +4,22 @@
    theme (plus fonts and sizes), the second is the dark theme.
    ================================================================== */
 :root{
-  --ground:#F4F2ED;       /* page background: soft warm cream */
+  --ground:#F2EFE7;       /* page background: soft warm cream */
   --surface:#FBFAF7;      /* pop-ups that sit above the page */
-  --wash:#EBEDE4;         /* faint sage fill: tags */
-  --sunk:#EAE7E0;         /* code and quiet fills */
+  --wash:#EAEBE1;         /* faint sage fill: tags */
+  --sunk:#E8E4DA;         /* code and quiet fills */
   --ink:#1F221E;          /* main text */
   --ink-2:#373B35;
   --muted:#555B52;        /* secondary text */
-  --faint:#777C72;        /* counts, icons */
-  --line:#DDDAD1;         /* hairlines */
+  --faint:#6F746A;        /* counts, icons */
+  --line:#DBD6CB;         /* hairlines */
   --accent:#4D6A51;       /* deep sage: links, active tab */
   --accent-line:#B6C8B0;  /* pale sage: underlines, dividers */
   --accent-soft:#DDE6D6;  /* sage tint: tags, highlights */
   --img-dim:none;         /* photos at full brightness */
   --c-comment:#72776D; --c-keyword:#4D6A51; --c-string:#2B6C80; --c-number:#944B1A; --c-func:#2F5C9E;
   /* Fonts: serif for names, titles, headings and blog posts; sans for everything else; mono for dates and labels */
-  --serif:"Newsreader","Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif;
+  --serif:"Spectral","Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif;
   --sans:"Source Sans 3",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
   --mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
   /* Text sizes: every text on the site uses one of these seven (phones shrink the big ones, see the end of this file) */
@@ -33,15 +33,15 @@
   color-scheme:light;
 }
 :root[data-theme="dark"]{
-  --ground:#1e1e19;       /* warm charcoal */
-  --surface:#32322A;
-  --wash:#31312A;
-  --sunk:#34342C;
+  --ground:#21211B;       /* warm charcoal */
+  --surface:#35352C;
+  --wash:#32322A;
+  --sunk:#35352D;
   --ink:#ECEBE3;
   --ink-2:#D3D2C8;
   --muted:#ADAC9F;
   --faint:#8C8C80;
-  --line:#3B3B32;
+  --line:#3E3D35;
   --accent:#AFCDA9;       /* soft sage */
   --accent-line:#5A6D53;
   --accent-soft:#384432;
@@ -120,7 +120,6 @@ strong,b{font-weight:600}
 .links a{color:var(--ink);text-decoration:none;display:inline-flex;align-items:center;gap:8px}
 .links .icon{flex:none;color:var(--faint)}
 .links a:hover .icon{color:var(--accent)}
-.links a::after{content:" \2197";color:var(--accent-line)}
 .links a:hover{color:var(--accent)}
 /* Email address with a copy button, first in the links block */
 .links .email{position:relative;display:flex;align-items:center;gap:6px;margin-bottom:2px}
@@ -136,7 +135,7 @@ strong,b{font-weight:600}
 
 /* ---------- Left column on the Blog, the CV page and posts ---------- */
 .rail{grid-area:side;position:sticky;top:32px;align-self:start;display:grid;gap:30px}
-.rail-label{margin:0 0 10px;font:500 var(--text-xs)/1.4 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--accent)}
+.rail-label{margin:0 0 10px;font:500 var(--text-xs)/1.4 var(--mono);color:var(--accent)}
 .rail ul{list-style:none;margin:0;padding:0;display:grid;gap:8px;font-size:var(--text-sm);line-height:1.45}
 .rail a{color:var(--ink);text-decoration:none}
 .rail a:hover{color:var(--accent)}
@@ -155,8 +154,8 @@ strong,b{font-weight:600}
 .is-home .content h2:not(:first-child){position:relative;padding-top:40px}
 .is-home .content h2:not(:first-child)::before{content:"";position:absolute;top:0;left:50px;right:0;height:1px;background:var(--accent-line);background:color-mix(in srgb,var(--accent-line) 55%,transparent)}
 .is-home .content h2:not(:first-child)::after{content:"";position:absolute;top:-14px;left:0;width:44px;aspect-ratio:52/19;background:var(--accent-line);-webkit-mask:url("../img/leaves/sprig.svg") no-repeat center/contain;mask:url("../img/leaves/sprig.svg") no-repeat center/contain}
-/* Home, Blog and CV share one text width (about 88 characters a line); Home text is a touch smaller */
-.is-home .content,.is-blog .content,.is-cv .content{max-width:44rem}
+/* Home, Blog, Research and CV share one text width (about 88 characters a line); Home text is a touch smaller */
+.is-home .content,.is-blog .content,.is-cv .content,.is-research .content{max-width:44rem}
 .is-home .content{font-size:16px}
 :where(.content) p{margin:0 0 14px}
 .is-home .content h3{font:600 var(--text-lg)/1.3 var(--serif);margin:0;padding-top:22px;border-top:1px solid var(--line);color:var(--ink)}
@@ -168,8 +167,10 @@ strong,b{font-weight:600}
 .is-home .content li::marker{color:var(--accent-line)}
 .is-home .content .news-latest{list-style:none;padding:0;margin:0;display:grid;gap:10px}
 .is-home .content .news-latest li{position:relative;padding-left:5rem;margin:0}
-.news-latest li > strong:first-child{position:absolute;left:0;top:.18em;font:500 var(--text-xs)/1.6 var(--mono);color:var(--accent);font-variant-numeric:tabular-nums}
+.news-latest li > strong:first-child{position:absolute;left:0;top:.12em;font:600 var(--text-sm)/1.6 var(--sans);color:var(--accent);font-variant-numeric:tabular-nums}
 .is-home .content .more{margin:18px 0 0}
+.all-pubs{display:inline-block;margin-top:6px;font-size:var(--text-sm);font-weight:600;text-decoration:none}
+.all-pubs:hover{text-decoration:underline;text-decoration-color:var(--accent-line)}
 .more a{font-size:var(--text-sm);font-weight:600;text-decoration:none}
 .more a:hover{text-decoration:underline;text-decoration-color:var(--accent-line)}
 
@@ -181,11 +182,11 @@ strong,b{font-weight:600}
 .kind-tabs button:hover{color:var(--accent)}
 .kind-tabs button[aria-pressed="true"]{background:var(--accent-soft);color:var(--accent);font-weight:600}
 .year-group + .year-group{margin-top:44px}
-.content .year{display:flex;align-items:center;gap:14px;margin:0 0 16px;font:500 var(--text-xs)/1.4 var(--mono);letter-spacing:.1em;color:var(--accent)}
+.content .year{display:flex;align-items:center;gap:14px;margin:0 0 16px;font:600 var(--text-sm)/1.4 var(--sans);letter-spacing:.02em;color:var(--accent);font-variant-numeric:tabular-nums}
 .content .year::after{content:"";flex:1;height:1px;background:var(--line)}
 .posts{list-style:none;margin:0;padding:0;display:grid;gap:26px}
 .posts li{display:grid;grid-template-columns:minmax(0,1fr) auto;column-gap:28px;align-items:baseline}
-.posts time{font:500 var(--text-xs)/1.6 var(--mono);color:var(--muted);white-space:nowrap;font-variant-numeric:tabular-nums}
+.posts time{font:400 var(--text-sm)/1.6 var(--sans);color:var(--muted);white-space:nowrap;font-variant-numeric:tabular-nums}
 .posts a{font:500 var(--text-xl)/1.25 var(--serif);color:var(--ink);text-decoration:none}
 .posts a:hover{color:var(--accent);text-decoration:underline;text-decoration-color:var(--accent-line);text-decoration-thickness:2px}
 .posts p{margin:6px 0 0;color:var(--muted);font-size:var(--text-sm);line-height:1.5}
@@ -196,13 +197,30 @@ strong,b{font-weight:600}
 .subscribe a{font-weight:600;text-decoration:none}
 .subscribe a:hover{text-decoration:underline}
 
-/* ---------- Full timeline (CV page) ---------- */
+/* ---------- Research page: publications ---------- */
+.section-label{margin:0 0 20px;font:600 var(--text-xl)/1.25 var(--serif);color:var(--ink);letter-spacing:-.005em}
+.rail .profiles a{display:inline-flex;align-items:center;gap:8px}
+.rail .profiles .icon{flex:none;color:var(--faint)}
+.rail .profiles a:hover .icon{color:var(--accent)}
+.pubs{list-style:none;margin:0;padding:0;display:grid;gap:20px}
+.pubs li{display:grid;gap:2px}
+.pub-title{font:600 var(--text-lg)/1.35 var(--serif);color:var(--ink)}
+.pub-authors{font-size:var(--text-sm);color:var(--ink-2)}
+/* Tags under each paper: the conference (filled), the workshop and type, then links */
+.pub-tags{display:flex;flex-wrap:wrap;gap:6px;margin:4px 0 2px}
+.tag{font:500 var(--text-xs)/1.5 var(--sans);color:var(--ink-2);background:var(--wash);border:1px solid var(--accent-soft);padding:1px 9px;border-radius:5px;white-space:nowrap}
+.tag-venue{font-weight:600;color:var(--ground);background:var(--accent);border-color:var(--accent)}
+a.tag-link{color:var(--accent);background:var(--accent-soft);border-color:var(--accent-soft);text-decoration:none}
+a.tag-link:hover{color:var(--ink);border-color:var(--accent-line)}
+a.tag-link::after{content:" \2197"}
+.pub-note{font-size:var(--text-sm);line-height:1.5;color:var(--muted)}
+/* ---------- CV page: the full timeline ---------- */
 /* Each entry: month, the text, and its kind as a quiet label on the right */
 .timeline{list-style:none;margin:0;padding:0;display:grid;gap:14px}
 .timeline li{display:grid;grid-template-columns:2.75rem minmax(0,1fr) 5.5rem;column-gap:14px;align-items:start;margin:0}
-.timeline time{font:500 var(--text-xs)/1.6 var(--mono);color:var(--accent);font-variant-numeric:tabular-nums;padding-top:.25em}
+.timeline time{font:600 var(--text-sm)/1.6 var(--sans);color:var(--accent);font-variant-numeric:tabular-nums;padding-top:.1em}
 .tl-text{min-width:0}
-.tl-kind{justify-self:end;padding-top:.25em;font:500 var(--text-xs)/1.6 var(--mono);color:var(--faint);white-space:nowrap}
+.tl-kind{justify-self:end;padding-top:.1em;font:italic 400 var(--text-sm)/1.6 var(--sans);color:var(--muted);white-space:nowrap}
 
 /* ---------- A post ---------- */
 .post-head{margin-bottom:36px}
@@ -242,7 +260,7 @@ strong,b{font-weight:600}
 .post-nav{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:48px;padding-top:24px;border-top:1px solid var(--line)}
 .post-nav a{display:block;text-decoration:none;color:var(--ink);font:500 var(--text-lg)/1.35 var(--serif)}
 .post-nav a:hover{color:var(--accent)}
-.post-nav small{display:block;margin-bottom:4px;font:500 var(--text-xs)/1.6 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.post-nav small{display:block;margin-bottom:4px;font:500 var(--text-xs)/1.6 var(--mono);color:var(--muted)}
 .post-nav .next{text-align:right;grid-column:2}
 
 /* ---------- Code ---------- */
@@ -266,10 +284,11 @@ strong,b{font-weight:600}
   :root{--text-lg:18px;--text-xl:22px;--text-2xl:28px;--text-3xl:30px}
   .wrap{grid-template-columns:minmax(0,1fr);grid-template-areas:"nav" "side" "main";padding-block:12px 8px;padding-inline:18px}
   .has-cover .wrap{grid-template-areas:"cover" "side" "main";grid-template-rows:auto}
-  .is-blog .wrap,.is-cv .wrap{grid-template-areas:"nav" "side" "main"}
-  .has-cover.is-blog .wrap,.has-cover.is-cv .wrap{grid-template-areas:"cover" "side" "main"}
-  .rail.blog-rail,.rail.cv-rail{margin:0 0 30px;padding:0 0 22px;border-top:0;border-bottom:1px solid var(--line);gap:22px}
+  .is-blog .wrap,.is-cv .wrap,.is-research .wrap{grid-template-areas:"nav" "side" "main"}
+  .has-cover.is-blog .wrap,.has-cover.is-cv .wrap,.has-cover.is-research .wrap{grid-template-areas:"cover" "side" "main"}
+  .rail.blog-rail,.rail.cv-rail,.rail.research-rail{margin:0 0 30px;padding:0 0 22px;border-top:0;border-bottom:1px solid var(--line);gap:22px}
   .rail .topic-list{display:flex;flex-wrap:wrap;gap:8px}
+  .rail .profiles{display:flex;flex-wrap:wrap;gap:8px 20px}
   .topic-list button{margin-left:0;border:1px solid var(--line)}
   .is-post .wrap{grid-template-areas:"nav" "main"}
   .post-rail{display:none}

@@ -1,6 +1,6 @@
 ---
 title: "Your post title"
-description: "One sentence. It appears under the title and on the Blog page."
+description: "One sentence. It appears under the title and on the Writing page."
 kind: technical   # or: thoughts
 tags: [Climate]
 # image: /assets/img/posts/your-cover.jpg

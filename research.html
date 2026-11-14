@@ -1,0 +1,19 @@
+---
+title: Research
+permalink: /research/
+rail: research
+description: "Papers, tutorials and other research by Sukhada Ghewari."
+---
+<h1 class="sr-only">Research</h1>
+<ol class="pubs">
+  {%- for p in site.data.publications %}
+  <li>
+    <span class="pub-title">{{ p.title }}</span>
+    <span class="pub-authors">{% for a in p.authors %}{% if a == site.title %}<strong>{{ a }}</strong>{% else %}{{ a }}{% endif %}{% unless forloop.last %}, {% endunless %}{% endfor %}</span>
+    {% include pub-tags.html p=p %}
+    {%- if p.note %}
+    <span class="pub-note">{{ p.note }}</span>
+    {%- endif %}
+  </li>
+  {%- endfor %}
+</ol>

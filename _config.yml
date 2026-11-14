@@ -10,7 +10,7 @@ description: >-
   Machine learning researcher and engineer building AI for
   people and the planet: extreme-weather early warning, forest monitoring,
   health and more.
-location: India
+location: Pune, India
 
 # Small tags under your name on the home page
 topics:
@@ -30,12 +30,12 @@ substack: "https://substack.com/@sukhada14"
 # Links under your name on the home page, in this order.
 # To remove one, delete both of its lines.
 links:
-  - name: GitHub
-    url: "https://github.com/sukhadaghewari"
   - name: Google Scholar
     url: "https://scholar.google.com/citations?hl=en&user=oeQF_3gAAAAJ"
   - name: OpenReview
     url: "https://openreview.net/profile?id=%7ESukhada_Ghewari1"
+  - name: GitHub
+    url: "https://github.com/sukhadaghewari"
   - name: LinkedIn
     url: "https://www.linkedin.com/in/sukhada-ghewari/"
   - name: Substack
@@ -44,7 +44,6 @@ links:
     url: "https://bsky.app/profile/sukhada.bsky.social"
   - name: X
     url: "https://x.com/sukhadathinks"
-  
 
 # Your photo. Upload a square picture as assets/img/photo.jpg.
 # Put a # at the start of the next line to show your initials instead.
@@ -68,10 +67,12 @@ cover_position: center 46%
 nav:
   - name: Home
     url: /
-  - name: Writing
-    url: /blog/
   - name: CV
     url: /cv/
+  - name: Research
+    url: /research/
+  - name: Writing
+    url: /blog/
 
 # The filters next to your full timeline on the CV page, in this order.
 # Every entry in _data/timeline.yml uses one of these as its kind.
@@ -99,6 +100,7 @@ post_kinds:
 # You shouldn't need to change anything below this line.
 # ---------------------------------------------------------------
 
+url: "https://sukhadaghewari.github.io"   # your site's address, for share previews, the sitemap and RSS
 timezone: Asia/Kolkata
 permalink: /blog/:year/:title/
 

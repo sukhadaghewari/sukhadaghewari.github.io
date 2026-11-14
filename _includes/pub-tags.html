@@ -1,0 +1,16 @@
+{%- comment -%}
+  One row of tags for a publication, always in the same order:
+  [Host Year] [Workshop] [Type] [Code] ...
+  The type tag (Paper unless the entry says otherwise) links to `url` when there is one.
+  Use as {% include pub-tags.html p=paper %}.
+{%- endcomment -%}
+{%- assign p = include.p -%}
+{%- assign name = p.short | default: p.venue -%}
+<span class="pub-tags">
+{%- if p.host %}<span class="tag tag-venue">{{ p.host }} {{ p.year }}</span><span class="tag" title="{{ p.venue | escape }}">{{ name }}</span>
+{%- else %}<span class="tag tag-venue" title="{{ p.venue | escape }}">{{ name }} {{ p.year }}</span>{% endif -%}
+{%- assign kind = p.type | default: "Paper" -%}
+{%- if p.url %}<a class="tag tag-link" href="{{ p.url }}" target="_blank" rel="noopener">{{ kind }}</a>
+{%- else %}<span class="tag">{{ kind }}</span>{% endif -%}
+{%- for l in p.links %}<a class="tag tag-link" href="{{ l.url }}" target="_blank" rel="noopener">{{ l.name }}</a>{% endfor -%}
+</span>

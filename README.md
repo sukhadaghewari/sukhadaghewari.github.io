@@ -28,10 +28,12 @@ Text in **[square brackets]** is a placeholder. Replace it before you share the 
 |---|---|
 | `_config.yml` | Your name, tagline, location, topics, links, photo, cover photo |
 | `index.md` | Home page: About, Selected work, News |
+| `_data/publications.yml` | Your papers, tutorials, posters and so on: the Research page and Selected work on the home page |
+| `_data/people.yml` | Co-authors' affiliations, shown on the Selected work cards |
 | `assets/cv.pdf` | Your CV. The **Download CV** button under your name links to it (upload yours with this exact name) |
 | `assets/img/photo.jpg` | Your photo (square). Then remove the `#` before `photo:` in `_config.yml` |
 | `assets/img/cover.jpg` | Your cover photo. See *Cover photo* below |
-| `_posts/` | Blog posts. Rewrite or delete the starter post |
+| `_posts/` | Posts for the Writing tab, which appears once one is published. Rewrite or delete the starter post |
 
 The browser-tab icon shows the first letter of your name automatically.
 
@@ -58,7 +60,7 @@ edit, then click **Commit changes**. The site updates in about a minute.
 | I want to… | Do this |
 |---|---|
 | Add a news item or anything I've done | `_data/timeline.yml` → add an entry (date, kind, text). It shows in News on the home page while it's among the newest 5, and on the CV page for good |
-| Add a project | `index.md` → copy one `###` block under *Selected work* and edit it |
+| Add a paper | `_data/publications.yml` → add an entry (instructions at the top of the file). Add `selected: true` and a `summary` to show it under *Selected work* on the home page too |
 | Update my CV | Upload a new `assets/cv.pdf`. The same name replaces the old one |
 | Change a link or my tagline | `_config.yml` |
 | Change the colours, fonts or text sizes | The first two blocks of `assets/css/site.css`: the light theme (with fonts and sizes), then the dark theme |
@@ -73,7 +75,7 @@ edit, then click **Commit changes**. The site updates in about a minute.
    ```
    ---
    title: "Your post title"
-   description: "One sentence shown under the title and on the Blog page."
+   description: "One sentence shown under the title and on the Writing page."
    kind: technical
    tags: [Climate]
    ---
@@ -83,7 +85,7 @@ edit, then click **Commit changes**. The site updates in about a minute.
 
 ### Technical or Thoughts
 
-The `kind` line puts a post under one of the two tabs at the top of the Blog:
+The `kind` line puts a post under one of the two tabs at the top of the Writing page:
 `kind: technical` for write-ups of methods, data and results, or `kind: thoughts`
 for opinions, reflections and anything else. Every post needs one of the two.
 To rename a tab, change its `name` under `post_kinds` in `_config.yml`.
@@ -113,7 +115,7 @@ The same lines are in **`_templates/substack-post.md`**.
 ### Topics
 
 The `tags` line puts a post under one or more topics, for example `tags: [Climate, Forests]`.
-Each topic appears in the Blog's left column; clicking it shows only those posts.
+Each topic appears in the Writing page's left column; clicking it shows only those posts.
 Spell topics the same way every time: `Climate` and `climate` would become two topics.
 
 For headings, links, images, quotes, code, equations and footnotes, copy from the

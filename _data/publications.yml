@@ -1,0 +1,68 @@
+# ---------------------------------------------------------------
+# YOUR WORK: PAPERS, TUTORIALS, POSTERS, ...
+# One entry each, newest first. The Research page lists all of
+# them; entries with `selected: true` also appear on the home page
+# under Selected work. Write each paper here once and every page
+# shows it the same way.
+#
+#   title:     the full title, in quotes
+#   authors:   everyone, in paper order, e.g. [Sukhada Ghewari, Adway Mitra]
+#              (your own name is made bold on the Research page)
+#   venue:     the full name of the workshop or conference, e.g.
+#              "Tackling Climate Change with Machine Learning (TCCML) Workshop"
+#   short:     a short name for its tag, e.g. "TCCML Workshop".
+#              Leave it out when the venue is already short.
+#   host:      only for a workshop: the conference it is part of, e.g. "WACV"
+#   year:      the year of the conference
+#   type:      Paper if you leave it out. Otherwise Tutorial, Poster, ...
+#
+# Each paper gets one row of tags, always in this order:
+#   [Host Year]  [Workshop]  [Type]  [Code] ...
+#   WACV 2027 · GeoCV Workshop · Paper
+#   NeurIPS 2026 · TCCML Workshop · Tutorial
+#   APWG eCrime 2021 · Paper ↗
+# (For a conference paper with no host, the first tag is the venue and year.)
+#
+# Optional:
+#   url:       where to read it. The type tag (Paper, Tutorial, ...)
+#              becomes a link to it, with an arrow.
+#   links:     more links, each becomes a tag, e.g.
+#                links:
+#                  - name: Code
+#                    url: "https://..."
+#   note:      one short line under the tags, e.g. a related patent
+#   selected:  true to show it under Selected work on the home page
+#   summary:   two or three sentences for the home page card
+#
+# Co-authors' affiliations for the home page cards are in _data/people.yml.
+# ---------------------------------------------------------------
+
+- title: "Can Multimodal LLMs Predict Rapid Intensification? A Leakage-Controlled Zero-Shot Benchmark for Tropical Cyclones"
+  authors: [Sukhada Ghewari, Harshal Tupsamudre]
+  venue: "GeoCV Workshop"
+  host: "WACV"
+  year: 2027
+  selected: true
+  summary: |
+    We wanted to know whether off-the-shelf multimodal LLMs can predict rapid intensification without any training. We gave six commercial models the recent history of 140 storms, along with environmental data and infrared satellite images, and removed names, dates and locations so they couldn't simply remember what happened.
+
+    The best model did two to three times better than chance. The satellite images didn't clearly help, though, and a plain XGBoost model trained on older storms still beat every LLM.
+
+- title: "Tropical Cyclone Rapid Intensification (RI) Prediction using Machine Learning"
+  authors: [Sukhada Ghewari, Adway Mitra]
+  type: Tutorial
+  venue: "Tackling Climate Change with Machine Learning (TCCML) Workshop"
+  short: "TCCML Workshop"
+  host: "NeurIPS"
+  year: 2026
+  selected: true
+  summary: |
+    A hands-on notebook that walks through predicting rapid intensification from start to finish, using real storm tracks, satellite images and reanalysis data. It shows how to treat RI as the rare event it is, build features a forecaster can make sense of, and check whether a model can really be trusted. The hope is to give forecasters more time to prepare before a storm suddenly strengthens.
+
+- title: "When Diversity Meets Hostility: A Study of Domain Squatting Abuse in Online Banking"
+  authors: [Neeraj Kumar, Sukhada Ghewari, Harshal Tupsamudre, Manish Shukla, Sachin Lodha]
+  venue: "APWG Symposium on Electronic Crime Research (eCrime)"
+  short: "APWG eCrime"
+  year: 2021
+  url: "https://ieeexplore.ieee.org/abstract/document/9738769"
+  note: "Related Indian patent No. 560163"

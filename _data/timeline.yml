@@ -12,6 +12,9 @@
 #                     Learning, Role or Service
 #   text: >-          one or two sentences. Links work as usual:
 #                     [Project page](https://...)
+#                     For a paper, use the same venue name as in
+#                     _data/publications.yml, e.g. "Paper *Title*
+#                     accepted at the GeoCV Workshop at WACV 2027."
 #
 # Order doesn't matter: entries are sorted by date on the site.
 # ---------------------------------------------------------------
@@ -89,19 +92,19 @@
 - date: "2021-12"
   kind: Research
   text: >-
-    *When Diversity Meets Hostility: A Study of Domain Squatting Abuse in Online Banking*, published at APWG Symposium (eCrime 2021), with a related patent filed in India.
+    Paper *When Diversity Meets Hostility: A Study of Domain Squatting Abuse in Online Banking* published at the APWG eCrime Symposium 2021, with a related Indian patent. [*Paper*](https://ieeexplore.ieee.org/abstract/document/9738769){:target="_blank" rel="noopener"}
 
 - date: "2019-07"
   kind: Role
   text: >-
-    Joined TCS Research as a researcher, working in Cybersecurity + ML area.
+    Joined TCS Research in Pune as a researcher, working on machine learning for cybersecurity.
 
 - date: "2019-05"
   kind: Education
   text: >-
-    Graduated from Walchand College of Engineering with B.Tech (Bachelors) in Computer Science and Engineering (Gold Medalist, CGPA: 9.51/10).
+    Graduated from Walchand College of Engineering with B.Tech (Bachelor's) in Computer Science and Engineering (Gold Medalist, CGPA: 9.51/10).
 
 - date: "2019-01"
   kind: Role
   text: >-
-    Started my first professional internship at AlgoAnalytics, working on ML for healthcare (Semi-automated ICD-9 coding using ML on MIMIC-III dataset).
+    Started my first professional internship at AlgoAnalytics, working on ML for healthcare (semi-automated ICD-9 coding using ML on the MIMIC-III dataset).

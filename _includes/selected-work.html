@@ -1,0 +1,20 @@
+{%- comment -%}
+  Selected work on the home page: every entry in _data/publications.yml
+  with `selected: true`, with co-authors' affiliations from _data/people.yml.
+{%- endcomment -%}
+{%- for p in site.data.publications %}
+{%- if p.selected %}
+{%- capture names -%}
+  {%- for a in p.authors -%}
+    {{ a }}{% if a != site.title and site.data.people[a] %} ({{ site.data.people[a] }}){% endif %}{% unless forloop.last %}|{% endunless %}
+  {%- endfor -%}
+{%- endcapture %}
+<h3>{{ p.title }}</h3>
+<p><em>{{ names | split: "|" | array_to_sentence_string }}</em></p>
+<p>{% include pub-tags.html p=p %}</p>
+{%- if p.note %}
+<p class="pub-note">{{ p.note }}</p>
+{%- endif %}
+{{ p.summary | markdownify }}
+{%- endif %}
+{%- endfor %}
