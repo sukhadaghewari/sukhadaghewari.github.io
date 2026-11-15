@@ -351,7 +351,7 @@ permalink: /
 
   <section id="contact">
     <h2>Contact</h2>
-    {%- if site.email %}<p>The best way to reach me is by email at <a href="mailto:{{ site.email }}">{{ site.email }}</a>.</p>{% endif %}
+    {%- if site.email %}<p>The best way to reach me is by email at <a href="mailto:{{ site.email }}"><em>{{ site.email }}</em></a>.</p>{% endif %}
     {%- comment -%} Social accounts in Contact, in this order. {%- endcomment -%}
     {%- assign social_names = "LinkedIn|X|Bluesky" | split: "|" %}
     {%- assign social = "" | split: "" %}
