@@ -1,58 +1,19 @@
 ---
-title: CV
+layout: null
 permalink: /cv/
-rail: cv
-description: "Everything I have done, by year: research, projects, education, roles and service."
+sitemap: false
 ---
-<h1 class="sr-only">CV</h1>
-{%- assign entries = site.data.timeline | reverse | sort: "date" | reverse %}
-{%- assign years = entries | group_by_exp: "e", "e.date | slice: 0, 4" %}
-{%- for year in years %}
-<section class="year-group" aria-labelledby="year-{{ year.name }}">
-  <h2 class="year" id="year-{{ year.name }}">{{ year.name }}</h2>
-  <ul class="timeline">
-    {%- for e in year.items %}
-    <li data-kind="{{ e.kind | slugify }}">
-      {%- if e.date.size > 4 %}
-      <time datetime="{{ e.date }}">{{ e.date | append: "-01" | date: "%b" }}</time>
-      {%- else %}
-      <span></span>
-      {%- endif %}
-      <div class="tl-text">{{ e.text | markdownify | remove: "<p>" | remove: "</p>" | strip }}</div>
-      <span class="tl-kind">{{ e.kind }}</span>
-    </li>
-    {%- endfor %}
-  </ul>
-</section>
-{%- endfor %}
-
-<script>
-  // Filters in the left column: show one kind of entry, or everything.
-  // Links like /cv/#research open with that filter on.
-  (function () {
-    var buttons = document.querySelectorAll(".cv-rail [data-kind]");
-    var entries = document.querySelectorAll(".timeline li");
-    var groups = document.querySelectorAll(".year-group");
-
-    function filter(kind) {
-      entries.forEach(function (li) {
-        li.hidden = kind !== "all" && li.getAttribute("data-kind") !== kind;
-      });
-      groups.forEach(function (g) { g.hidden = !g.querySelector(".timeline li:not([hidden])"); });
-      buttons.forEach(function (b) {
-        b.setAttribute("aria-pressed", b.getAttribute("data-kind") === kind ? "true" : "false");
-      });
-    }
-
-    buttons.forEach(function (b) {
-      b.addEventListener("click", function () {
-        var kind = b.getAttribute("data-kind");
-        filter(kind);
-        try { history.replaceState(null, "", kind === "all" ? location.pathname : "#" + kind); } catch (e) {}
-      });
-    });
-
-    var hash = decodeURIComponent(location.hash.slice(1));
-    if (hash && document.querySelector('.cv-rail [data-kind="' + hash + '"]')) filter(hash);
-  })();
-</script>
+{%- comment -%} This page moved to the home page. Old links land on the CV section there. {%- endcomment -%}
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>CV · {{ site.title }}</title>
+  <meta name="robots" content="noindex">
+  <link rel="canonical" href="{{ '/' | absolute_url }}#experience">
+  <meta http-equiv="refresh" content="0; url={{ '/' | relative_url }}#experience">
+</head>
+<body>
+  <p><a href="{{ '/' | relative_url }}#experience">This page has moved to the home page.</a></p>
+</body>
+</html>

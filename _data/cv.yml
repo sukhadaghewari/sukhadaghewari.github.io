@@ -1,0 +1,88 @@
+# ---------------------------------------------------------------
+# EXPERIENCE, EDUCATION, AWARDS AND SERVICE
+# The home page shows these sections in this order, after News.
+# To add something, find its section and add an entry, newest first.
+#
+# Papers, tutorials and posters don't go here. They go in
+# _data/publications.yml and show under Research.
+#
+# Each entry:
+#   title:   the role, degree, competition or award
+#   org:     where, e.g. "TCS Research, Pune" (optional). In Experience
+#            and Education the org comes first, with the title under it.
+#   dates:   "Sep 2021 – Mar 2023", "Jan 2019" or "Jul 2026 – present", in quotes
+#   text:    one or two sentences in grey (optional). Links work as usual:
+#            [Project page](https://...){:target="_blank" rel="noopener"}
+#   courses: coursework, one course per line. It shows folded under
+#            "Coursework" as one sentence (optional)
+# ---------------------------------------------------------------
+
+- section: Experience
+  entries:
+    - org: "Independent researcher"
+      title: "Climate and AI, ML for Predicting Tropical Cyclone Rapid Intensification"
+      dates: "Jul 2026 – present"
+    - org: "Oracle"
+      title: "Software Engineer 2, Healthcare Analytics"
+      dates: "May 2023 – Dec 2025"
+    - org: "Oracle"
+      title: "Software Development Intern"
+      dates: "Jun 2022 – Sep 2022"
+    - org: "Ideker Lab, UC San Diego"
+      title: "Graduate Student Researcher"
+      dates: "Oct 2021 – Jun 2022"
+    - org: "TCS Research, Pune"
+      title: "Researcher, Machine Learning and Cybersecurity"
+      dates: "Jul 2019 – May 2021"
+    - org: "AlgoAnalytics"
+      title: "Intern, Machine Learning for Healthcare"
+      dates: "Jan 2019 – Jul 2019"
+
+- section: Education
+  entries:
+    - title: "MS in Computer Science, AI specialization"
+      org: "University of California San Diego"
+      dates: "Sep 2021 – Mar 2023"
+      text: "GPA 3.97/4"
+      courses:
+        - "ML: Learning Algorithms"
+        - "Probabilistic Reasoning & Learning"
+        - "ML for Physical Applications"
+        - "Data Systems for ML"
+        - "Data Mining & Analytics"
+        - "Algorithm Design & Analysis"
+    - title: "B.Tech in Computer Science and Engineering"
+      org: "Walchand College of Engineering"
+      dates: "Jul 2015 – May 2019"
+      text: "Departmental Gold Medalist, CGPA 9.51/10"
+      courses:
+        - "Data Structures"
+        - "Algorithms"
+        - "Operating Systems"
+        - "Database Engineering"
+        - "Theory of Computation"
+        - "Machine Learning"
+        - "Statistics & Fuzzy Systems"
+        - "Digital Image Processing"
+        - "Remote Sensing & GPS"
+
+- section: Awards and service
+  entries:
+    - title: "First place, ITU AI/ML Challenge 2026"
+      org: "ITU AI for Good"
+      dates: "Nov 2026"
+      text: >-
+        “Application Inference from Packet Flows”, with team Flow State. Final presentation on November 17, 2026.
+    - title: "Special recognition, AmazôniaHack 2026"
+      dates: "Sep 2026"
+      text: >-
+        Forest Sentinel, a prototype offline AI that drafts traceable environmental inspection reports from field evidence. [Project page](https://wiki.amazoniahack.co/wiki/Forest_Sentinel){:target="_blank" rel="noopener"}
+    - title: "Reviewer"
+      org: "Machine Learning for Health (ML4H) Symposium"
+      dates: "Sep 2026"
+    - title: "Session volunteer"
+      org: "ACM Conference on Fairness, Accountability, and Transparency (FAccT)"
+      dates: "Mar 2021"
+    - title: "Departmental Gold Medal"
+      org: "Walchand College of Engineering"
+      dates: "May 2019"

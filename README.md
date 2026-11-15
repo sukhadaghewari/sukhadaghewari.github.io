@@ -26,9 +26,11 @@ Text in **[square brackets]** is a placeholder. Replace it before you share the 
 
 | File | What it controls |
 |---|---|
-| `_config.yml` | Your name, tagline, location, topics, links, photo, cover photo |
-| `index.md` | Home page: About, Selected work, News |
-| `_data/publications.yml` | Your papers, tutorials, posters and so on: the Research page and Selected work on the home page |
+| `_config.yml` | Your name, tagline, topics, links, photo, cover photo |
+| `index.html` | The home page, which is the whole site on one page. Your About text is in here |
+| `_data/publications.yml` | Your papers, tutorials and posters, shown under Research |
+| `_data/news.yml` | Short announcements, shown under News |
+| `_data/cv.yml` | Experience, Education, and Awards and service |
 | `assets/cv.pdf` | Your CV. The **Download CV** button under your name links to it (upload yours with this exact name) |
 | `assets/img/photo.jpg` | Your photo (square). Then remove the `#` before `photo:` in `_config.yml` |
 | `assets/img/cover.jpg` | Your cover photo. See *Cover photo* below |
@@ -41,7 +43,7 @@ whichever their device uses, and the site remembers their choice once they press
 
 ### Cover photo
 
-The cover is the wide strip at the top of the home page, with your photo overlapping it.
+The cover is the wide photo band at the top of the home page. It fades softly into the page.
 
 1. Crop your photo to a wide strip, about 3 times as wide as it is tall (for example 2400 × 750 pixels).
    Keep what matters in the middle: laptops show a thin band across it, phones a taller slice.
@@ -58,11 +60,12 @@ edit, then click **Commit changes**. The site updates in about a minute.
 
 | I want to… | Do this |
 |---|---|
-| Add a news item or anything I've done | `_data/timeline.yml` → add an entry (date, kind, text). It shows in News on the home page while it's among the newest 5, and on the CV page for good |
-| Add a paper | `_data/publications.yml` → add an entry (instructions at the top of the file). Add `selected: true` and a `summary` to show it under *Selected work* on the home page too |
+| Add a news item | `_data/news.yml` → add an entry (date, text). It shows in News on the home page while it's among the newest 5 |
+| Add a role, degree, award or service | `_data/cv.yml` → add an entry under its section (instructions at the top of the file). Papers go only in `_data/publications.yml` |
+| Add a paper | `_data/publications.yml` → add an entry (instructions at the top of the file) |
 | Update my CV | Upload a new `assets/cv.pdf`. The same name replaces the old one |
 | Change a link or my tagline | `_config.yml` |
-| Change the colours, fonts or text sizes | The first two blocks of `assets/css/site.css`: the light theme (with fonts and sizes), then the dark theme |
+| Change the home page colours | The colour rules at the top of `index.html`, in the `<style>` block. The Writing pages use `assets/css/site.css` |
 
 ## 4. Write a blog post
 

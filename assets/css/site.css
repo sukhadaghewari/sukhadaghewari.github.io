@@ -4,7 +4,7 @@
    theme (plus fonts and sizes), the second is the dark theme.
    ================================================================== */
 :root{
-  --ground:#F2EFE7;       /* page background: soft warm cream */
+  --ground:#F3F0E8;       /* page background: soft warm cream */
   --surface:#FBFAF7;      /* pop-ups that sit above the page */
   --wash:#EAEBE1;         /* faint sage fill: tags */
   --sunk:#E8E4DA;         /* code and quiet fills */
@@ -137,7 +137,7 @@ strong,b{font-weight:600}
 .links .email .copied{font:600 var(--text-xs)/1.6 var(--sans);color:var(--accent)}
 .links .email .copied:empty{display:none}
 
-/* ---------- Left column on the Blog, the CV page and posts ---------- */
+/* ---------- Left column on the Blog, CV, Research and posts ---------- */
 .rail{grid-area:side;position:sticky;top:32px;align-self:start;display:grid;gap:30px}
 .rail-label{margin:0 0 8px;font:italic 400 var(--text-sm)/1.4 var(--sans);color:var(--muted)}
 .rail ul{list-style:none;margin:0;padding:0;display:grid;gap:8px;font-size:var(--text-sm);line-height:1.45}
@@ -147,8 +147,8 @@ strong,b{font-weight:600}
 .rail .recent{gap:12px}
 /* Filters in the left column: one per line (on phones they wrap, see the end of this file) */
 .rail .topic-list{display:flex;flex-direction:column;align-items:flex-start;gap:6px}
-/* Filter chips, the same on every page: the CV filters, and the kinds and
-   topics on the Writing page. The chosen one is filled with sage. */
+/* Filter chips, the same on every page: the kinds and topics on the
+   Writing page. The chosen one is filled with sage. */
 .topic-list button,.kind-tabs button{display:inline-flex;align-items:baseline;gap:7px;padding:3px 11px;border:1px solid var(--line);border-radius:6px;background:none;color:var(--ink);font:400 var(--text-sm)/1.45 var(--sans);text-align:left;cursor:pointer}
 .topic-list button:hover,.kind-tabs button:hover{color:var(--accent);border-color:var(--accent-line)}
 .topic-list button[aria-pressed="true"],.kind-tabs button[aria-pressed="true"]{background:var(--accent-soft);border-color:var(--accent-line);color:var(--accent);font-weight:600}
@@ -186,6 +186,7 @@ strong,b{font-weight:600}
 .year-group + .year-group{margin-top:44px}
 .content .year{display:flex;align-items:center;gap:14px;margin:0 0 16px;font:600 var(--text-sm)/1.4 var(--sans);letter-spacing:.02em;color:var(--accent);font-variant-numeric:tabular-nums}
 .content .year::after{content:"";flex:1;height:1px;background:var(--line)}
+.content .section-label{font-size:var(--text-md)}
 .posts{list-style:none;margin:0;padding:0;display:grid;gap:26px}
 .posts li{display:grid;grid-template-columns:minmax(0,1fr) auto;column-gap:28px;align-items:baseline}
 .posts time{font:400 var(--text-sm)/1.6 var(--sans);color:var(--muted);white-space:nowrap;font-variant-numeric:tabular-nums}
@@ -217,13 +218,26 @@ a.tag-link{color:var(--accent);background:var(--accent-soft);border-color:var(--
 a.tag-link:hover{color:var(--ink);border-color:var(--accent-line)}
 a.tag-link::after{content:" \2197"}
 .pub-note{font-size:var(--text-sm);line-height:1.5;color:var(--muted)}
-/* ---------- CV page: the full timeline ---------- */
-/* Each entry: month, the text, and its kind as a quiet label on the right */
-.timeline{list-style:none;margin:0;padding:0;display:grid;gap:14px}
-.timeline li{display:grid;grid-template-columns:2.75rem minmax(0,1fr) 5.5rem;column-gap:14px;align-items:start;margin:0}
-.timeline time{font:600 var(--text-sm)/1.6 var(--sans);color:var(--accent);font-variant-numeric:tabular-nums;padding-top:.1em}
-.tl-text{min-width:0}
-.tl-kind{justify-self:end;padding-top:.1em;font:italic 400 var(--text-sm)/1.6 var(--sans);color:var(--muted);white-space:nowrap}
+/* ---------- CV page: one section each for experience, education, ... ---------- */
+/* A plain list: each entry is one line (title, where, dates, and an
+   optional bold label like "First place"), then a short grey line. */
+.cv-list{list-style:none;margin:0;padding:0;display:grid;gap:12px}
+.cv-list li{position:relative;display:grid;gap:1px;margin:0;padding-left:18px}
+.cv-list li::before{content:"";position:absolute;left:2px;top:.68em;width:6px;height:6px;border-radius:50%;background:var(--accent-line)}
+.cv-line{color:var(--ink-2);line-height:1.5}
+.cv-title{font-weight:600;color:var(--ink)}
+.cv-dates{color:var(--muted);font-variant-numeric:tabular-nums;white-space:nowrap}
+.cv-tag{font-weight:600;color:var(--accent);white-space:nowrap}
+.cv-text{font-size:var(--text-sm);line-height:1.5;color:var(--muted)}
+.cv-text a{font-weight:600;text-decoration:none}
+.cv-text a:hover{text-decoration:underline;text-decoration-color:var(--accent-line)}
+.cv-details{font-size:var(--text-sm);color:var(--muted)}
+.cv-details summary{display:inline-block;margin-top:2px;cursor:pointer;color:var(--accent);font-weight:600;list-style:none}
+.cv-details summary::-webkit-details-marker{display:none}
+.cv-details summary::after{content:" +"}
+.cv-details[open] summary::after{content:" \2212"}
+.cv-details p{margin:4px 0 0;line-height:1.5}
+.cv-section{scroll-margin-top:24px}
 
 /* ---------- A post ---------- */
 .post-head{margin-bottom:36px}
@@ -305,8 +319,7 @@ a.tag-link::after{content:" \2197"}
   .has-cover .side,.has-cover .rail{padding-top:24px}
   .links{display:flex;flex-wrap:wrap;gap:8px 20px}
   .is-home .content .news-latest li{padding-left:0;padding-top:1.45em}
-  .timeline li{grid-template-columns:2.4rem minmax(0,1fr);column-gap:12px}
-  .tl-kind{grid-column:2;justify-self:start;padding-top:2px}
+  .rail .jump-list{display:flex;flex-wrap:wrap;gap:8px 20px}
   .posts li{grid-template-columns:minmax(0,1fr);row-gap:4px}
   .post-nav{grid-template-columns:1fr}
   .post-nav .next{text-align:left;grid-column:auto}

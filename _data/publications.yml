@@ -1,13 +1,12 @@
 # ---------------------------------------------------------------
 # YOUR WORK: PAPERS, TUTORIALS, POSTERS, ...
-# One entry each, newest first. The Research page lists all of
-# them; entries with `selected: true` also appear on the home page
-# under Selected work. Write each paper here once and every page
-# shows it the same way.
+# One entry each, newest first. Research on the home page lists them,
+# papers under Publications and everything else (tutorials, posters)
+# under Tutorials and posters.
 #
 #   title:     the full title, in quotes
 #   authors:   everyone, in paper order, e.g. [Sukhada Ghewari, Adway Mitra]
-#              (your own name is made bold on the Research page)
+#              (your own name is made bold)
 #   venue:     the full name of the workshop or conference, e.g.
 #              "Tackling Climate Change with Machine Learning (TCCML) Workshop"
 #   short:     a short name for its tag, e.g. "TCCML Workshop".
@@ -16,23 +15,24 @@
 #   year:      the year of the conference
 #   type:      Paper if you leave it out. Otherwise Tutorial, Poster, ...
 #
-# Each paper gets one row of tags, always in this order:
+# Each paper gets one row of small tags, always in this order:
 #   [Host Year]  [Workshop]  [Type]  [Code] ...
-#   WACV 2027 · GeoCV Workshop · Paper
-#   NeurIPS 2026 · TCCML Workshop · Tutorial
-#   APWG eCrime 2021 · Paper ↗
+#   WACV 2027  GeoCV Workshop  Paper
+#   APWG eCrime 2021  Paper
 # (For a conference paper with no host, the first tag is the venue and year.)
 #
 # Optional:
 #   url:       where to read it. The type tag (Paper, Tutorial, ...)
-#              becomes a link to it, with an arrow.
+#              becomes a link to it.
 #   links:     more links, each becomes a tag, e.g.
 #                links:
 #                  - name: Code
 #                    url: "https://..."
-#   note:      one short line under the tags, e.g. a related patent
-#   selected:  true to show it under Selected work on the home page
-#   summary:   two or three sentences for the home page card
+#   note:      one short line under the tags, e.g. a related patent.
+#              "Accepted" or "Accepted, to appear" becomes a small
+#              italic tag instead.
+#   selected, summary: not shown on the site right now. Kept so a
+#              short description is ready if you want one later.
 # ---------------------------------------------------------------
 
 - title: "Can Multimodal LLMs Predict Rapid Intensification? A Leakage-Controlled Zero-Shot Benchmark for Tropical Cyclones"
@@ -40,6 +40,7 @@
   venue: "GeoCV Workshop"
   host: "WACV"
   year: 2027
+  note: "Accepted, to appear"
   selected: true
   summary: |
     We wanted to know whether off-the-shelf multimodal LLMs can predict rapid intensification without any training. We gave six commercial models the recent history of 140 storms, along with environmental data and infrared satellite images, and removed names, dates and locations so they couldn't simply remember what happened.
@@ -50,12 +51,21 @@
   authors: [Sukhada Ghewari, Adway Mitra]
   type: Tutorial
   venue: "Tackling Climate Change with Machine Learning (TCCML) Workshop"
-  short: "TCCML Workshop"
   host: "NeurIPS"
   year: 2026
+  note: "Accepted, to appear"
   selected: true
   summary: |
     A hands-on notebook that walks through predicting rapid intensification from start to finish, using real storm tracks, satellite images and reanalysis data. It shows how to treat RI as the rare event it is, build features a forecaster can make sense of, and check whether a model can really be trusted. The hope is to give forecasters more time to prepare before a storm suddenly strengthens.
+
+- title: "Which Information Matters for Rapid Intensification of Tropical Cyclones? A Global-Basin Feature Ablation Study"
+  authors: [Sukhada Ghewari, Shardul Deshpande]
+  type: Poster
+  venue: "Women in Machine Learning (WiML) Workshop"
+  short: "WiML Workshop"
+  host: "NeurIPS"
+  year: 2026
+  note: "Accepted"
 
 - title: "When Diversity Meets Hostility: A Study of Domain Squatting Abuse in Online Banking"
   authors: [Neeraj Kumar, Sukhada Ghewari, Harshal Tupsamudre, Manish Shukla, Sachin Lodha]
@@ -63,4 +73,4 @@
   short: "APWG eCrime"
   year: 2021
   url: "https://ieeexplore.ieee.org/abstract/document/9738769"
-  note: "This work also led to a granted Indian patent (No. 560163)"
+  note: "This work also led to a granted Indian patent (No. 560163)."

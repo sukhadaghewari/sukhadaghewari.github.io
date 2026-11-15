@@ -7,9 +7,8 @@
 title: Sukhada Ghewari
 tagline: Applied machine learning for social and environmental good
 description: >-
-  Machine learning researcher and engineer building AI for
-  people and the planet: extreme-weather early warning, forest monitoring,
-  health and more.
+  Machine learning researcher and engineer building AI for people and the
+  planet, from extreme-weather early warning to forest monitoring and health.
 location: Pune, India
 
 # Small tags under your name on the home page
@@ -17,7 +16,6 @@ topics:
   - Climate & extreme weather
   - Earth observation
   - Health & clinical AI
-  - Responsible AI
 
 # Your email address, shown on the home page with a button that copies it.
 # Delete this line to leave the address off the site.
@@ -66,22 +64,8 @@ cover_position: center
 nav:
   - name: Home
     url: /
-  - name: CV
-    url: /cv/
-  - name: Research
-    url: /research/
   - name: Writing
     url: /blog/
-
-# The filters next to your full timeline on the CV page, in this order.
-# Every entry in _data/timeline.yml uses one of these as its kind.
-timeline_kinds:
-  - Research
-  - Project
-  - Education
-  - Learning
-  - Role
-  - Service
 
 # The two kinds of post, shown as tabs above the list on the Writing page.
 # Technical posts usually live here; Thoughts usually live on Substack.
