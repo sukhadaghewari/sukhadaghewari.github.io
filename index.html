@@ -44,9 +44,11 @@ permalink: /
        COLOUR RULES (sage scale; numbers are contrast against the page)
        Few colours, each used the same way everywhere.
        - Text: --ink for all main text, --muted for everything secondary.
-       - Sage text: links (with a soft underline) and anything in a tinted box.
-       - Tinted boxes (chips, tags, the active tab, the CV button) all share one
-         tint, one border and sage text.
+       - Sage text: links (with a soft underline), the active tab, the CV button.
+       - Controls (the active tab, the CV button) share one tint and one border.
+       - Tags have two levels. The venue (WACV 2027, NeurIPS 2026, ...) is the
+         only filled element on the page. Every other tag and chip is light:
+         a faint border and grey text. A tag that is a link keeps sage text.
        - One line colour for every divider.
        ------------------------------------------------------------------ */
     :root{
@@ -58,6 +60,7 @@ permalink: /
       --paper:#F8F7F3; --ink:#232622; --ink-2:var(--ink); --muted:#676B64; --line:#E4E1DA;
       --link:var(--sage-700); --link-hover:var(--sage-900); --link-line:var(--sage-300);
       --tab-on:var(--sage-100); --chip:var(--sage-100); --chip-line:var(--sage-200); --rule:var(--line);
+      --venue:var(--sage-700); --venue-text:var(--paper);
       --serif:"Spectral",Georgia,serif; --sans:"Source Sans 3",-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
     }
     :root[data-theme="dark"]{
@@ -69,6 +72,7 @@ permalink: /
       --paper:#1B1C1A; --ink:#E2E3DE; --ink-2:var(--ink); --muted:#9A9D94; --line:#2F312D;
       --link:var(--sage-200); --link-hover:var(--sage-100); --link-line:var(--sage-600);
       --tab-on:var(--sage-900); --chip:var(--sage-900); --chip-line:var(--sage-800); --rule:var(--line);
+      --venue:#455B3D; --venue-text:#E9F0E4; /* muted deep sage, so it doesn't glow */
     }
     *{box-sizing:border-box}
     html{scroll-behavior:smooth;scroll-padding-top:64px}
@@ -141,8 +145,10 @@ permalink: /
     .p-authors strong{font-weight:500}
     /* Small, subtle tags under each paper */
     .p-tags{display:flex;flex-wrap:wrap;gap:5px;margin-top:4px}
-    /* One style for every tag and chip (rule 3): the topics under your name and the paper tags */
-    .topics li,.p-tags > *{font-size:12.5px;line-height:1.6;padding:0 8px;border:1px solid var(--chip-line);border-radius:5px;background:var(--chip);color:var(--link)}
+    /* Tags and chips: light by default; the venue tag is filled (see the colour rules) */
+    .topics li,.p-tags > *{font-size:12.5px;line-height:1.6;padding:0 8px;border:1px solid var(--line);border-radius:5px;background:none;color:var(--muted)}
+    .p-tags .venue{background:var(--venue);border-color:var(--venue);color:var(--venue-text);font-weight:500}
+    .p-tags a{color:var(--link)}
     .p-tags a{text-decoration:none}
     /* A tag that opens the paper gets an arrow */
     .p-tags a::after{content:"";display:inline-block;width:.78em;height:.78em;margin-left:3px;vertical-align:-.05em;background:currentColor;-webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M5 11L11 5M6.5 5H11V9.5' fill='none' stroke='black' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") no-repeat center/contain;mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M5 11L11 5M6.5 5H11V9.5' fill='none' stroke='black' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") no-repeat center/contain}
@@ -279,7 +285,7 @@ permalink: /
         {%- if p.note contains "to appear" %}{% assign status = "To appear" %}{% assign note = nil %}
         {%- elsif p.note == "Accepted" %}{% assign status = "Accepted" %}{% assign note = nil %}{% endif %}
         {%- assign kind = p.type | default: "Paper" %}
-        <span class="p-tags">{% if p.host %}<span>{{ p.host }} {{ p.year }}</span><span>{{ p.short | default: p.venue }}</span>{% else %}<span>{{ p.short | default: p.venue }} {{ p.year }}</span>{% endif %}{% if p.url %}<a href="{{ p.url }}" target="_blank" rel="noopener">{{ kind }}</a>{% else %}<span>{{ kind }}</span>{% endif %}{% for l in p.links %}<a href="{{ l.url }}" target="_blank" rel="noopener">{{ l.name }}</a>{% endfor %}{% if status %}<span class="status">{{ status }}</span>{% endif %}</span>
+        <span class="p-tags">{% if p.host %}<span class="venue">{{ p.host }} {{ p.year }}</span><span>{{ p.short | default: p.venue }}</span>{% else %}<span class="venue">{{ p.short | default: p.venue }} {{ p.year }}</span>{% endif %}{% if p.url %}<a href="{{ p.url }}" target="_blank" rel="noopener">{{ kind }}</a>{% else %}<span>{{ kind }}</span>{% endif %}{% for l in p.links %}<a href="{{ l.url }}" target="_blank" rel="noopener">{{ l.name }}</a>{% endfor %}{% if status %}<span class="status">{{ status }}</span>{% endif %}</span>
         {%- if note %}<span class="p-note">{{ note }}</span>{% endif %}
       </li>
       {%- endfor %}
