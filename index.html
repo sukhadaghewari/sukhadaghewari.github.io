@@ -167,7 +167,7 @@ permalink: /
     details summary:hover{color:var(--ink)}
     details .more{font-size:15px;color:var(--ink-2);margin-top:4px}
     details .more p{margin:0 0 8px}
-    .more.courses{font-style:italic}
+    .coursework summary{font-style:italic}
     .courses{list-style:none;margin:6px 0 2px;padding:0;font-size:14.5px;line-height:1.55;color:var(--ink-2)}
 
     /* Rows: news, experience, education, awards, ... */
@@ -330,7 +330,7 @@ permalink: /
           <b>{{ e.title }}</b>{% if e.org %}<span class="org">, {{ e.org }}</span>{% endif %}{% if e.tag %} · <span class="label">{{ e.tag }}</span>{% endif %}
           {%- endif %}
           {%- if e.text %}<span class="txt">{{ e.text | markdownify | remove: "<p>" | remove: "</p>" | strip }}</span>{% endif %}
-          {%- if e.courses %}<details><summary>Coursework</summary><div class="more courses">{% for c in e.courses %}{% if forloop.last and forloop.length > 1 %}and {% endif %}{{ c }}{% if forloop.last %}.{% else %}, {% endif %}{% endfor %}</div></details>{% endif %}
+          {%- if e.courses %}<details class="coursework"><summary>Coursework</summary><div class="more">{% for c in e.courses %}{% if forloop.last and forloop.length > 1 %}and {% endif %}{{ c }}{% if forloop.last %}.{% else %}, {% endif %}{% endfor %}</div></details>{% endif %}
         </div>
       </li>
       {%- endfor %}
