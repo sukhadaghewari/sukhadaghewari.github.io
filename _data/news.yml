@@ -1,6 +1,6 @@
 # ---------------------------------------------------------------
 # UPDATES
-# Short announcements. The home page shows the newest 3 under Updates,
+# Short announcements. The home page shows the newest 4 under Updates,
 # and the Updates page (/updates/) shows all of them. Add one when something is worth announcing,
 # like a paper accepted, a win or a new role. It doesn't have to be
 # complete, since your full record lives in _data/cv.yml.
@@ -20,7 +20,7 @@
 
 - date: "2026-11"
   text: >-
-    Won first place in the ITU AI/ML Challenge 2026 with Shardul Deshpande.
+    Won first place in the ITU AI/ML Challenge 2026 (Application Inference from Packet Flows) with Shardul Deshpande.
 
 - date: "2026-11"
   text: >-
@@ -48,7 +48,7 @@
 
 - date: "2025-12"
   text: >-
-    Moved back to India after two and a half years at Oracle, to focus on machine learning for climate and society.
+    Moved back to India after two and a half years at Oracle.
 
 - date: "2023-05"
   text: >-
@@ -64,7 +64,7 @@
 
 - date: "2021-09"
   text: >-
-    Started my MS in Computer Science at UC San Diego.
+    Started an MS in Computer Science at UC San Diego.
 
 - date: "2021-12"
   text: >-

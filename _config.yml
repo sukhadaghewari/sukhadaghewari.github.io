@@ -9,7 +9,6 @@ tagline: Applied machine learning for social and environmental good
 description: >-
   Machine learning researcher and engineer building AI for people and the
   planet, from extreme-weather early warning to forest monitoring and health.
-location: Pune, India
 
 # Small tags under your name on the home page
 topics:
@@ -58,7 +57,7 @@ cv_pdf: /assets/cv.pdf
 cover: /assets/img/cover.jpg
 # Which part of the photo to keep when it's cropped: top, center or bottom,
 # or a percentage from the top, e.g. "center 40%".
-cover_position: center
+cover_position: "center 58%"
 
 # Tabs at the top of every page
 nav:

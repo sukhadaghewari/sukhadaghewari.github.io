@@ -30,7 +30,7 @@ Text in **[square brackets]** is a placeholder. Replace it before you share the 
 | `index.html` | The home page sections. Your About text is in here |
 | `_layouts/one.html` | The frame around the home and Updates pages: top bar, Yosemite band, sidebar, footer and colours |
 | `_data/publications.yml` | Your papers, tutorials and posters, shown under Research |
-| `_data/news.yml` | Short announcements. The newest 3 show under Updates on the home page, and all of them on the Updates page |
+| `_data/news.yml` | Short announcements. The newest 4 show under Updates on the home page, and all of them on the Updates page |
 | `_data/cv.yml` | Experience, Education, Awards, and Academic service |
 | `assets/cv.pdf` | Your CV. The **Download CV** button under your name links to it (upload yours with this exact name) |
 | `assets/img/photo.jpg` | Your photo (square). Then remove the `#` before `photo:` in `_config.yml` |
@@ -61,7 +61,7 @@ edit, then click **Commit changes**. The site updates in about a minute.
 
 | I want to… | Do this |
 |---|---|
-| Add an update | `_data/news.yml` → add an entry (date, text). The newest 3 show on the home page, and every update shows on the Updates page |
+| Add an update | `_data/news.yml` → add an entry (date, text). The newest 4 show on the home page, and every update shows on the Updates page |
 | Add a role, degree, award or service | `_data/cv.yml` → add an entry under its section (instructions at the top of the file). Papers go only in `_data/publications.yml` |
 | Add a paper | `_data/publications.yml` → add an entry (instructions at the top of the file) |
 | Update my CV | Upload a new `assets/cv.pdf`. The same name replaces the old one |

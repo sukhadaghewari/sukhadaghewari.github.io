@@ -4,20 +4,18 @@
    theme (plus fonts and sizes), the second is the dark theme.
    ================================================================== */
 :root{
-  --ground:#F3F0E8;       /* page background: soft warm cream */
+  --ground:#F8F7F2;       /* page background: same off-white as the home page */
   --surface:#FBFAF7;      /* pop-ups that sit above the page */
   --wash:#EAEBE1;         /* faint sage fill: tags */
   --sunk:#E8E4DA;         /* code and quiet fills */
-  --ink:#1F221E;          /* main text */
+  --ink:#232622;          /* main text */
   --ink-2:#373B35;
-  --muted:#555B52;        /* secondary text */
+  --muted:#676B64;        /* secondary text */
   --faint:#6F746A;        /* counts, icons */
-  --line:#DBD6CB;         /* hairlines */
-  --accent:#4D6A51;       /* deep sage: links, active tab */
-  --accent-line:#B6C8B0;  /* pale sage: underlines, dividers */
+  --line:#E5E1D9;         /* hairlines */
+  --accent:#3D5E44;       /* sage: links, active tab (same as the home page) */
+  --accent-line:#B4C8B1;  /* pale sage: underlines, dividers */
   --accent-soft:#DDE6D6;  /* sage tint: tags, highlights */
-  --tag-fill:#4D6A51;     /* the filled conference tag on papers */
-  --tag-fill-ink:#F2EFE7;
   --img-dim:none;         /* photos at full brightness */
   --c-comment:#72776D; --c-keyword:#4D6A51; --c-string:#2B6C80; --c-number:#944B1A; --c-func:#2F5C9E;
   /* Fonts: serif for names, titles, headings and posts; sans for everything else; mono only for code */
@@ -35,20 +33,18 @@
   color-scheme:light;
 }
 :root[data-theme="dark"]{
-  --ground:#21211B;       /* warm charcoal */
+  --ground:#1B1C1A;       /* same dark background as the home page */
   --surface:#35352C;
   --wash:#32322A;
   --sunk:#35352D;
-  --ink:#ECEBE3;
+  --ink:#E2E3DE;
   --ink-2:#D3D2C8;
-  --muted:#ADAC9F;
+  --muted:#9A9D94;
   --faint:#8C8C80;
-  --line:#3E3D35;
-  --accent:#AFCDA9;       /* soft sage */
-  --accent-line:#5A6D53;
+  --line:#2F312D;
+  --accent:#B3CAA5;       /* soft sage (same as the home page) */
+  --accent-line:#57764D;
   --accent-soft:#384432;
-  --tag-fill:#4A5E45;     /* deeper, muted sage so it doesn't glow */
-  --tag-fill-ink:#E3EBDF;
   --img-dim:brightness(.86) saturate(.95);
   --c-comment:#8F8F83; --c-keyword:#AFCDA9; --c-string:#8CC8D8; --c-number:#F0B784; --c-func:#9DBBF3;
   color-scheme:dark;
@@ -70,7 +66,7 @@ strong,b{font-weight:600}
 .sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 
 /* ---------- Page frame: the same two columns on every page ----------
-   Left: your profile (Home), the topics (Blog) or recent posts (a post).
+   Left: the topics (Writing page) or recent posts (a post).
    Right: the page itself, always in the same place. */
 .wrap{max-width:1120px;margin:0 auto;padding-inline:24px;padding-block:48px 16px;display:grid;grid-template-columns:225px minmax(0,1fr);column-gap:56px;grid-template-areas:"nav nav" "side main";grid-template-rows:auto 1fr}
 .has-cover .wrap{grid-template-areas:"cover cover" "side main";grid-template-rows:auto 1fr;padding-block:24px 16px}
@@ -79,7 +75,7 @@ strong,b{font-weight:600}
 
 /* ---------- Tabs ---------- */
 .tabs{grid-area:nav;display:flex;align-items:center;gap:24px;border-bottom:1px solid var(--line);margin-bottom:40px}
-/* On the home page the tabs sit on the cover image, in a frosted bar of their
+/* On the Writing page the tabs sit on the cover image, in a frosted bar of their
    own so they stay readable whatever the photo underneath is doing. */
 .has-cover .tabs{grid-area:cover;align-self:start;z-index:2;margin:0;padding:2px 20px 5px;border-bottom:0;border-radius:12px 12px 0 0;background:rgba(20,20,15,.72)}
 @supports (backdrop-filter:blur(2px)) or (-webkit-backdrop-filter:blur(2px)){
@@ -101,43 +97,13 @@ strong,b{font-weight:600}
 .theme-toggle .sun,[data-theme="dark"] .theme-toggle .moon{display:none}
 [data-theme="dark"] .theme-toggle .sun{display:block}
 
-/* ---------- Cover strip (Home, Blog and CV) ---------- */
+/* ---------- Cover strip (Writing page) ---------- */
 .site-cover{grid-area:cover;margin:0;position:relative;z-index:1}
 .site-cover img{display:block;width:100%;aspect-ratio:9/2.277;object-fit:cover;border-radius:12px;background:var(--wash)}
 .has-cover .content{padding-top:40px}
 
-/* ---------- Sidebar (home page) ---------- */
-.side{grid-area:side;position:sticky;top:32px;align-self:start;display:grid;gap:14px}
-.has-cover .side{position:static}
-.has-cover .side,.has-cover .rail{padding-top:40px}
-.photo{width:168px;height:168px;border-radius:50%;object-fit:cover;background:var(--sunk);box-shadow:0 0 0 4px var(--ground),0 0 0 6px var(--accent-line);margin:6px 0 6px 6px}
-.monogram{display:grid;place-items:center;font:500 var(--text-3xl)/1 var(--serif);color:var(--accent);background:var(--accent-soft);letter-spacing:.02em}
-.side h1{margin:6px 0 0;font:600 var(--text-2xl)/1.1 var(--serif);letter-spacing:-.01em;color:var(--ink);text-wrap:balance}
-.tagline{margin:0;line-height:1.45}
-.loc{margin:-6px 0 0;color:var(--muted);font-size:var(--text-sm)}
-.topics{list-style:none;margin:2px 0 0;padding:0;display:flex;flex-wrap:wrap;gap:6px}
-.topics li{font-size:var(--text-xs);line-height:1.5;color:var(--ink-2);background:var(--wash);border:1px solid var(--accent-soft);padding:2px 9px;border-radius:5px}
-.cv-button{justify-self:start;display:inline-flex;align-items:center;gap:8px;margin-top:6px;padding:8px 15px;border-radius:7px;background:var(--accent-soft);color:var(--accent);font-size:var(--text-sm);font-weight:600;line-height:1.2;text-decoration:none}
-.cv-button:hover{color:var(--ink)}
-.cv-button svg{flex:none}
-.links{list-style:none;margin:6px 0 0;padding:14px 0 0;border-top:1px solid var(--line);display:grid;gap:6px;font-size:var(--text-sm)}
-.links a{color:var(--ink);text-decoration:none;display:inline-flex;align-items:center;gap:8px}
-.links .icon{flex:none;color:var(--faint)}
-.links a:hover .icon{color:var(--accent)}
-.links a:hover{color:var(--accent)}
-/* Email address with a copy button, first in the links block */
-.links .email{position:relative;display:flex;align-items:center;gap:6px;margin-bottom:2px}
-.links .email .label{display:inline-flex;align-items:center;gap:8px;cursor:default}
-.links .email .label:focus-visible{outline:2px solid var(--accent-line);outline-offset:3px;border-radius:4px}
-/* The address itself: a small bubble on hover or keyboard focus */
-.links .email .addr{position:absolute;left:0;top:calc(100% + 6px);z-index:5;white-space:nowrap;user-select:all;padding:5px 9px;border:1px solid var(--line);border-radius:7px;background:var(--surface);box-shadow:0 8px 20px rgba(28,33,29,.12);font:400 var(--text-sm)/1.5 var(--sans);color:var(--ink-2);opacity:0;visibility:hidden;transition:opacity .12s ease}
-.links .email:hover .addr,.links .email:focus-within .addr{opacity:1;visibility:visible}
-.links .email .copy{flex:none;display:grid;place-items:center;width:24px;height:24px;padding:0;border:0;border-radius:6px;background:none;color:var(--faint);cursor:pointer}
-.links .email .copy:hover{color:var(--accent);background:var(--accent-soft)}
-.links .email .copied{font:600 var(--text-xs)/1.6 var(--sans);color:var(--accent)}
-.links .email .copied:empty{display:none}
-
-/* ---------- Left column on the Blog, CV, Research and posts ---------- */
+/* ---------- Left column on the Writing page and posts ---------- */
+.has-cover .rail{padding-top:40px}
 .rail{grid-area:side;position:sticky;top:32px;align-self:start;display:grid;gap:30px}
 .rail-label{margin:0 0 8px;font:italic 400 var(--text-sm)/1.4 var(--sans);color:var(--muted)}
 .rail ul{list-style:none;margin:0;padding:0;display:grid;gap:8px;font-size:var(--text-sm);line-height:1.45}
@@ -153,31 +119,9 @@ strong,b{font-weight:600}
 .topic-list button:hover,.kind-tabs button:hover{color:var(--accent);border-color:var(--accent-line)}
 .topic-list button[aria-pressed="true"],.kind-tabs button[aria-pressed="true"]{background:var(--accent-soft);border-color:var(--accent-line);color:var(--accent);font-weight:600}
 
-/* ---------- Home sections ---------- */
-.is-home .content h2{font:600 var(--text-xl)/1.25 var(--serif);margin:48px 0 14px;color:var(--ink);letter-spacing:-.005em}
-.is-home .content h2:first-child{margin-top:0}
-/* Between the home page sections (About, Selected work, News): a sprig growing into a faint sage line */
-.is-home .content h2:not(:first-child){position:relative;padding-top:40px}
-.is-home .content h2:not(:first-child)::before{content:"";position:absolute;top:0;left:50px;right:0;height:1px;background:var(--accent-line);background:color-mix(in srgb,var(--accent-line) 55%,transparent)}
-.is-home .content h2:not(:first-child)::after{content:"";position:absolute;top:-14px;left:0;width:44px;aspect-ratio:52/19;background:var(--accent-line);-webkit-mask:url("../img/leaves/sprig.svg") no-repeat center/contain;mask:url("../img/leaves/sprig.svg") no-repeat center/contain}
-/* Home, Blog, Research and CV share one text width (about 88 characters a line); Home text is a touch smaller */
-.is-home .content,.is-blog .content,.is-cv .content,.is-research .content{max-width:44rem}
-.is-home .content{font-size:16px}
+/* ---------- Text width on the Writing page ---------- */
+.is-blog .content{max-width:44rem}
 :where(.content) p{margin:0 0 14px}
-.is-home .content h3{font:600 var(--text-lg)/1.3 var(--serif);margin:0;padding-top:22px;border-top:1px solid var(--line);color:var(--ink)}
-.is-home .content h2 + h3{border-top:0;padding-top:2px}
-.is-home .content h3 + p{margin:8px 0}
-.is-home .content ul{padding-left:1.2em;margin:0 0 16px}
-.is-home .content li{margin:4px 0}
-.is-home .content li::marker{color:var(--accent-line)}
-.is-home .content .news-latest{list-style:none;padding:0;margin:0;display:grid;gap:10px}
-.is-home .content .news-latest li{position:relative;padding-left:5rem;margin:0}
-.news-latest li > strong:first-child{position:absolute;left:0;top:.12em;font:600 var(--text-sm)/1.6 var(--sans);color:var(--accent);font-variant-numeric:tabular-nums}
-.is-home .content .more{margin:18px 0 0}
-.all-pubs{display:inline-block;margin-top:6px;font-size:var(--text-sm);font-weight:600;text-decoration:none}
-.all-pubs:hover{text-decoration:underline;text-decoration-color:var(--accent-line)}
-.more a{font-size:var(--text-sm);font-weight:600;text-decoration:none}
-.more a:hover{text-decoration:underline;text-decoration-color:var(--accent-line)}
 
 .post-cover img,.post-body img{filter:var(--img-dim)}
 
@@ -186,7 +130,6 @@ strong,b{font-weight:600}
 .year-group + .year-group{margin-top:44px}
 .content .year{display:flex;align-items:center;gap:14px;margin:0 0 16px;font:600 var(--text-sm)/1.4 var(--sans);letter-spacing:.02em;color:var(--accent);font-variant-numeric:tabular-nums}
 .content .year::after{content:"";flex:1;height:1px;background:var(--line)}
-.content .section-label{font-size:var(--text-md)}
 .posts{list-style:none;margin:0;padding:0;display:grid;gap:26px}
 .posts li{display:grid;grid-template-columns:minmax(0,1fr) auto;column-gap:28px;align-items:baseline}
 .posts time{font:400 var(--text-sm)/1.6 var(--sans);color:var(--muted);white-space:nowrap;font-variant-numeric:tabular-nums}
@@ -200,44 +143,10 @@ strong,b{font-weight:600}
 .subscribe a{font-weight:600;text-decoration:none}
 .subscribe a:hover{text-decoration:underline}
 
-/* ---------- Research page: publications ---------- */
-.rail .profiles a{display:inline-flex;align-items:center;gap:8px}
-.rail .profiles .icon{flex:none;color:var(--faint)}
-.rail .profiles a:hover .icon{color:var(--accent)}
-.pubs{list-style:none;margin:0;padding:0;display:grid;gap:20px}
-.pubs li{display:grid;gap:2px}
 /* A light, full-width line between papers */
-.pubs li + li{padding-top:20px;border-top:1px solid var(--line);border-top-color:color-mix(in srgb,var(--line) 85%,transparent)}
-.pub-title{font:600 var(--text-lg)/1.35 var(--serif);color:var(--ink)}
-.pub-authors{font-size:var(--text-sm);color:var(--ink-2)}
 /* Tags under each paper: the conference (filled), the workshop and type, then links */
-.pub-tags{display:flex;flex-wrap:wrap;gap:6px;margin:4px 0 2px}
-.tag{font:500 var(--text-xs)/1.5 var(--sans);color:var(--ink-2);background:var(--wash);border:1px solid var(--accent-soft);padding:1px 9px;border-radius:5px;white-space:nowrap}
-.tag-venue{font-weight:600;color:var(--tag-fill-ink);background:var(--tag-fill);border-color:var(--tag-fill)}
-a.tag-link{color:var(--accent);background:var(--accent-soft);border-color:var(--accent-soft);text-decoration:none}
-a.tag-link:hover{color:var(--ink);border-color:var(--accent-line)}
-a.tag-link::after{content:" \2197"}
-.pub-note{font-size:var(--text-sm);line-height:1.5;color:var(--muted)}
-/* ---------- CV page: one section each for experience, education, ... ---------- */
 /* A plain list: each entry is one line (title, where, dates, and an
    optional bold label like "First place"), then a short grey line. */
-.cv-list{list-style:none;margin:0;padding:0;display:grid;gap:12px}
-.cv-list li{position:relative;display:grid;gap:1px;margin:0;padding-left:18px}
-.cv-list li::before{content:"";position:absolute;left:2px;top:.68em;width:6px;height:6px;border-radius:50%;background:var(--accent-line)}
-.cv-line{color:var(--ink-2);line-height:1.5}
-.cv-title{font-weight:600;color:var(--ink)}
-.cv-dates{color:var(--muted);font-variant-numeric:tabular-nums;white-space:nowrap}
-.cv-tag{font-weight:600;color:var(--accent);white-space:nowrap}
-.cv-text{font-size:var(--text-sm);line-height:1.5;color:var(--muted)}
-.cv-text a{font-weight:600;text-decoration:none}
-.cv-text a:hover{text-decoration:underline;text-decoration-color:var(--accent-line)}
-.cv-details{font-size:var(--text-sm);color:var(--muted)}
-.cv-details summary{display:inline-block;margin-top:2px;cursor:pointer;color:var(--accent);font-weight:600;list-style:none}
-.cv-details summary::-webkit-details-marker{display:none}
-.cv-details summary::after{content:" +"}
-.cv-details[open] summary::after{content:" \2212"}
-.cv-details p{margin:4px 0 0;line-height:1.5}
-.cv-section{scroll-margin-top:24px}
 
 /* ---------- A post ---------- */
 .post-head{margin-bottom:36px}
@@ -301,25 +210,19 @@ a.tag-link::after{content:" \2197"}
   :root{--text-lg:18px;--text-xl:22px;--text-2xl:28px;--text-3xl:30px}
   .wrap{grid-template-columns:minmax(0,1fr);grid-template-areas:"nav" "side" "main";padding-block:12px 8px;padding-inline:18px}
   .has-cover .wrap{grid-template-areas:"cover" "side" "main";grid-template-rows:auto}
-  .is-blog .wrap,.is-cv .wrap,.is-research .wrap{grid-template-areas:"nav" "side" "main"}
-  .has-cover.is-blog .wrap,.has-cover.is-cv .wrap,.has-cover.is-research .wrap{grid-template-areas:"cover" "side" "main"}
+  .is-blog .wrap{grid-template-areas:"nav" "side" "main"}
+  .has-cover.is-blog .wrap{grid-template-areas:"cover" "side" "main"}
   .rail .topic-list{flex-direction:row;flex-wrap:wrap;gap:8px}
-  .rail.blog-rail,.rail.cv-rail,.rail.research-rail{margin:0 0 30px;padding:0 0 22px;border-top:0;border-bottom:1px solid var(--line);gap:22px}
-  .rail .profiles{display:flex;flex-wrap:wrap;gap:8px 20px}
+  .rail.blog-rail,.rail.research-rail{margin:0 0 30px;padding:0 0 22px;border-top:0;border-bottom:1px solid var(--line);gap:22px}
   .is-post .wrap{grid-template-areas:"nav" "main"}
   .post-rail{display:none}
   .tabs{gap:20px;margin-bottom:28px}
   .has-cover .tabs{padding:0 12px 4px;border-radius:10px 10px 0 0}
   .site-cover img{aspect-ratio:2/1.1385;border-radius:10px}
-  .side{position:static;margin-bottom:40px}
   .rail{position:static;margin-top:48px;padding-top:24px;border-top:1px solid var(--line)}
-  .photo{width:132px;height:132px}
   .has-cover .content{padding-top:0}
   .site-cover + .content{padding-top:24px}
-  .has-cover .side,.has-cover .rail{padding-top:24px}
-  .links{display:flex;flex-wrap:wrap;gap:8px 20px}
-  .is-home .content .news-latest li{padding-left:0;padding-top:1.45em}
-  .rail .jump-list{display:flex;flex-wrap:wrap;gap:8px 20px}
+  .has-cover .rail{padding-top:24px}
   .posts li{grid-template-columns:minmax(0,1fr);row-gap:4px}
   .post-nav{grid-template-columns:1fr}
   .post-nav .next{text-align:left;grid-column:auto}

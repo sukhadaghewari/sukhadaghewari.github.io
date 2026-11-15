@@ -52,10 +52,8 @@
   <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
   {%- endif %}
 </head>
-{%- assign is_home = false -%}
-{%- if page.url == "/" -%}{%- assign is_home = true -%}{%- endif -%}
-{%- if is_home -%}{%- assign page_kind = "is-home" -%}
-{%- elsif page.layout == "post" -%}{%- assign page_kind = "is-post" -%}
+{%- comment -%} Used by the Writing pages and posts. The home page uses _layouts/one.html. {%- endcomment -%}
+{%- if page.layout == "post" -%}{%- assign page_kind = "is-post" -%}
 {%- elsif page.rail == "blog" -%}{%- assign page_kind = "is-blog" -%}
 {%- else -%}{%- assign page_kind = "is-page" -%}{%- endif -%}
 {%- comment -%} The cover strip tops the Writing page, with the tabs on it. {%- endcomment -%}
@@ -83,44 +81,7 @@
     {%- capture cover_style %}style="object-position: {{ site.cover_position | default: 'center' | escape }};"{% endcapture %}
     <div class="site-cover"><img src="{{ site.cover | relative_url }}" alt="" {{ cover_style }}></div>
     {%- endif %}
-    {%- if is_home %}
-    <aside class="side">
-      {%- if site.photo %}
-      <img class="photo" src="{{ site.photo | relative_url }}" alt="Photo of {{ site.title | escape }}">
-      {%- else %}
-      {%- assign name_parts = site.title | split: " " %}
-      <div class="photo monogram" aria-hidden="true">{{ name_parts.first | slice: 0 }}{% if name_parts.size > 1 %}{{ name_parts.last | slice: 0 }}{% endif %}</div>
-      {%- endif %}
-      <h1>{{ site.title }}</h1>
-      <p class="tagline">{{ site.tagline }}</p>
-      {%- if site.location %}
-      <p class="loc">{{ site.location }}</p>
-      {%- endif %}
-      {%- if site.topics %}
-      <ul class="topics">
-        {%- for t in site.topics %}
-        <li>{{ t }}</li>
-        {%- endfor %}
-      </ul>
-      {%- endif %}
-      {% include cv-button.html %}
-      <ul class="links">
-      {%- if site.email %}
-      <li class="email">
-        <span class="label" tabindex="0">{%- include link-icon.html name="Email" %}Email</span>
-        <span class="addr" role="tooltip">{{ site.email }}</span>
-        <button class="copy" type="button" aria-label="Copy email address {{ site.email }}">
-          <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-        </button>
-        <span class="copied" role="status" aria-live="polite"></span>
-      </li>
-      {%- endif %}
-      {%- for l in site.links %}
-      <li><a href="{{ l.url }}"{% unless l.url contains "mailto:" %} target="_blank" rel="noopener"{% endunless %}>{% include link-icon.html name=l.name %}{{ l.name }}</a></li>
-      {%- endfor %}
-      </ul>
-    </aside>
-    {%- elsif page_kind == "is-post" %}
+    {%- if page_kind == "is-post" %}
     {%- include post-rail.html %}
     {%- elsif page_kind == "is-blog" %}
     {%- include blog-rail.html %}
@@ -134,40 +95,6 @@
     <span aria-hidden="true">·</span>
     <a href="{{ '/feed.xml' | relative_url }}">RSS</a>
   </footer>
-  <script>
-    // Copy the email address to the clipboard (home page)
-    (function () {
-      var row = document.querySelector(".links .email");
-      if (!row) return;
-      var address = row.querySelector(".addr");
-      var button = row.querySelector(".copy");
-      var said = row.querySelector(".copied");
-      var timer;
-      button.addEventListener("click", function () {
-        var text = address.textContent.trim();
-        function done(ok) {
-          said.textContent = ok ? "Copied" : "Press Ctrl/\u2318 C";
-          clearTimeout(timer);
-          timer = setTimeout(function () { said.textContent = ""; }, 2500);
-        }
-        if (navigator.clipboard && navigator.clipboard.writeText) {
-          navigator.clipboard.writeText(text).then(function () { done(true); }, function () { select(); });
-        } else {
-          select();
-        }
-        // No clipboard permission: select the address so one keystroke copies it.
-        function select() {
-          row.querySelector(".label").focus();  // keeps the address visible while it is selected
-          var range = document.createRange();
-          range.selectNodeContents(address);
-          var sel = window.getSelection();
-          sel.removeAllRanges();
-          sel.addRange(range);
-          done(false);
-        }
-      });
-    })();
-  </script>
   <script>
     // Light and dark theme button (top right)
     (function () {

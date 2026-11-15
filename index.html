@@ -19,8 +19,8 @@ permalink: /
   {%- assign news = site.data.news | reverse | sort: "date" | reverse %}
   <section id="updates">
     <h2>Updates</h2>
-    {% include update-rows.html items=news limit=3 %}
-    {%- if news.size > 3 %}
+    {% include update-rows.html items=news limit=4 %}
+    {%- if news.size > 4 %}
     <p class="all-updates"><a href="{{ '/updates/' | relative_url }}">All updates →</a></p>
     {%- endif %}
   </section>
@@ -71,7 +71,7 @@ permalink: /
           {%- if s.section == "Experience" or s.section == "Education" %}
           <b>{{ e.org | default: e.title }}</b>{% if e.org %}<span class="role">{{ e.title }}</span>{% endif %}
           {%- else %}
-          <b>{{ e.title }}</b>{% if e.org %}<span class="org">, {{ e.org }}</span>{% endif %}{% if e.tag %} · <span class="label">{{ e.tag }}</span>{% endif %}
+          <b>{{ e.title }}</b>{% if e.org %}<span class="org">, {{ e.org }}</span>{% endif %}
           {%- endif %}
           {%- if e.text %}<span class="txt">{{ e.text | markdownify | remove: "<p>" | remove: "</p>" | strip }}</span>{% endif %}
           {%- if e.courses %}<details class="coursework"><summary>Coursework</summary><div class="more">{% for c in e.courses %}{% if forloop.last and forloop.length > 1 %}and {% endif %}{{ c }}{% if forloop.last %}.{% else %}, {% endif %}{% endfor %}</div></details>{% endif %}

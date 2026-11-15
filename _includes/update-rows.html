@@ -1,6 +1,6 @@
 {%- comment -%}
   A list of updates from _data/news.yml, newest first.
-  Use as {% include update-rows.html items=news limit=3 %}; leave out limit to show all.
+  Use as {% include update-rows.html items=news limit=4 %}; leave out limit to show all.
 {%- endcomment -%}
 {%- assign n = include.limit | default: include.items.size %}
 <ul class="rows news">

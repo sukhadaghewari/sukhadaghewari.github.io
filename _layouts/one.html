@@ -42,34 +42,28 @@
        COLOUR RULES (sage scale; numbers are contrast against the page)
        Few colours, each used the same way everywhere.
        - Text: --ink for all main text, --muted for everything secondary.
-       - Sage text: links (with a soft underline), the active tab, the CV button.
-       - Controls (the active tab, the CV button) share one tint and one border.
-       - Tags have two levels. The venue (WACV 2027, NeurIPS 2026, ...) is the
-         only filled element on the page. Every other tag and chip is light:
-         a faint border and grey text. A tag that is a link keeps sage text.
+       - Sage text: links (with a soft underline).
+       - One filled sage box style, used for the venue tags (WACV 2027, ...),
+         the Download CV button and the active tab. Nothing else is filled.
+       - Every other tag and chip is light: a faint border and grey text.
+         A tag that is a link keeps sage text.
        - One line colour for every divider.
        ------------------------------------------------------------------ */
     :root{
       --sage-900:#2C4431; /* 9.9  link hover */
-      --sage-700:#3D5E44; /* 6.8  links, active tab text, highlights */
+      --sage-700:#3D5E44; /* 6.8  links and the filled boxes */
       --sage-300:#B4C8B1; /*      link underline */
-      --sage-200:#D6E2D2; /*      the one border for chips, tags, tab, button */
-      --sage-100:#E9F0E6; /*      the one tint for chips, tags, tab, button */
-      --paper:#F8F7F3; --ink:#232622; --ink-2:var(--ink); --muted:#676B64; --line:#E4E1DA;
+      --paper:#F8F7F2; --ink:#232622; --ink-2:var(--ink); --muted:#676B64; --line:#E5E1D9;
       --link:var(--sage-700); --link-hover:var(--sage-900); --link-line:var(--sage-300);
-      --tab-on:var(--sage-100); --chip:var(--sage-100); --chip-line:var(--sage-200); --rule:var(--line);
       --venue:var(--sage-700); --venue-text:var(--paper);
       --serif:"Spectral",Georgia,serif; --sans:"Source Sans 3",-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
     }
     :root[data-theme="dark"]{
       --sage-100:#CDDFC2; /* 12.2 link hover */
-      --sage-200:#B3CAA5; /* 9.7  links, active tab text, highlights */
+      --sage-200:#B3CAA5; /* 9.7  links */
       --sage-600:#57764D; /*      link underline */
-      --sage-800:#3C4936; /*      the one border for chips, tags, tab, button */
-      --sage-900:#2F392A; /*      the one tint for chips, tags, tab, button */
       --paper:#1B1C1A; --ink:#E2E3DE; --ink-2:var(--ink); --muted:#9A9D94; --line:#2F312D;
       --link:var(--sage-200); --link-hover:var(--sage-100); --link-line:var(--sage-600);
-      --tab-on:var(--sage-900); --chip:var(--sage-900); --chip-line:var(--sage-800); --rule:var(--line);
       --venue:#455B3D; --venue-text:#E9F0E4; /* muted deep sage, so it doesn't glow */
     }
     *{box-sizing:border-box}
@@ -84,13 +78,11 @@
     .bar{position:sticky;top:0;z-index:10;background:var(--paper);border-bottom:1px solid transparent}
     .bar.scrolled{border-bottom-color:var(--line)}
     .bar .wrap{max-width:60rem;display:flex;align-items:center;gap:22px;height:52px}
-    .mark{font-weight:600;color:var(--ink)}
-    .mark:hover{text-decoration:none}
     .bar nav{display:flex;gap:4px;margin-left:auto;font-size:15px}
     .bar nav a{position:relative;color:var(--muted);padding:4px 10px;border:1px solid transparent;border-radius:5px;transition:background-color .15s,color .15s,border-color .15s}
     .bar nav a:hover{color:var(--ink);text-decoration:none}
     /* The tab for the section you're reading gets a soft sage background */
-    .bar nav a.on{color:var(--link);background:var(--tab-on);border-color:var(--chip-line)}
+    .bar nav a.on{color:var(--venue-text);background:var(--venue);border-color:var(--venue)}
     .theme{border:0;background:none;color:var(--muted);cursor:pointer;padding:4px;display:grid;place-items:center}
     .theme:hover{color:var(--ink)}
     :root[data-theme="dark"] .theme .moon,:root[data-theme="light"] .theme .sun{display:none}
@@ -114,8 +106,9 @@
     h1{font:600 26px/1.2 var(--serif);letter-spacing:-.005em;margin:0;white-space:nowrap}
     .tagline{color:var(--ink-2);margin:0;line-height:1.45}
     .topics{display:flex;flex-wrap:wrap;gap:5px;list-style:none;margin:2px 0 0;padding:0}
-    .cv-btn{display:inline-flex;align-items:center;gap:8px;margin-top:4px;padding:7px 14px;border-radius:5px;background:var(--chip);border:1px solid var(--chip-line);color:var(--link);font-size:14.5px;font-weight:600;text-decoration:none}
-    .cv-btn:hover{text-decoration:none;color:var(--ink)}
+    /* Download CV: filled like the venue tags, the one primary action */
+    .cv-btn{display:inline-flex;align-items:center;gap:8px;margin-top:4px;padding:5px 13px;border-radius:5px;background:var(--venue);border:1px solid var(--venue);color:var(--venue-text);font-size:14.5px;font-weight:500;text-decoration:none}
+    .cv-btn:hover{text-decoration:none;color:var(--venue-text);filter:brightness(1.08)}
     .side-links{list-style:none;margin:4px 0 0;padding:12px 0 0;border-top:1px solid var(--line);display:grid;gap:6px;width:100%;font-size:14.5px}
     .side-links a,.side-links button{display:inline-flex;align-items:center;gap:8px;color:var(--ink-2);background:none;border:0;padding:0;font:inherit;cursor:pointer}
     .side-links a:hover,.side-links button:hover{color:var(--ink);text-decoration:none}
@@ -127,7 +120,7 @@
     section{padding:76px 0 0}
     main > section:first-child{padding-top:30px}
     h2{display:flex;align-items:center;gap:12px;font:500 25.5px/1.2 var(--serif);margin:0 0 22px}
-    h2::after{content:"";flex:1;height:1px;background:var(--rule)}
+    h2::after{content:"";flex:1;height:1px;background:var(--line)}
     h3{font-size:16px;font-weight:600;color:var(--muted);margin:24px 0 10px}
     h3:first-of-type{margin-top:0}
     h3:not(:first-of-type){margin-top:26px;padding-top:22px;border-top:1px solid var(--line)}
@@ -150,23 +143,15 @@
     .p-tags a{text-decoration:none}
     /* A tag that opens the paper gets an arrow */
     .p-tags a::after{content:"";display:inline-block;width:.78em;height:.78em;margin-left:3px;vertical-align:-.05em;background:currentColor;-webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M5 11L11 5M6.5 5H11V9.5' fill='none' stroke='black' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") no-repeat center/contain;mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M5 11L11 5M6.5 5H11V9.5' fill='none' stroke='black' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") no-repeat center/contain}
-    .p-tags a:hover{text-decoration:none;background:var(--chip)}
+    .p-tags a:hover{text-decoration:none;color:var(--link-hover);border-color:var(--link-line)}
     .p-tags .status{font-style:italic;background:none;border-color:transparent;color:var(--muted);padding-left:2px}
     .p-authors strong{color:var(--ink)}
     .p-note{font-size:14.5px;color:var(--muted)}
-    .pub-meta{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin:4px 0 1px}
-    .pub-tags{display:contents}
-    .tag-status{font-style:italic;background:none;border-color:transparent;color:var(--muted);padding-left:2px}
-    .pub-meta details{margin-left:4px}
-    .pub-meta details[open]{flex-basis:100%;margin-left:0}
-    .tag{font-size:13px;line-height:1.5;color:var(--ink-2);background:var(--chip);border:1px solid var(--chip-line);padding:0 8px;border-radius:5px;white-space:nowrap}
-    a.tag-link{color:var(--link)}
     details summary{cursor:pointer;color:var(--link);font-size:14.5px}
     details summary:hover{color:var(--ink)}
     details .more{font-size:15px;color:var(--ink-2);margin-top:4px}
     details .more p{margin:0 0 8px}
     .coursework summary{font-style:italic}
-    .courses{list-style:none;margin:6px 0 2px;padding:0;font-size:14.5px;line-height:1.55;color:var(--ink-2)}
 
     /* Rows: news, experience, education, awards, ... */
     .rows{list-style:none;margin:0;padding:0}
@@ -179,7 +164,6 @@
     .what .org{color:var(--muted)}
     /* Education: the degree and the university each on their own line */
     .what .role{display:block;color:var(--ink-2)}
-    .what .label{font-weight:600;color:var(--link)}
     .what .txt{display:block;font-size:15px;color:var(--muted);line-height:1.5}
     .news .what{color:var(--ink-2)}
     /* "All updates" under the latest three on the home page */
@@ -192,7 +176,9 @@
     #contact .social a{color:var(--muted);text-decoration:none;display:inline-flex}
     #contact .social a:hover{color:var(--link)}
     #contact .social .icon{width:19px;height:19px}
-    footer{padding:56px 0 40px;color:var(--muted);font-size:13px}
+    footer{margin-top:64px;padding:0 0 40px;color:var(--muted);font-size:13px}
+    /* One small leaf between your name and the update date. Nowhere else. */
+    footer .leaf{display:inline-block;width:11px;height:11px;margin:0 9px;vertical-align:-1px;background:var(--link-line);-webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M20 4C11 4 5 9 5 16c0 1 .1 1.9.4 2.7C6.9 13.8 10.6 10 15 8c-3.6 2.7-6.6 6.4-8.4 11.2.8.5 1.8.8 2.9.8C16 20 20 13 20 4z'/%3E%3C/svg%3E") no-repeat center/contain;mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M20 4C11 4 5 9 5 16c0 1 .1 1.9.4 2.7C6.9 13.8 10.6 10 15 8c-3.6 2.7-6.6 6.4-8.4 11.2.8.5 1.8.8 2.9.8C16 20 20 13 20 4z'/%3E%3C/svg%3E") no-repeat center/contain}
 
     @media (max-width:760px){
       .bar nav{display:none}
@@ -229,7 +215,7 @@
 </header>
 
 {%- if site.cover %}
-<figure class="cover" style="margin-top:0;margin-bottom:0"><img src="{{ site.cover | relative_url }}" alt="Yosemite Valley from Tunnel View at sunset" style="object-position: center 58%;"><figcaption>Tunnel View, Yosemite, 30 August 2025</figcaption></figure>
+<figure class="cover" style="margin-top:0;margin-bottom:0"><img src="{{ site.cover | relative_url }}" alt="Yosemite Valley from Tunnel View at sunset" style="object-position: {{ site.cover_position | default: 'center' | escape }};"><figcaption>Tunnel View, Yosemite, 30 August 2025</figcaption></figure>
 {%- endif %}
 
 {%- comment -%} Links in the left column. These ones from _config.yml are left off. {%- endcomment -%}
@@ -253,7 +239,9 @@
 
 <main>
   {{ content }}
-  <footer>© {{ site.time | date: "%Y" }} {{ site.title }} · Updated {{ site.time | date: "%B %Y" }}</footer>
+  <footer>
+    © {{ site.time | date: "%Y" }} {{ site.title }}<span class="leaf" aria-hidden="true"></span>Updated {{ site.time | date: "%B %Y" }}
+  </footer>
 </main>
 </div>
 
@@ -272,7 +260,7 @@
         var li = copy.parentNode, addr = li.querySelector(".addr"), email = copy.getAttribute("data-email");
         function done() {
           if (!addr) return;
-          addr.textContent = "Copied " + email;
+          addr.textContent = "Copied to clipboard";
           li.classList.add("copied");
           setTimeout(function () { addr.textContent = email; li.classList.remove("copied"); }, 1800);
         }
