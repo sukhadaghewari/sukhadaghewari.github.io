@@ -90,12 +90,11 @@
     /* The cover photo, with a very light fade at the bottom and sides */
     .cover{position:relative;max-width:60rem;margin:0 auto;padding:0 24px}
     .cover img{width:100%;height:200px;object-fit:cover;display:block;border-radius:10px 10px 0 0;
-      -webkit-mask-image:linear-gradient(to bottom,#000 92%,transparent 100%),linear-gradient(to right,transparent,#000 1.2%,#000 98.8%,transparent);-webkit-mask-composite:source-in;
-      mask-image:linear-gradient(to bottom,#000 92%,transparent 100%),linear-gradient(to right,transparent,#000 1.2%,#000 98.8%,transparent);mask-composite:intersect}
+      -webkit-mask-image:linear-gradient(to bottom,#000 85%,transparent 100%),linear-gradient(to right,transparent,#000 1.2%,#000 98.8%,transparent);-webkit-mask-composite:source-in;
+      mask-image:linear-gradient(to bottom,#000 85%,transparent 100%),linear-gradient(to right,transparent,#000 1.2%,#000 98.8%,transparent);mask-composite:intersect}
     :root[data-theme="dark"] .cover img{filter:brightness(.82) saturate(.9)}
-    /* Caption bottom right, on its own soft patch of fade so it stays readable */
-    .cover figcaption{position:absolute;right:34px;bottom:5px;padding:0 6px;font-size:12px;color:var(--muted);letter-spacing:.01em;border-radius:6px;
-      background:color-mix(in srgb,var(--paper) 72%,transparent);box-shadow:0 0 12px 8px color-mix(in srgb,var(--paper) 72%,transparent)}
+    /* Caption bottom right, on the faded strip */
+    .cover figcaption{position:absolute;right:34px;bottom:3px;font-size:12px;color:var(--muted);letter-spacing:.01em}
 
     /* Name, photo and links */
     /* Below the Yosemite band, with nothing overlapping: photo on the left, name beside it */
@@ -126,6 +125,7 @@
     h3:first-of-type{margin-top:0}
     h3:not(:first-of-type){margin-top:26px;padding-top:22px;border-top:1px solid var(--line)}
     .prose p{margin:0 0 12px;color:var(--ink-2)}
+    .prose strong{font-weight:600;color:var(--ink)}
     .prose p:last-child{margin-bottom:0}
 
     /* Papers */
