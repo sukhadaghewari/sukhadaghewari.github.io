@@ -59,11 +59,11 @@ permalink: /
   </section>
 
 
+  {%- comment -%} Background: Experience, Education, Awards and Academic service as subsections, like Research. {%- endcomment -%}
+  <section id="background">
+    <h2>Background</h2>
   {%- for s in site.data.cv %}
-  {%- assign id = s.section | slugify %}
-  {%- if s.section contains "Awards" %}{% assign id = "awards" %}{% endif %}
-  <section id="{{ id }}">
-    <h2>{{ s.section }}</h2>
+    <h3 id="{{ s.section | slugify }}">{{ s.section }}</h3>
     <ul class="rows">
       {%- for e in s.entries %}
       <li>
@@ -80,8 +80,8 @@ permalink: /
       </li>
       {%- endfor %}
     </ul>
-  </section>
   {%- endfor %}
+  </section>
 
   {%- if posts.size > 0 %}
   <section id="writing">
