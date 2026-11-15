@@ -30,7 +30,7 @@ Text in **[square brackets]** is a placeholder. Replace it before you share the 
 | `index.html` | The home page, which is the whole site on one page. Your About text is in here |
 | `_data/publications.yml` | Your papers, tutorials and posters, shown under Research |
 | `_data/news.yml` | Short announcements, shown under News |
-| `_data/cv.yml` | Experience, Education, and Awards and service |
+| `_data/cv.yml` | Experience, Education, Awards, and Academic service |
 | `assets/cv.pdf` | Your CV. The **Download CV** button under your name links to it (upload yours with this exact name) |
 | `assets/img/photo.jpg` | Your photo (square). Then remove the `#` before `photo:` in `_config.yml` |
 | `assets/img/cover.jpg` | Your cover photo. See *Cover photo* below |
