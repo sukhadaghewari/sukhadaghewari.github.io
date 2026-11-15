@@ -12,7 +12,7 @@
 #            and Education the org comes first, with the title under it.
 #   dates:   "Sep 2021 – Mar 2023", "Jan 2019" or "Jul 2026 – present", in quotes
 #   text:    one or two sentences in grey (optional). Links work as usual:
-#            [Project page](https://...){:target="_blank" rel="noopener"}
+#            [*Project page*](https://...){:target="_blank" rel="noopener"}
 #   courses: coursework, one course per line. It shows folded under
 #            "Coursework" as one sentence (optional)
 # ---------------------------------------------------------------
@@ -76,7 +76,7 @@
     - title: "Special recognition, AmazôniaHack 2026"
       dates: "Sep 2026"
       text: >-
-        Forest Sentinel, a prototype offline AI that drafts traceable environmental inspection reports from field evidence. [Project page](https://wiki.amazoniahack.co/wiki/Forest_Sentinel){:target="_blank" rel="noopener"}
+        Forest Sentinel, a prototype offline AI that drafts traceable environmental inspection reports from field evidence. [*Project page*](https://wiki.amazoniahack.co/wiki/Forest_Sentinel){:target="_blank" rel="noopener"}
     - title: "Departmental Gold Medal"
       org: "Walchand College of Engineering"
       dates: "May 2019"

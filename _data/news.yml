@@ -9,7 +9,7 @@
 #   date: "2026-09"   year and month, in quotes. Use just "2025"
 #                     when the month doesn't matter.
 #   text: >-          one or two sentences. Links work as usual:
-#                     [Project page](https://...)
+#                     [*Project page*](https://...)
 #                     For a paper, tutorial or poster, describe it in a
 #                     few words instead of the full title (the full title
 #                     is on the Research list), e.g.
