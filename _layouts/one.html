@@ -87,14 +87,15 @@
     .theme:hover{color:var(--ink)}
     :root[data-theme="dark"] .theme .moon,:root[data-theme="light"] .theme .sun{display:none}
 
-    /* The cover photo, faded into the page */
-    .cover{position:relative;max-width:60rem;margin:0 auto;height:200px;overflow:hidden}
-    .cover img{width:100%;height:100%;object-fit:cover;display:block;
-      -webkit-mask-image:linear-gradient(to bottom,#000 63%,transparent 100%),linear-gradient(to right,transparent,#000 5%,#000 95%,transparent);
-      -webkit-mask-composite:source-in;mask-image:linear-gradient(to bottom,#000 63%,transparent 100%),linear-gradient(to right,transparent,#000 5%,#000 95%,transparent);mask-composite:intersect;opacity:.97}
-    :root[data-theme="dark"] .cover img{opacity:.55}
-    /* Caption in the bottom-right corner, where the photo has faded into the page */
-    .cover figcaption{position:absolute;bottom:6px;right:14px;font-size:12px;color:var(--muted);letter-spacing:.01em}
+    /* The cover photo, with a very light fade at the bottom and sides */
+    .cover{position:relative;max-width:60rem;margin:0 auto;padding:0 24px}
+    .cover img{width:100%;height:200px;object-fit:cover;display:block;border-radius:10px 10px 0 0;
+      -webkit-mask-image:linear-gradient(to bottom,#000 92%,transparent 100%),linear-gradient(to right,transparent,#000 1.2%,#000 98.8%,transparent);-webkit-mask-composite:source-in;
+      mask-image:linear-gradient(to bottom,#000 92%,transparent 100%),linear-gradient(to right,transparent,#000 1.2%,#000 98.8%,transparent);mask-composite:intersect}
+    :root[data-theme="dark"] .cover img{filter:brightness(.82) saturate(.9)}
+    /* Caption bottom right, on its own soft patch of fade so it stays readable */
+    .cover figcaption{position:absolute;right:34px;bottom:5px;padding:0 6px;font-size:12px;color:var(--muted);letter-spacing:.01em;border-radius:6px;
+      background:color-mix(in srgb,var(--paper) 72%,transparent);box-shadow:0 0 12px 8px color-mix(in srgb,var(--paper) 72%,transparent)}
 
     /* Name, photo and links */
     /* Below the Yosemite band, with nothing overlapping: photo on the left, name beside it */
@@ -172,7 +173,8 @@
     /* Contact, last */
     #contact p{margin:0 0 10px;color:var(--ink-2)}
     /* Social accounts as a small row of icons */
-    #contact .social{display:flex;gap:16px;margin-top:14px}
+    #contact .social{display:flex;align-items:center;gap:14px;margin-top:6px}
+    #contact .social span{margin-right:2px}
     #contact .social a{color:var(--muted);text-decoration:none;display:inline-flex}
     #contact .social a:hover{color:var(--link)}
     #contact .social .icon{width:19px;height:19px}
@@ -183,7 +185,7 @@
     @media (max-width:760px){
       .bar nav{display:none}
       .theme{margin-left:auto}
-      .cover{height:150px}
+      .cover img{height:150px}
       .layout{grid-template-columns:1fr;gap:0}
       .side{position:static;padding-top:20px;padding-bottom:6px}
       .photo{width:121px;height:121px}
@@ -219,7 +221,7 @@
 {%- endif %}
 
 {%- comment -%} Links in the left column. These ones from _config.yml are left off. {%- endcomment -%}
-{%- assign hidden_links = "OpenReview|GitHub|Bluesky|X" | split: "|" %}
+{%- assign hidden_links = "OpenReview|Bluesky|X" | split: "|" %}
 <div class="layout">
 <aside class="side">
   {%- if site.photo %}<img class="photo" src="{{ site.photo | relative_url }}" alt="Photo of {{ site.title | escape }}">{% endif %}

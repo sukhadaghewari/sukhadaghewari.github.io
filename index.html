@@ -9,8 +9,9 @@ permalink: /
   <section id="about">
     <h2>About</h2>
     <div class="prose">
-      <p>I am a machine learning researcher and engineer working on climate, health, and society. I did my MS in Computer Science at UC San Diego and I am currently based in India.</p>
-      <p>Right now I am working on extreme weather prediction, with a focus on tropical cyclones and early warning. Before this, I built LLM systems for healthcare at Oracle, and worked on machine learning for cybersecurity at TCS Research in Pune. I also have a background in clinical NLP and AI fairness.</p>
+      <p>I am an applied machine learning researcher and engineer working on climate, Earth observation, and health.</p>
+      <p>Right now I am working on extreme weather prediction, with a focus on tropical cyclones and early warning. I am especially interested in getting useful information out of satellite imagery, and in building machine learning that holds up in real environmental applications.</p>
+      <p>I did my MS in Computer Science, with an AI specialization, at UC San Diego, and I am currently based in India. Before this, I built LLM systems for healthcare at Oracle and worked on machine learning for cybersecurity at TCS Research in Pune. I also have a background in clinical NLP and AI fairness.</p>
       <p>I like finding out whether an idea actually works, then building it into something people use, picking up whatever new method, tool, or field the problem needs along the way.</p>
       <p>I am currently applying to PhD programs and I am also open to research roles.</p>
     </div>
@@ -101,6 +102,6 @@ permalink: /
     {%- assign social = "" | split: "" %}
     {%- for name in social_names %}{% for l in site.links %}{% if l.name == name %}{% assign social = social | push: l %}{% endif %}{% endfor %}{% endfor %}
     {%- if social.size > 0 %}
-    <p class="social">{% for l in social %}<a href="{{ l.url }}" target="_blank" rel="noopener" aria-label="{{ l.name }}" title="{{ l.name }}">{% include link-icon.html name=l.name %}</a>{% endfor %}</p>
+    <p class="social"><span>You can also find me on</span>{% for l in social %}<a href="{{ l.url }}" target="_blank" rel="noopener" aria-label="{{ l.name }}" title="{{ l.name }}">{% include link-icon.html name=l.name %}</a>{% endfor %}</p>
     {%- endif %}
   </section>
