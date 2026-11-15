@@ -145,7 +145,7 @@ permalink: /
     .topics li,.p-tags > *{font-size:12.5px;line-height:1.6;padding:0 8px;border:1px solid var(--chip-line);border-radius:5px;background:var(--chip);color:var(--link)}
     .p-tags a{text-decoration:none}
     /* A tag that opens the paper gets an arrow */
-    .p-tags a::after{content:" \2197"}
+    .p-tags a::after{content:"";display:inline-block;width:.78em;height:.78em;margin-left:3px;vertical-align:-.05em;background:currentColor;-webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M5 11L11 5M6.5 5H11V9.5' fill='none' stroke='black' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") no-repeat center/contain;mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M5 11L11 5M6.5 5H11V9.5' fill='none' stroke='black' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") no-repeat center/contain}
     .p-tags a:hover{text-decoration:none;background:var(--chip)}
     .p-tags .status{font-style:italic;background:none;border-color:transparent;color:var(--muted);padding-left:2px}
     .p-authors strong{color:var(--ink)}
