@@ -137,6 +137,9 @@ permalink: /
     .papers li{display:grid;gap:2px;padding:14px 0;border-top:1px solid var(--line)}
     .papers li:first-child{border-top:0;padding-top:0}
     .p-title{font-weight:500;color:var(--ink);line-height:1.4}
+    /* A paper with a link: the title keeps its ink colour, with the usual soft link underline */
+    a.p-title{justify-self:start;text-decoration:underline;text-decoration-color:var(--link-line);text-decoration-thickness:1px;text-underline-offset:4px}
+    a.p-title:hover{color:var(--link);text-decoration-color:currentColor}
     .p-authors{font-size:14.5px;color:var(--muted)}
     .p-authors strong{font-weight:500}
     /* Small, subtle tags under each paper */
@@ -270,7 +273,7 @@ permalink: /
     <ul class="papers">
       {%- for p in items %}
       <li>
-        <span class="p-title">{{ p.title }}</span>
+        {%- if p.url %}<a class="p-title" href="{{ p.url }}" target="_blank" rel="noopener">{{ p.title }}</a>{% else %}<span class="p-title">{{ p.title }}</span>{% endif %}
         <span class="p-authors">{% for a in p.authors %}{% if a == site.title %}<strong>{{ a }}</strong>{% else %}{{ a }}{% endif %}{% unless forloop.last %}, {% endunless %}{% endfor %}</span>
         {%- comment -%} "Accepted" notes become a small tag; other notes stay as a line. {%- endcomment -%}
         {%- assign status = nil %}{% assign note = p.note %}
