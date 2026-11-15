@@ -137,9 +137,6 @@ permalink: /
     .papers li{display:grid;gap:2px;padding:14px 0;border-top:1px solid var(--line)}
     .papers li:first-child{border-top:0;padding-top:0}
     .p-title{font-weight:500;color:var(--ink);line-height:1.4}
-    /* A paper with a link: the title keeps its ink colour, with the usual soft link underline */
-    a.p-title{justify-self:start;text-decoration:underline;text-decoration-color:var(--link-line);text-decoration-thickness:1px;text-underline-offset:4px}
-    a.p-title:hover{color:var(--link);text-decoration-color:currentColor}
     .p-authors{font-size:14.5px;color:var(--muted)}
     .p-authors strong{font-weight:500}
     /* Small, subtle tags under each paper */
@@ -147,6 +144,8 @@ permalink: /
     /* One style for every tag and chip (rule 3): the topics under your name and the paper tags */
     .topics li,.p-tags > *{font-size:12.5px;line-height:1.6;padding:0 8px;border:1px solid var(--chip-line);border-radius:5px;background:var(--chip);color:var(--link)}
     .p-tags a{text-decoration:none}
+    /* A tag that opens the paper gets an arrow */
+    .p-tags a::after{content:" \2197"}
     .p-tags a:hover{text-decoration:none;background:var(--chip)}
     .p-tags .status{font-style:italic;background:none;border-color:transparent;color:var(--muted);padding-left:2px}
     .p-authors strong{color:var(--ink)}
@@ -273,7 +272,7 @@ permalink: /
     <ul class="papers">
       {%- for p in items %}
       <li>
-        {%- if p.url %}<a class="p-title" href="{{ p.url }}" target="_blank" rel="noopener">{{ p.title }}</a>{% else %}<span class="p-title">{{ p.title }}</span>{% endif %}
+        <span class="p-title">{{ p.title }}</span>
         <span class="p-authors">{% for a in p.authors %}{% if a == site.title %}<strong>{{ a }}</strong>{% else %}{{ a }}{% endif %}{% unless forloop.last %}, {% endunless %}{% endfor %}</span>
         {%- comment -%} "Accepted" notes become a small tag; other notes stay as a line. {%- endcomment -%}
         {%- assign status = nil %}{% assign note = p.note %}
