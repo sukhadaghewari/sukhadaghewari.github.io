@@ -172,9 +172,10 @@ permalink: /
 
     /* Rows: news, experience, education, awards, ... */
     .rows{list-style:none;margin:0;padding:0}
-    .rows li{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:24px;align-items:baseline;padding:12px 0;border-top:1px solid var(--line)}
+    /* Every list reads as a timeline: the date first, in one column of the same width */
+    .rows li{display:grid;grid-template-columns:136px minmax(0,1fr);gap:20px;align-items:baseline;padding:12px 0;border-top:1px solid var(--line)}
     .rows li:first-child{border-top:0;padding-top:0}
-    .when{order:2;color:var(--muted);font-size:13.5px;font-variant-numeric:tabular-nums;white-space:nowrap;text-align:right}
+    .when{color:var(--ink);font-weight:500;font-size:13.5px;font-variant-numeric:tabular-nums;white-space:nowrap}
     .what{min-width:0}
     .what b{font-weight:500;color:var(--ink)}
     .what .org{color:var(--muted)}
@@ -183,10 +184,6 @@ permalink: /
     .what .label{font-weight:600;color:var(--link)}
     .what .txt{display:block;font-size:15px;color:var(--muted);line-height:1.5}
     .news .what{color:var(--ink-2)}
-    /* News reads as a dated timeline: date first, key phrase in bold */
-    .rows.news li{grid-template-columns:76px minmax(0,1fr);gap:18px}
-    .rows.news .when{order:0;text-align:left;color:var(--ink);font-weight:500}
-    .news .what strong{font-weight:600;color:var(--ink)}
     /* Older news opens in a short box that scrolls, so the page stays short */
     .older{margin-top:10px;max-height:15rem;overflow-y:auto;padding:10px 12px 10px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);scrollbar-width:thin}
 
@@ -208,8 +205,6 @@ permalink: /
       .photo{width:121px;height:121px}
       .side-links{display:flex;flex-wrap:wrap;gap:8px 18px}
       .rows li{grid-template-columns:1fr;gap:2px}
-      .when{order:-1;text-align:left}
-      .rows.news li{grid-template-columns:1fr;gap:2px}
     }
     @media (max-width:420px){.wrap,.layout{padding:0 16px}}
   </style>

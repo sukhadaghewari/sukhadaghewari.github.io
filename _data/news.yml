@@ -8,9 +8,7 @@
 # Each entry has two lines:
 #   date: "2026-09"   year and month, in quotes. Use just "2025"
 #                     when the month doesn't matter.
-#   text: >-          one or two sentences. Put the key phrase (the award,
-#                     venue or place) in **bold** so News is easy to skim.
-#                     Links work as usual:
+#   text: >-          one or two sentences. Links work as usual:
 #                     [*Project page*](https://...)
 #                     For a paper, tutorial or poster, describe it in a
 #                     few words instead of the full title (the full title
@@ -24,64 +22,64 @@
 
 - date: "2026-11"
   text: >-
-    Won **first place in the ITU AI/ML Challenge 2026** with Shardul Deshpande.
+    Won first place in the ITU AI/ML Challenge 2026 with Shardul Deshpande.
 
 - date: "2026-11"
   text: >-
-    Paper on zero-shot rapid intensification prediction with multimodal LLMs accepted at the **GeoCV Workshop, WACV 2027**.
+    Paper on zero-shot rapid intensification prediction with multimodal LLMs accepted at the GeoCV Workshop, WACV 2027.
 
 - date: "2026-10"
   text: >-
-    Tutorial on predicting rapid intensification with machine learning accepted at the **TCCML Workshop, NeurIPS 2026**.
+    Tutorial on predicting rapid intensification with machine learning accepted at the TCCML Workshop, NeurIPS 2026.
 
 - date: "2026-09"
   text: >-
-    Poster on which information matters for rapid intensification accepted at the **WiML Workshop, NeurIPS 2026**.
+    Poster on which information matters for rapid intensification accepted at the WiML Workshop, NeurIPS 2026.
 
 - date: "2026-09"
   text: >-
-    Built **Forest Sentinel** at AmazôniaHack, an offline AI that drafts environmental inspection reports from field evidence. The judges selected it for **special recognition**. [*Project page*](https://wiki.amazoniahack.co/wiki/Forest_Sentinel){:target="_blank" rel="noopener"}
+    Built Forest Sentinel at AmazôniaHack, an offline AI that drafts environmental inspection reports from field evidence. The judges selected it for special recognition. [*Project page*](https://wiki.amazoniahack.co/wiki/Forest_Sentinel){:target="_blank" rel="noopener"}
 
 - date: "2026-08"
   text: >-
-    Attended the **Climate Change AI (CCAI) Summer School 2026**.
+    Attended the Climate Change AI (CCAI) Summer School 2026.
 
 - date: "2026-07"
   text: >-
-    Started **independent research** on rapid intensification of tropical cyclones.
+    Started independent research on rapid intensification of tropical cyclones.
 
 - date: "2025-12"
   text: >-
-    **Moved back to India** after two and a half years at Oracle, to focus on machine learning for climate and society.
+    Moved back to India after two and a half years at Oracle, to focus on machine learning for climate and society.
 
 - date: "2023-05"
   text: >-
-    Joined **Oracle**, building data and LLM tools for healthcare analytics.
+    Joined Oracle, building data and LLM tools for healthcare analytics.
 
 - date: "2023-03"
   text: >-
-    Graduated from **UC San Diego** with an MS in Computer Science, specializing in AI.
+    Graduated from UC San Diego with an MS in Computer Science, specializing in AI.
 
 - date: "2021-10"
   text: >-
-    Joined the **Ideker Lab** at UC San Diego as a graduate student researcher, building a synapse protein ontology for psychiatric disease prediction.
+    Joined the Ideker Lab at UC San Diego as a graduate student researcher, building a synapse protein ontology for psychiatric disease prediction.
 
 - date: "2021-09"
   text: >-
-    Started my **MS in Computer Science** at UC San Diego.
+    Started my MS in Computer Science at UC San Diego.
 
 - date: "2021-12"
   text: >-
-    Paper on domain squatting abuse in online banking published at **APWG eCrime 2021**. The work also led to a patent granted in India. [*Paper*](https://ieeexplore.ieee.org/abstract/document/9738769){:target="_blank" rel="noopener"}
+    Paper on domain squatting abuse in online banking published at APWG eCrime 2021. The work also led to a patent granted in India. [*Paper*](https://ieeexplore.ieee.org/abstract/document/9738769){:target="_blank" rel="noopener"}
 
 - date: "2019-07"
   text: >-
-    Joined **TCS Research** in Pune as a researcher, working on machine learning for cybersecurity.
+    Joined TCS Research in Pune as a researcher, working on machine learning for cybersecurity.
 
 - date: "2019-05"
   text: >-
-    Graduated from **Walchand College of Engineering** with a B.Tech in Computer Science and Engineering, as the Departmental Gold Medalist.
+    Graduated from Walchand College of Engineering with a B.Tech in Computer Science and Engineering, as the Departmental Gold Medalist.
 
 - date: "2019-01"
   text: >-
-    Started my first internship at **AlgoAnalytics**, semi-automating ICD-9 medical coding with machine learning on the MIMIC-III dataset.
+    Started my first internship at AlgoAnalytics, semi-automating ICD-9 medical coding with machine learning on the MIMIC-III dataset.
