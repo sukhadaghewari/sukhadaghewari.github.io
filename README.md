@@ -27,9 +27,10 @@ Text in **[square brackets]** is a placeholder. Replace it before you share the 
 | File | What it controls |
 |---|---|
 | `_config.yml` | Your name, tagline, topics, links, photo, cover photo |
-| `index.html` | The home page, which is the whole site on one page. Your About text is in here |
+| `index.html` | The home page sections. Your About text is in here |
+| `_layouts/one.html` | The frame around the home and Updates pages: top bar, Yosemite band, sidebar, footer and colours |
 | `_data/publications.yml` | Your papers, tutorials and posters, shown under Research |
-| `_data/news.yml` | Short announcements, shown under News |
+| `_data/news.yml` | Short announcements. The newest 3 show under Updates on the home page, and all of them on the Updates page |
 | `_data/cv.yml` | Experience, Education, Awards, and Academic service |
 | `assets/cv.pdf` | Your CV. The **Download CV** button under your name links to it (upload yours with this exact name) |
 | `assets/img/photo.jpg` | Your photo (square). Then remove the `#` before `photo:` in `_config.yml` |
@@ -60,12 +61,12 @@ edit, then click **Commit changes**. The site updates in about a minute.
 
 | I want to… | Do this |
 |---|---|
-| Add a news item | `_data/news.yml` → add an entry (date, text). It shows in News on the home page while it's among the newest 5 |
+| Add an update | `_data/news.yml` → add an entry (date, text). The newest 3 show on the home page, and every update shows on the Updates page |
 | Add a role, degree, award or service | `_data/cv.yml` → add an entry under its section (instructions at the top of the file). Papers go only in `_data/publications.yml` |
 | Add a paper | `_data/publications.yml` → add an entry (instructions at the top of the file) |
 | Update my CV | Upload a new `assets/cv.pdf`. The same name replaces the old one |
 | Change a link or my tagline | `_config.yml` |
-| Change the home page colours | The colour rules at the top of `index.html`, in the `<style>` block. The Writing pages use `assets/css/site.css` |
+| Change the home page colours | The colour rules at the top of `_layouts/one.html`, in the `<style>` block. The Writing pages use `assets/css/site.css` |
 
 ## 4. Write a blog post
 

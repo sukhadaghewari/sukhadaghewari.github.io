@@ -1,7 +1,7 @@
 # ---------------------------------------------------------------
-# NEWS
-# Short announcements for the News section on the home page, which
-# shows the newest 5. Add one when something is worth announcing,
+# UPDATES
+# Short announcements. The home page shows the newest 3 under Updates,
+# and the Updates page (/updates/) shows all of them. Add one when something is worth announcing,
 # like a paper accepted, a win or a new role. It doesn't have to be
 # complete, since your full record lives in _data/cv.yml.
 #
@@ -10,12 +10,10 @@
 #                     when the month doesn't matter.
 #   text: >-          one or two sentences. Links work as usual:
 #                     [*Project page*](https://...)
-#                     For a paper, tutorial or poster, describe it in a
-#                     few words instead of the full title (the full title
-#                     is on the Research list), e.g.
-#                       Paper on zero-shot rapid intensification prediction
-#                       with multimodal LLMs accepted at the GeoCV
-#                       Workshop, WACV 2027.
+#                     For a paper, tutorial or poster, start with its
+#                     full title in quotes, e.g.
+#                       “Title” was accepted as a paper at the GeoCV
+#                       Workshop at WACV 2027.
 #
 # Order doesn't matter: entries are sorted by date on the site.
 # ---------------------------------------------------------------
@@ -26,15 +24,15 @@
 
 - date: "2026-11"
   text: >-
-    Paper on zero-shot rapid intensification prediction with multimodal LLMs accepted at the GeoCV Workshop, WACV 2027.
+    “Can Multimodal LLMs Predict Rapid Intensification? A Leakage-Controlled Zero-Shot Benchmark for Tropical Cyclones” was accepted as a paper at the GeoCV Workshop at WACV 2027.
 
 - date: "2026-10"
   text: >-
-    Tutorial on predicting rapid intensification with machine learning accepted at the TCCML Workshop, NeurIPS 2026.
+    “Tropical Cyclone Rapid Intensification (RI) Prediction using Machine Learning” was accepted as a tutorial at the Tackling Climate Change with Machine Learning (TCCML) Workshop at NeurIPS 2026.
 
 - date: "2026-09"
   text: >-
-    Poster on which information matters for rapid intensification accepted at the WiML Workshop, NeurIPS 2026.
+    “Which Information Matters for Rapid Intensification of Tropical Cyclones? A Global-Basin Feature Ablation Study” was accepted as a poster at the WiML Workshop at NeurIPS 2026.
 
 - date: "2026-09"
   text: >-
@@ -70,7 +68,7 @@
 
 - date: "2021-12"
   text: >-
-    Paper on domain squatting abuse in online banking published at APWG eCrime 2021. The work also led to a patent granted in India. [*Paper*](https://ieeexplore.ieee.org/abstract/document/9738769){:target="_blank" rel="noopener"}
+    “When Diversity Meets Hostility: A Study of Domain Squatting Abuse in Online Banking” was published at APWG eCrime 2021. The work also led to a patent granted in India. [*Paper*](https://ieeexplore.ieee.org/abstract/document/9738769){:target="_blank" rel="noopener"}
 
 - date: "2019-07"
   text: >-

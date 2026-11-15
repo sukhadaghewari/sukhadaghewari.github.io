@@ -1,0 +1,10 @@
+---
+layout: one
+title: Updates
+permalink: /updates/
+---
+{%- assign news = site.data.news | reverse | sort: "date" | reverse %}
+  <section id="updates">
+    <h2>Updates</h2>
+    {% include update-rows.html items=news %}
+  </section>

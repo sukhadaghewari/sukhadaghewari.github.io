@@ -1,0 +1,305 @@
+{%- comment -%}
+  The frame shared by the home page and the Updates page: the top bar,
+  the Yosemite band, the sidebar and the footer. The sections themselves
+  are in index.html and updates.html. Everything comes from these files,
+  so nothing is written twice:
+    _config.yml             name, tagline, topics, photo, cover, links
+    _data/publications.yml  Research
+    _data/news.yml          Updates
+    _data/cv.yml            Experience, Education, Awards, Academic service
+  The About text is in index.html.
+{%- endcomment -%}
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% if page.title %}{{ page.title }} · {{ site.title }}{% else %}{{ site.title }} · {{ site.tagline }}{% endif %}</title>
+  <meta name="description" content="{{ site.description | strip_newlines | escape }}">
+  <link rel="canonical" href="{{ page.url | absolute_url }}">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="{{ site.title | escape }}">
+  <meta property="og:description" content="{{ site.description | strip_newlines | escape }}">
+  <meta property="og:url" content="{{ page.url | absolute_url }}">
+  {%- if site.photo %}
+  <meta property="og:image" content="{{ site.photo | absolute_url }}">
+  <meta name="twitter:card" content="summary">
+  {%- endif %}
+  <link rel="alternate" type="application/atom+xml" title="{{ site.title | escape }}" href="{{ '/feed.xml' | relative_url }}">
+  <link rel="icon" href="{{ '/assets/favicon.svg' | relative_url }}" type="image/svg+xml">
+  <script>
+    (function () {
+      var t; try { t = localStorage.getItem("theme"); } catch (e) {}
+      if (t !== "light" && t !== "dark") t = matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+      document.documentElement.setAttribute("data-theme", t);
+    })();
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Spectral:wght@500;600&family=Source+Sans+3:ital,wght@0,400;0,500;0,600;1,400&display=swap">
+  <style>
+    /* ------------------------------------------------------------------
+       COLOUR RULES (sage scale; numbers are contrast against the page)
+       Few colours, each used the same way everywhere.
+       - Text: --ink for all main text, --muted for everything secondary.
+       - Sage text: links (with a soft underline), the active tab, the CV button.
+       - Controls (the active tab, the CV button) share one tint and one border.
+       - Tags have two levels. The venue (WACV 2027, NeurIPS 2026, ...) is the
+         only filled element on the page. Every other tag and chip is light:
+         a faint border and grey text. A tag that is a link keeps sage text.
+       - One line colour for every divider.
+       ------------------------------------------------------------------ */
+    :root{
+      --sage-900:#2C4431; /* 9.9  link hover */
+      --sage-700:#3D5E44; /* 6.8  links, active tab text, highlights */
+      --sage-300:#B4C8B1; /*      link underline */
+      --sage-200:#D6E2D2; /*      the one border for chips, tags, tab, button */
+      --sage-100:#E9F0E6; /*      the one tint for chips, tags, tab, button */
+      --paper:#F8F7F3; --ink:#232622; --ink-2:var(--ink); --muted:#676B64; --line:#E4E1DA;
+      --link:var(--sage-700); --link-hover:var(--sage-900); --link-line:var(--sage-300);
+      --tab-on:var(--sage-100); --chip:var(--sage-100); --chip-line:var(--sage-200); --rule:var(--line);
+      --venue:var(--sage-700); --venue-text:var(--paper);
+      --serif:"Spectral",Georgia,serif; --sans:"Source Sans 3",-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+    }
+    :root[data-theme="dark"]{
+      --sage-100:#CDDFC2; /* 12.2 link hover */
+      --sage-200:#B3CAA5; /* 9.7  links, active tab text, highlights */
+      --sage-600:#57764D; /*      link underline */
+      --sage-800:#3C4936; /*      the one border for chips, tags, tab, button */
+      --sage-900:#2F392A; /*      the one tint for chips, tags, tab, button */
+      --paper:#1B1C1A; --ink:#E2E3DE; --ink-2:var(--ink); --muted:#9A9D94; --line:#2F312D;
+      --link:var(--sage-200); --link-hover:var(--sage-100); --link-line:var(--sage-600);
+      --tab-on:var(--sage-900); --chip:var(--sage-900); --chip-line:var(--sage-800); --rule:var(--line);
+      --venue:#455B3D; --venue-text:#E9F0E4; /* muted deep sage, so it doesn't glow */
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth;scroll-padding-top:64px}
+    body{margin:0;background:var(--paper);color:var(--ink);font:400 16px/1.6 var(--sans);-webkit-font-smoothing:antialiased}
+    a{color:var(--link);text-decoration:none}
+    main a{text-decoration:underline;text-decoration-color:var(--link-line);text-decoration-thickness:1px;text-underline-offset:3px}
+    a:hover{color:var(--link-hover);text-decoration-color:currentColor}
+    .wrap{max-width:46rem;margin:0 auto;padding:0 24px}
+
+    /* Top bar */
+    .bar{position:sticky;top:0;z-index:10;background:var(--paper);border-bottom:1px solid transparent}
+    .bar.scrolled{border-bottom-color:var(--line)}
+    .bar .wrap{max-width:60rem;display:flex;align-items:center;gap:22px;height:52px}
+    .mark{font-weight:600;color:var(--ink)}
+    .mark:hover{text-decoration:none}
+    .bar nav{display:flex;gap:4px;margin-left:auto;font-size:15px}
+    .bar nav a{position:relative;color:var(--muted);padding:4px 10px;border:1px solid transparent;border-radius:5px;transition:background-color .15s,color .15s,border-color .15s}
+    .bar nav a:hover{color:var(--ink);text-decoration:none}
+    /* The tab for the section you're reading gets a soft sage background */
+    .bar nav a.on{color:var(--link);background:var(--tab-on);border-color:var(--chip-line)}
+    .theme{border:0;background:none;color:var(--muted);cursor:pointer;padding:4px;display:grid;place-items:center}
+    .theme:hover{color:var(--ink)}
+    :root[data-theme="dark"] .theme .moon,:root[data-theme="light"] .theme .sun{display:none}
+
+    /* The cover photo, faded into the page */
+    .cover{position:relative;max-width:60rem;margin:0 auto;height:200px;overflow:hidden}
+    .cover img{width:100%;height:100%;object-fit:cover;display:block;
+      -webkit-mask-image:linear-gradient(to bottom,#000 63%,transparent 100%),linear-gradient(to right,transparent,#000 5%,#000 95%,transparent);
+      -webkit-mask-composite:source-in;mask-image:linear-gradient(to bottom,#000 63%,transparent 100%),linear-gradient(to right,transparent,#000 5%,#000 95%,transparent);mask-composite:intersect;opacity:.97}
+    :root[data-theme="dark"] .cover img{opacity:.55}
+    /* Caption in the bottom-right corner, where the photo has faded into the page */
+    .cover figcaption{position:absolute;bottom:6px;right:14px;font-size:12px;color:var(--muted);letter-spacing:.01em}
+
+    /* Name, photo and links */
+    /* Below the Yosemite band, with nothing overlapping: photo on the left, name beside it */
+    /* Two columns under the photo band: you on the left, everything else on the right */
+    .layout{max-width:60rem;margin:0 auto;padding:0 24px;display:grid;grid-template-columns:240px minmax(0,1fr);gap:52px;align-items:start}
+    .layout > main{min-width:0;max-width:44rem}
+    .side{position:sticky;top:72px;padding-top:30px;display:grid;gap:10px;justify-items:start}
+    .photo{width:145px;height:145px;border-radius:50%;object-fit:cover;margin:0 0 4px}
+    h1{font:600 26px/1.2 var(--serif);letter-spacing:-.005em;margin:0;white-space:nowrap}
+    .tagline{color:var(--ink-2);margin:0;line-height:1.45}
+    .topics{display:flex;flex-wrap:wrap;gap:5px;list-style:none;margin:2px 0 0;padding:0}
+    .cv-btn{display:inline-flex;align-items:center;gap:8px;margin-top:4px;padding:7px 14px;border-radius:5px;background:var(--chip);border:1px solid var(--chip-line);color:var(--link);font-size:14.5px;font-weight:600;text-decoration:none}
+    .cv-btn:hover{text-decoration:none;color:var(--ink)}
+    .side-links{list-style:none;margin:4px 0 0;padding:12px 0 0;border-top:1px solid var(--line);display:grid;gap:6px;width:100%;font-size:14.5px}
+    .side-links a,.side-links button{display:inline-flex;align-items:center;gap:8px;color:var(--ink-2);background:none;border:0;padding:0;font:inherit;cursor:pointer}
+    .side-links a:hover,.side-links button:hover{color:var(--ink);text-decoration:none}
+    .side-links .icon{color:var(--muted);flex:none}
+    /* Your address appears beside "Email" on hover, on focus, and after copying */
+    .side-links .email{position:relative}
+    .side-links .addr{position:absolute;left:78px;top:50%;transform:translateY(-50%);white-space:nowrap;padding:2px 8px;border:1px solid var(--line);border-radius:4px;background:var(--paper);color:var(--ink);font-size:13.5px;opacity:0;pointer-events:none;transition:opacity .15s;z-index:5}
+    .side-links .email:hover .addr,.side-links .email:focus-within .addr,.side-links .email.copied .addr{opacity:1}
+    section{padding:76px 0 0}
+    main > section:first-child{padding-top:30px}
+    h2{display:flex;align-items:center;gap:12px;font:500 25.5px/1.2 var(--serif);margin:0 0 22px}
+    h2::after{content:"";flex:1;height:1px;background:var(--rule)}
+    h3{font-size:16px;font-weight:600;color:var(--muted);margin:24px 0 10px}
+    h3:first-of-type{margin-top:0}
+    h3:not(:first-of-type){margin-top:26px;padding-top:22px;border-top:1px solid var(--line)}
+    .prose p{margin:0 0 12px;color:var(--ink-2)}
+    .prose p:last-child{margin-bottom:0}
+
+    /* Papers */
+    .papers{list-style:none;margin:0;padding:0}
+    .papers li{display:grid;gap:2px;padding:14px 0;border-top:1px solid var(--line)}
+    .papers li:first-child{border-top:0;padding-top:0}
+    .p-title{font-weight:500;color:var(--ink);line-height:1.4}
+    .p-authors{font-size:14.5px;color:var(--muted)}
+    .p-authors strong{font-weight:500}
+    /* Small, subtle tags under each paper */
+    .p-tags{display:flex;flex-wrap:wrap;gap:5px;margin-top:4px}
+    /* Tags and chips: light by default; the venue tag is filled (see the colour rules) */
+    .topics li,.p-tags > *{font-size:12.5px;line-height:1.6;padding:0 8px;border:1px solid var(--line);border-radius:5px;background:none;color:var(--muted)}
+    .p-tags .venue{background:var(--venue);border-color:var(--venue);color:var(--venue-text);font-weight:500}
+    .p-tags a{color:var(--link)}
+    .p-tags a{text-decoration:none}
+    /* A tag that opens the paper gets an arrow */
+    .p-tags a::after{content:"";display:inline-block;width:.78em;height:.78em;margin-left:3px;vertical-align:-.05em;background:currentColor;-webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M5 11L11 5M6.5 5H11V9.5' fill='none' stroke='black' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") no-repeat center/contain;mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M5 11L11 5M6.5 5H11V9.5' fill='none' stroke='black' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") no-repeat center/contain}
+    .p-tags a:hover{text-decoration:none;background:var(--chip)}
+    .p-tags .status{font-style:italic;background:none;border-color:transparent;color:var(--muted);padding-left:2px}
+    .p-authors strong{color:var(--ink)}
+    .p-note{font-size:14.5px;color:var(--muted)}
+    .pub-meta{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin:4px 0 1px}
+    .pub-tags{display:contents}
+    .tag-status{font-style:italic;background:none;border-color:transparent;color:var(--muted);padding-left:2px}
+    .pub-meta details{margin-left:4px}
+    .pub-meta details[open]{flex-basis:100%;margin-left:0}
+    .tag{font-size:13px;line-height:1.5;color:var(--ink-2);background:var(--chip);border:1px solid var(--chip-line);padding:0 8px;border-radius:5px;white-space:nowrap}
+    a.tag-link{color:var(--link)}
+    details summary{cursor:pointer;color:var(--link);font-size:14.5px}
+    details summary:hover{color:var(--ink)}
+    details .more{font-size:15px;color:var(--ink-2);margin-top:4px}
+    details .more p{margin:0 0 8px}
+    .coursework summary{font-style:italic}
+    .courses{list-style:none;margin:6px 0 2px;padding:0;font-size:14.5px;line-height:1.55;color:var(--ink-2)}
+
+    /* Rows: news, experience, education, awards, ... */
+    .rows{list-style:none;margin:0;padding:0}
+    /* Every list reads as a timeline: the date first, in one column of the same width */
+    .rows li{display:grid;grid-template-columns:136px minmax(0,1fr);gap:20px;align-items:baseline;padding:12px 0;border-top:1px solid var(--line)}
+    .rows li:first-child{border-top:0;padding-top:0}
+    .when{color:var(--ink);font-weight:500;font-size:13.5px;font-variant-numeric:tabular-nums;white-space:nowrap}
+    .what{min-width:0}
+    .what b{font-weight:500;color:var(--ink)}
+    .what .org{color:var(--muted)}
+    /* Education: the degree and the university each on their own line */
+    .what .role{display:block;color:var(--ink-2)}
+    .what .label{font-weight:600;color:var(--link)}
+    .what .txt{display:block;font-size:15px;color:var(--muted);line-height:1.5}
+    .news .what{color:var(--ink-2)}
+    /* "All updates" under the latest three on the home page */
+    .all-updates{margin:16px 0 0;font-size:15px}
+
+    /* Contact, last */
+    #contact p{margin:0 0 10px;color:var(--ink-2)}
+    /* Social accounts as a small row of icons */
+    #contact .social{display:flex;gap:16px;margin-top:14px}
+    #contact .social a{color:var(--muted);text-decoration:none;display:inline-flex}
+    #contact .social a:hover{color:var(--link)}
+    #contact .social .icon{width:19px;height:19px}
+    footer{padding:56px 0 40px;color:var(--muted);font-size:13px}
+
+    @media (max-width:760px){
+      .bar nav{display:none}
+      .theme{margin-left:auto}
+      .cover{height:150px}
+      .layout{grid-template-columns:1fr;gap:0}
+      .side{position:static;padding-top:20px;padding-bottom:6px}
+      .photo{width:121px;height:121px}
+      .side-links{display:flex;flex-wrap:wrap;gap:8px 18px}
+      .rows li{grid-template-columns:1fr;gap:2px}
+    }
+    @media (max-width:420px){.wrap,.layout{padding:0 16px}}
+  </style>
+</head>
+<body>
+{%- assign posts = site.posts %}
+<header class="bar" id="top">
+  <div class="wrap">
+    <nav aria-label="Sections">
+      {%- assign home = '/' | relative_url %}
+      <a href="{{ home }}#about">About</a>
+      <a href="{{ home }}#updates">Updates</a>
+      <a href="{{ home }}#research">Research</a>
+      <a href="{{ home }}#experience">Experience</a>
+      <a href="{{ home }}#awards">Awards</a>
+      {%- if posts.size > 0 %}<a href="{{ home }}#writing">Writing</a>{% endif %}
+      <a href="{{ home }}#contact">Contact</a>
+    </nav>
+    <button class="theme" type="button" aria-label="Switch light or dark">
+      <svg class="moon" viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.5 14.3A8.5 8.5 0 1 1 9.7 3.5a7 7 0 0 0 10.8 10.8z"/></svg>
+      <svg class="sun" viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M5.3 18.7l1.4-1.4M17.3 6.7l1.4-1.4"/></svg>
+    </button>
+  </div>
+</header>
+
+{%- if site.cover %}
+<figure class="cover" style="margin-top:0;margin-bottom:0"><img src="{{ site.cover | relative_url }}" alt="Yosemite Valley from Tunnel View at sunset" style="object-position: center 58%;"><figcaption>Tunnel View, Yosemite, 30 August 2025</figcaption></figure>
+{%- endif %}
+
+{%- comment -%} Links in the left column. These ones from _config.yml are left off. {%- endcomment -%}
+{%- assign hidden_links = "OpenReview|GitHub|Bluesky|X" | split: "|" %}
+<div class="layout">
+<aside class="side">
+  {%- if site.photo %}<img class="photo" src="{{ site.photo | relative_url }}" alt="Photo of {{ site.title | escape }}">{% endif %}
+  <h1>{{ site.title }}</h1>
+  <p class="tagline">{{ site.tagline }}</p>
+  {%- if site.topics %}
+  <ul class="topics">{% for t in site.topics %}<li>{{ t }}</li>{% endfor %}</ul>
+  {%- endif %}
+  {%- if site.cv_pdf %}
+  <a class="cv-btn" href="{{ site.cv_pdf | relative_url }}" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg>Download CV</a>
+  {%- endif %}
+  <ul class="side-links">
+    {%- if site.email %}<li class="email"><button class="copy" type="button" data-email="{{ site.email }}" aria-describedby="email-addr">{% include link-icon.html name="Email" %}<span>Email</span></button><span class="addr" id="email-addr" role="status">{{ site.email }}</span></li>{% endif %}
+    {%- for l in site.links %}{% unless hidden_links contains l.name %}<li><a href="{{ l.url }}" target="_blank" rel="noopener">{% include link-icon.html name=l.name %}{{ l.name }}</a></li>{% endunless %}{% endfor %}
+  </ul>
+</aside>
+
+<main>
+  {{ content }}
+  <footer>© {{ site.time | date: "%Y" }} {{ site.title }} · Updated {{ site.time | date: "%B %Y" }}</footer>
+</main>
+</div>
+
+<script>
+  (function () {
+    var root = document.documentElement;
+    document.querySelector(".theme").addEventListener("click", function () {
+      var t = root.getAttribute("data-theme") === "dark" ? "light" : "dark";
+      root.setAttribute("data-theme", t);
+      try { localStorage.setItem("theme", t); } catch (e) {}
+    });
+    var bar = document.querySelector(".bar");
+    addEventListener("scroll", function () { bar.classList.toggle("scrolled", scrollY > 8); }, { passive: true });
+    document.querySelectorAll(".copy").forEach(function (copy) {
+      copy.addEventListener("click", function () {
+        var li = copy.parentNode, addr = li.querySelector(".addr"), email = copy.getAttribute("data-email");
+        function done() {
+          if (!addr) return;
+          addr.textContent = "Copied " + email;
+          li.classList.add("copied");
+          setTimeout(function () { addr.textContent = email; li.classList.remove("copied"); }, 1800);
+        }
+        if (navigator.clipboard) navigator.clipboard.writeText(email).then(done, function () { location.href = "mailto:" + email; });
+        else location.href = "mailto:" + email;
+      });
+    });
+    // Highlight the tab for the section you're reading. Sections without
+    // a tab of their own (Education, Projects, ...) light up the tab above them.
+    var tabs = {};
+    document.querySelectorAll(".bar nav a").forEach(function (a) { tabs[a.hash.slice(1)] = a; });
+    var sections = Array.prototype.slice.call(document.querySelectorAll("main section"));
+    var current = null;
+    function mark() {
+      var line = innerHeight * 0.35, id = null;
+      for (var i = 0; i < sections.length; i++) {
+        if (sections[i].getBoundingClientRect().top <= line && tabs[sections[i].id]) id = sections[i].id;
+      }
+      if (document.getElementById("contact") && innerHeight + scrollY >= document.documentElement.scrollHeight - 4) id = "contact";
+      if (id === current) return;
+      current = id;
+      Object.keys(tabs).forEach(function (k) { tabs[k].classList.toggle("on", k === id); });
+    }
+    addEventListener("scroll", mark, { passive: true });
+    addEventListener("resize", mark);
+    mark();
+  })();
+</script>
+</body>
+</html>

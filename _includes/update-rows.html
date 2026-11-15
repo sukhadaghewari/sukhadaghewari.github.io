@@ -1,0 +1,10 @@
+{%- comment -%}
+  A list of updates from _data/news.yml, newest first.
+  Use as {% include update-rows.html items=news limit=3 %}; leave out limit to show all.
+{%- endcomment -%}
+{%- assign n = include.limit | default: include.items.size %}
+<ul class="rows news">
+  {%- for e in include.items limit: n %}
+  <li><span class="when">{% if e.date.size > 4 %}{{ e.date | append: "-01" | date: "%b %Y" }}{% else %}{{ e.date }}{% endif %}</span><span class="what">{{ e.text | markdownify | remove: "<p>" | remove: "</p>" | strip }}</span></li>
+  {%- endfor %}
+</ul>
