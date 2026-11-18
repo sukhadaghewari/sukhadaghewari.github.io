@@ -355,7 +355,7 @@
 <main>
   {{ content }}
   <footer>
-    © {{ site.time | date: "%Y" }} {{ site.title }}{%- assign months = "kite|cherry-blossom|seedling|hyacinth|watermelon|rain-cloud|lotus|peacock|pumpkin|maple-leaf|shooting-star|snowman" | split: "|" %}{% assign month_index = site.time | date: "%-m" | minus: 1 %}<span class="month-wrap"><img class="month" src="{{ '/assets/img/months/' | relative_url }}{{ months[month_index] }}.svg" alt="" width="20" height="20" data-months="{{ months | join: ',' }}"><span class="hello" role="tooltip">Hello {{ site.time | date: "%B" }}!</span></span>Updated {{ site.time | date: "%B %Y" }}
+    © {{ site.time | date: "%Y" }} {{ site.title }}{%- assign months = "kite|cherry-blossom|seedling|tulip|watermelon|rain-cloud|hyacinth|peacock|pumpkin|maple-leaf|shooting-star|snowman" | split: "|" %}{% assign month_index = site.time | date: "%-m" | minus: 1 %}<span class="month-wrap"><img class="month" src="{{ '/assets/img/months/' | relative_url }}{{ months[month_index] }}.svg" alt="" width="20" height="20" data-months="{{ months | join: ',' }}"><span class="hello" role="tooltip">Hello {{ site.time | date: "%B" }}!</span></span>Updated {{ site.time | date: "%B %Y" }}
   </footer>
 </main>
 </div>
