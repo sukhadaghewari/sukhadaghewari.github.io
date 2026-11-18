@@ -262,9 +262,15 @@
     #contact .social a:hover{color:var(--link)}
     #contact .social .icon{width:19px;height:19px}
     footer{margin-top:84px;padding:0 0 48px;color:var(--muted);font-size:var(--fs-tag)}
-    /* A flower for the month between your name and the update date
-       (Microsoft Fluent Emoji, MIT licence, see assets/img/flowers/LICENSE.txt) */
-    footer .flower{width:20px;height:20px;margin:0 10px;vertical-align:-5px}
+    /* A small nature icon for the month between your name and the update date
+       (Google Noto Emoji, Apache 2.0, see assets/img/months/LICENSE.txt) */
+    footer .month{width:20px;height:20px;margin:0 10px;vertical-align:-5px}
+    /* Hover the icon: it lifts a little, and "Hello November" fades in above it in a thin grey outline bubble */
+    footer .month-wrap{position:relative;display:inline-block}
+    footer .month{transition:transform .4s cubic-bezier(.22,.61,.36,1)}
+    footer .hello{position:absolute;left:50%;bottom:calc(100% + 8px);white-space:nowrap;padding:3px 10px;border:1px solid color-mix(in srgb,var(--muted) 45%,transparent);border-radius:999px;background:var(--paper);color:var(--ink);font-size:var(--fs-tag);opacity:0;pointer-events:none;
+      transform:translate(-50%,4px);transition:opacity .35s ease,transform .45s cubic-bezier(.22,.61,.36,1)}
+    footer .month-wrap:hover .hello{opacity:1;transform:translate(-50%,0)}
 
     /* Small hover touches, only on devices with a pointer */
     @media (hover:hover){
@@ -276,11 +282,9 @@
       .side-links a:hover .icon,.side-links button:hover .icon{color:var(--warm)}
       #contact .social a{transition:transform .2s ease,color .15s}
       #contact .social a:hover{transform:translateY(-2px)}
-      /* The footer flower sways */
-      footer .flower{transform-origin:50% 90%}
-      footer:hover .flower{animation:sway 1.4s ease-in-out}
+      /* The footer icon lifts gently */
+      footer .month-wrap:hover .month{transform:translateY(-2px) scale(1.08)}
     }
-    @keyframes sway{0%,100%{transform:rotate(0)}30%{transform:rotate(-14deg)}65%{transform:rotate(9deg)}}
     @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
 
     @media (max-width:760px){
@@ -351,7 +355,7 @@
 <main>
   {{ content }}
   <footer>
-    © {{ site.time | date: "%Y" }} {{ site.title }}{%- assign flowers = "blossom|cherry-blossom|tulip|hibiscus|sunflower|rose|lotus|hyacinth|white-flower|rosette|bouquet|cherry-blossom" | split: "|" %}{% assign month_index = site.time | date: "%-m" | minus: 1 %}<img class="flower" src="{{ '/assets/img/flowers/' | relative_url }}{{ flowers[month_index] }}.svg" alt="" width="20" height="20" data-flowers="{{ flowers | join: ',' }}">Updated {{ site.time | date: "%B %Y" }}
+    © {{ site.time | date: "%Y" }} {{ site.title }}{%- assign months = "kite|cherry-blossom|seedling|hyacinth|watermelon|rain-cloud|lotus|peacock|pumpkin|maple-leaf|shooting-star|snowman" | split: "|" %}{% assign month_index = site.time | date: "%-m" | minus: 1 %}<span class="month-wrap"><img class="month" src="{{ '/assets/img/months/' | relative_url }}{{ months[month_index] }}.svg" alt="" width="20" height="20" data-months="{{ months | join: ',' }}"><span class="hello" role="tooltip">Hello {{ site.time | date: "%B" }}!</span></span>Updated {{ site.time | date: "%B %Y" }}
   </footer>
 </main>
 </div>
@@ -433,11 +437,13 @@
     addEventListener("hashchange", openTarget);
     openTarget();
 
-    // The footer flower follows the visitor's month (January to December)
-    var flower = document.querySelector("footer .flower");
-    if (flower) {
-      var names = flower.getAttribute("data-flowers").split(",");
-      flower.src = flower.src.replace(/[^/]+\.svg$/, names[new Date().getMonth()] + ".svg");
+    // The footer icon follows the visitor's month (January to December)
+    var icon = document.querySelector("footer .month");
+    if (icon) {
+      var names = icon.getAttribute("data-months").split(",");
+      var now = new Date();
+      icon.src = icon.src.replace(/[^/]+\.svg$/, names[now.getMonth()] + ".svg");
+      icon.parentNode.querySelector(".hello").textContent = "Hello " + now.toLocaleString("en", { month: "long" }) + "!";
     }
 
     // Section titles draw their rule the first time they come into view
