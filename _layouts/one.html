@@ -88,18 +88,19 @@
       --serif:"Newsreader",Georgia,serif; --sans:"Figtree",-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
     }
     :root[data-theme="dark"]{
-      /* Soft warm charcoal, never pure black or white, with every green on the
-         same sage hue (130) as light mode. Numbers are contrast on the page. */
-      --sage-100:#BED3C2; /* link hover */
-      --sage-200:#9CC1A3; /* 7.8  links */
-      --sage-600:#4F6F55; /*      link underline */
-      --paper:#242422; --ink:#D4D4CD; /* 10.4 */ --muted:#9D9D93; /* 5.7 */ --line:#383835;
+      /* Deep olive charcoal with crisp, bright text. Main text and headings
+         lead, everything else one step softer. The greens stay on the same
+         sage hue as light mode. Numbers are contrast on the page. */
+      --sage-100:#DCECDE; /* link hover */
+      --sage-200:#B2D3B7; /* 9.9  links */
+      --sage-600:#5E7E64; /*      link underline */
+      --paper:#20231F; --ink:#F1F1EB; /* 14.0 */ --muted:#B9BBB1; /* 8.2 */ --line:#434940;
       --link:var(--sage-200); --link-hover:var(--sage-100); --link-line:var(--sage-600);
-      --venue:#3E5F44; --venue-text:#DDE8DE; /* 5.7 */
-      --warm:#CF8A6B; /* 5.6 */ --warm-soft:rgba(207,138,107,.2);
-      --card:#2C2C29; --card-line:#3D3D39; --chip:#2B2B28;
-      --forest:#BED3C2; /* 9.8 */ --moss:#8DAF93; /* 6.4 */
-      --fern:#465F4B;
+      --venue:#4C6E52; --venue-text:#F0F6F0; /* 5.6 */
+      --warm:#E0A386; /* 7.4 */ --warm-soft:rgba(224,163,134,.24);
+      --card:#2C302B; --card-line:#4A5047; --chip:#2E322C;
+      --forest:#DCECDE; /* 13.0 */ --moss:#AECAB1; /* 9.2 */
+      --fern:#5A745E;
     }
     *{box-sizing:border-box}
     html{scroll-behavior:smooth;scroll-padding-top:70px}
@@ -160,7 +161,8 @@
     .side-links .email{position:relative}
     .side-links .addr{position:absolute;left:78px;top:50%;transform:translateY(-50%);white-space:nowrap;padding:2px 8px;border:1px solid var(--line);border-radius:4px;background:var(--paper);color:var(--ink);font-size:var(--fs-tag);opacity:0;pointer-events:none;transition:opacity .15s;z-index:5}
     .side-links .email:hover .addr,.side-links .email:focus-within .addr,.side-links .email.copied .addr{opacity:1}
-    main section{padding-top:72px}
+    /* One medium gap between every section, and before the footer */
+    main section{padding-top:84px}
     main > section:first-child{padding-top:36px}
     h2{position:relative;font-size:var(--fs-section);line-height:1.2;letter-spacing:-.005em;font-variation-settings:"opsz" 60;margin:0 0 24px;padding-bottom:10px}
     /* A fern rule under each section title, drawn in the first time the section comes into view */
@@ -181,6 +183,9 @@
     .sub > summary:hover h3{color:var(--forest)}
     .sub > summary:focus-visible{outline:2px solid var(--link-line);outline-offset:2px;border-radius:4px}
     .sub[open]{padding-bottom:40px}
+    /* The last subsection adds no space of its own, so section gaps stay equal open or folded */
+    .sub[open]:last-child{padding-bottom:0}
+    .sub:not([open]):last-child > summary{padding-bottom:0}
     .sub[open] > summary{padding-bottom:16px}
     /* About */
     .prose{line-height:1.8}
@@ -256,7 +261,7 @@
     #contact .social a{color:var(--muted);text-decoration:none;display:inline-flex}
     #contact .social a:hover{color:var(--link)}
     #contact .social .icon{width:19px;height:19px}
-    footer{margin-top:88px;padding:0 0 48px;color:var(--muted);font-size:var(--fs-tag)}
+    footer{margin-top:84px;padding:0 0 48px;color:var(--muted);font-size:var(--fs-tag)}
     /* A flower for the month between your name and the update date
        (Microsoft Fluent Emoji, MIT licence, see assets/img/flowers/LICENSE.txt) */
     footer .flower{width:20px;height:20px;margin:0 10px;vertical-align:-5px}
