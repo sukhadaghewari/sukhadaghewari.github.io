@@ -81,11 +81,13 @@
       org: "Walchand College of Engineering"
       dates: "May 2019"
 
-- section: Academic service
-  entries:
-    - title: "Reviewer"
-      org: "Machine Learning for Health (ML4H) Symposium"
-      dates: "Sep 2026"
-    - title: "Session volunteer"
-      org: "ACM Conference on Fairness, Accountability, and Transparency (FAccT)"
-      dates: "Mar 2021"
+# Academic service is hidden for now. To show it again, delete the # at
+# the start of each line below.
+# - section: Academic service
+#   entries:
+#     - title: "Reviewer"
+#       org: "Machine Learning for Health (ML4H) Symposium"
+#       dates: "Sep 2026"
+#     - title: "Session volunteer"
+#       org: "ACM Conference on Fairness, Accountability, and Transparency (FAccT)"
+#       dates: "Mar 2021"

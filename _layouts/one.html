@@ -1,12 +1,12 @@
 {%- comment -%}
   The frame shared by the home page and the Updates page: the top bar,
-  the Yosemite band, the sidebar and the footer. The sections themselves
-  are in index.html and updates.html. Everything comes from these files,
-  so nothing is written twice:
+  the Yosemite cover, the sidebar and the footer. The sections
+  themselves are in index.html and updates.html. Everything comes from
+  these files, so nothing is written twice:
     _config.yml             name, tagline, topics, photo, cover, links
     _data/publications.yml  Research
     _data/news.yml          Updates
-    _data/cv.yml            Experience, Education, Awards, Academic service
+    _data/cv.yml            Experience, Education, Awards
   The About text is in index.html.
 {%- endcomment -%}
 <!doctype html>
@@ -32,43 +32,79 @@
       var t; try { t = localStorage.getItem("theme"); } catch (e) {}
       if (t !== "light" && t !== "dark") t = matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
       document.documentElement.setAttribute("data-theme", t);
+      // Motion (the gliding tab, the rules drawing in) only when scripts run and motion is welcome
+      if (!matchMedia("(prefers-reduced-motion: reduce)").matches && "IntersectionObserver" in window) document.documentElement.classList.add("js");
     })();
   </script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Spectral:wght@500;600&family=Source+Sans+3:ital,wght@0,400;0,500;0,600;1,400&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400..600;1,6..72,400..500&family=Figtree:ital,wght@0,400;0,600;1,400&display=swap">
   <style>
     /* ------------------------------------------------------------------
-       COLOUR RULES (sage scale; numbers are contrast against the page)
+       COLOUR RULES (greens; numbers are contrast against the page)
+       Every green, in light and dark, is one sage hue (130) at different
+       lightness, so nothing clashes.
        Few colours, each used the same way everywhere.
-       - Text: --ink for all main text, --muted for everything secondary.
-       - Sage text: links (with a soft underline).
-       - One filled sage box style, used for the venue tags (WACV 2027, ...),
-         the Download CV button and the active tab. Nothing else is filled.
-       - Every other tag and chip is light: a faint border and grey text.
-         A tag that is a link keeps sage text.
-       - One line colour for every divider.
+       - Forest green: your name and the section titles.
+       - Sage: links (with a soft fern underline), and the one filled box
+         style used for the home button, the venue tags (WACV 2027, ...),
+         the Download CV button and the active tab.
+       - Moss: subsection titles, dates and update labels, all in italic.
+       - Fern: the rule under each section title, and link underlines.
+       - Text: --ink for main text, --muted for everything secondary.
+       - Other tags are light: a faint border, a warm grey fill a shade
+         under the page, and grey text.
+       - Terracotta (from the sunset cliffs) only for the Accepted /
+         To appear notes, link icons on hover and text selection.
+       ------------------------------------------------------------------
+       TYPE RULES
+       Newsreader names things, Figtree tells you about them.
+       Six sizes, nothing in between. Figtree in 400 and 600 only.
+         30    Name      Newsreader 400, forest     your name
+         21    Section   Newsreader 400, forest     About, Updates, Research, ...
+         16    Title     Newsreader 500, ink        papers, places, degrees, awards
+               Subsection  Newsreader italic, moss  Publications, Experience, ...
+         14.5  Body      Figtree 400, ink           sentences: About, Contact, updates
+         13    Small     Figtree 400, muted         authors, roles, schools, links,
+                                                    tabs, buttons (600)
+               Note      Newsreader italic, moss    dates, update labels
+         11.5  Tag       Figtree 400, muted         tags, footer
+       Small text with generous line spacing and plenty of air between parts.
        ------------------------------------------------------------------ */
     :root{
-      --sage-900:#2C4431; /* 9.9  link hover */
-      --sage-700:#3D5E44; /* 6.8  links and the filled boxes */
-      --sage-300:#B4C8B1; /*      link underline */
-      --paper:#F8F7F2; --ink:#232622; --ink-2:var(--ink); --muted:#676B64; --line:#E5E1D9;
+      --sage-900:#2C4430; /* 9.9  link hover */
+      --sage-700:#3C5D42; /* 6.9  links and the filled boxes */
+      --sage-300:#B1C8B5; /*      link underline */
+      --paper:#F8F7F2; --ink:#232622; --muted:#676B64; --line:#E5E1D9;
       --link:var(--sage-700); --link-hover:var(--sage-900); --link-line:var(--sage-300);
       --venue:var(--sage-700); --venue-text:var(--paper);
-      --serif:"Spectral",Georgia,serif; --sans:"Source Sans 3",-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+      --warm:#A9502F; /* 5.0 */ --warm-soft:rgba(169,80,47,.15);
+      --card:#FCFBF8; --card-line:#E2DED5; --chip:#F0EEE7; /* tag fill, a shade under the page */
+      --forest:#1E3823; /* 11.9 name and section titles */
+      --moss:#4E7355;   /* 5.0  subsection titles, dates, labels */
+      --fern:var(--sage-300);
+      /* Six sizes, nothing in between (see TYPE RULES) */
+      --fs-name:30px; --fs-section:21px; --fs-title:16px; --fs-body:14.5px; --fs-small:13px; --fs-tag:11.5px;
+      --serif:"Newsreader",Georgia,serif; --sans:"Figtree",-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
     }
     :root[data-theme="dark"]{
-      --sage-100:#CDDFC2; /* 12.2 link hover */
-      --sage-200:#B3CAA5; /* 9.7  links */
-      --sage-600:#57764D; /*      link underline */
-      --paper:#1B1C1A; --ink:#E2E3DE; --ink-2:var(--ink); --muted:#9A9D94; --line:#2F312D;
+      /* Soft warm charcoal, never pure black or white, with every green on the
+         same sage hue (130) as light mode. Numbers are contrast on the page. */
+      --sage-100:#BED3C2; /* link hover */
+      --sage-200:#9CC1A3; /* 7.8  links */
+      --sage-600:#4F6F55; /*      link underline */
+      --paper:#242422; --ink:#D4D4CD; /* 10.4 */ --muted:#9D9D93; /* 5.7 */ --line:#383835;
       --link:var(--sage-200); --link-hover:var(--sage-100); --link-line:var(--sage-600);
-      --venue:#455B3D; --venue-text:#E9F0E4; /* muted deep sage, so it doesn't glow */
+      --venue:#3E5F44; --venue-text:#DDE8DE; /* 5.7 */
+      --warm:#CF8A6B; /* 5.6 */ --warm-soft:rgba(207,138,107,.2);
+      --card:#2C2C29; --card-line:#3D3D39; --chip:#2B2B28;
+      --forest:#BED3C2; /* 9.8 */ --moss:#8DAF93; /* 6.4 */
+      --fern:#465F4B;
     }
     *{box-sizing:border-box}
-    html{scroll-behavior:smooth;scroll-padding-top:64px}
-    body{margin:0;background:var(--paper);color:var(--ink);font:400 16px/1.6 var(--sans);-webkit-font-smoothing:antialiased}
+    html{scroll-behavior:smooth;scroll-padding-top:70px}
+    ::selection{background:var(--warm-soft)}
+    body{margin:0;background:var(--paper);color:var(--ink);font:400 var(--fs-body)/1.75 var(--sans);-webkit-font-smoothing:antialiased}
     a{color:var(--link);text-decoration:none}
     main a{text-decoration:underline;text-decoration-color:var(--link-line);text-decoration-thickness:1px;text-underline-offset:3px}
     a:hover{color:var(--link-hover);text-decoration-color:currentColor}
@@ -77,12 +113,19 @@
     /* Top bar */
     .bar{position:sticky;top:0;z-index:10;background:var(--paper);border-bottom:1px solid transparent}
     .bar.scrolled{border-bottom-color:var(--line)}
-    .bar .wrap{max-width:60rem;display:flex;align-items:center;gap:22px;height:52px}
-    .bar nav{display:flex;gap:4px;margin-left:auto;font-size:15px}
-    .bar nav a{position:relative;color:var(--muted);padding:4px 10px;border:1px solid transparent;border-radius:5px;transition:background-color .15s,color .15s,border-color .15s}
-    .bar nav a:hover{color:var(--ink);text-decoration:none}
-    /* The tab for the section you're reading gets a soft sage background */
+    .bar .wrap{max-width:60rem;display:flex;align-items:center;gap:22px;height:58px}
+    /* Home: your initials on a sage tile, top left */
+    .home{flex:none;display:grid;place-items:center;width:34px;height:34px;border-radius:9px;background:var(--venue);color:var(--venue-text);font:italic 500 var(--fs-title)/1 var(--serif);letter-spacing:.02em}
+    .home:hover{color:var(--venue-text);filter:brightness(1.1)}
+    .bar nav{position:relative;display:flex;gap:4px;margin-left:auto;font-size:var(--fs-small)}
+    .bar nav a{position:relative;z-index:1;color:var(--muted);padding:4px 10px;border:1px solid transparent;border-radius:5px;transition:background-color .15s,color .15s}
+    .bar nav a:hover{color:var(--ink)}
+    /* The tab for the section you're reading is sage. With motion on, one sage
+       pill glides from tab to tab, and the text changes colour as it arrives. */
     .bar nav a.on{color:var(--venue-text);background:var(--venue);border-color:var(--venue)}
+    .bar nav .pill{position:absolute;left:0;top:0;border-radius:5px;background:var(--venue);opacity:0;pointer-events:none;transition:transform .5s cubic-bezier(.2,.75,.2,1),width .5s cubic-bezier(.2,.75,.2,1),opacity .25s}
+    .js .bar nav a{transition:color .3s ease .18s}
+    .js .bar nav a.on{background:none;border-color:transparent}
     .theme{border:0;background:none;color:var(--muted);cursor:pointer;padding:4px;display:grid;place-items:center}
     .theme:hover{color:var(--ink)}
     :root[data-theme="dark"] .theme .moon,:root[data-theme="light"] .theme .sun{display:none}
@@ -96,96 +139,149 @@
     /* Caption in the bottom-right corner, on the fade */
     .cover figcaption{position:absolute;bottom:6px;right:16px;font-size:12px;color:var(--muted);letter-spacing:.01em}
 
-    /* Name, photo and links */
-    /* Below the Yosemite band, with nothing overlapping: photo on the left, name beside it */
-    /* Two columns under the photo band: you on the left, everything else on the right */
-    .layout{max-width:60rem;margin:0 auto;padding:0 24px;display:grid;grid-template-columns:240px minmax(0,1fr);gap:52px;align-items:start}
+    /* Two columns under the cover: you on the left, everything else on the right */
+    .layout{max-width:60rem;margin:0 auto;padding:0 24px;display:grid;grid-template-columns:256px minmax(0,1fr);gap:44px;align-items:start}
     .layout > main{min-width:0;max-width:44rem}
-    .side{position:sticky;top:72px;padding-top:30px;display:grid;gap:10px;justify-items:start}
+    .side{position:sticky;top:76px;padding-top:36px;display:grid;gap:12px;justify-items:start}
     .photo{width:145px;height:145px;border-radius:50%;object-fit:cover;margin:0 0 4px}
-    h1{font:600 26px/1.2 var(--serif);letter-spacing:-.005em;margin:0;white-space:nowrap}
-    .tagline{color:var(--ink-2);margin:0;line-height:1.45}
+    /* Headings in Newsreader, forest green */
+    h1,h2{font-family:var(--serif);font-weight:400;color:var(--forest)}
+    h1{font-size:var(--fs-name);line-height:1.15;letter-spacing:-.01em;font-variation-settings:"opsz" 72;margin:2px 0 0;white-space:nowrap}
+    .tagline{color:var(--ink);margin:2px 0 0;line-height:1.45}
     .topics{display:flex;flex-wrap:wrap;gap:5px;list-style:none;margin:2px 0 0;padding:0}
     /* Download CV: filled like the venue tags, the one primary action */
-    .cv-btn{display:inline-flex;align-items:center;gap:8px;margin-top:4px;padding:5px 13px;border-radius:5px;background:var(--venue);border:1px solid var(--venue);color:var(--venue-text);font-size:14.5px;font-weight:500;text-decoration:none}
+    .cv-btn{display:inline-flex;align-items:center;gap:8px;margin-top:4px;padding:5px 13px;border-radius:5px;background:var(--venue);border:1px solid var(--venue);color:var(--venue-text);font-size:var(--fs-small);font-weight:600;text-decoration:none}
     .cv-btn:hover{text-decoration:none;color:var(--venue-text);filter:brightness(1.08)}
-    .side-links{list-style:none;margin:4px 0 0;padding:12px 0 0;border-top:1px solid var(--line);display:grid;gap:6px;width:100%;font-size:14.5px}
-    .side-links a,.side-links button{display:inline-flex;align-items:center;gap:8px;color:var(--ink-2);background:none;border:0;padding:0;font:inherit;cursor:pointer}
-    .side-links a:hover,.side-links button:hover{color:var(--ink);text-decoration:none}
+    .side-links{list-style:none;margin:4px 0 0;padding:12px 0 0;border-top:1px solid var(--line);display:grid;gap:8px;width:100%;font-size:var(--fs-small)}
+    .side-links a,.side-links button{display:inline-flex;align-items:center;gap:8px;color:var(--ink);background:none;border:0;padding:0;font:inherit;cursor:pointer}
+    .side-links a:hover,.side-links button:hover{color:var(--ink)}
     .side-links .icon{color:var(--muted);flex:none}
     /* Your address appears beside "Email" on hover, on focus, and after copying */
     .side-links .email{position:relative}
-    .side-links .addr{position:absolute;left:78px;top:50%;transform:translateY(-50%);white-space:nowrap;padding:2px 8px;border:1px solid var(--line);border-radius:4px;background:var(--paper);color:var(--ink);font-size:13.5px;opacity:0;pointer-events:none;transition:opacity .15s;z-index:5}
+    .side-links .addr{position:absolute;left:78px;top:50%;transform:translateY(-50%);white-space:nowrap;padding:2px 8px;border:1px solid var(--line);border-radius:4px;background:var(--paper);color:var(--ink);font-size:var(--fs-tag);opacity:0;pointer-events:none;transition:opacity .15s;z-index:5}
     .side-links .email:hover .addr,.side-links .email:focus-within .addr,.side-links .email.copied .addr{opacity:1}
-    section{padding:76px 0 0}
-    main > section:first-child{padding-top:30px}
-    h2{display:flex;align-items:center;gap:12px;font:500 25.5px/1.2 var(--serif);margin:0 0 22px}
-    h2::after{content:"";flex:1;height:1px;background:var(--line)}
-    h3{font-size:16px;font-weight:600;color:var(--muted);margin:24px 0 10px}
-    h3:first-of-type{margin-top:0}
-    h3:not(:first-of-type){margin-top:26px;padding-top:22px;border-top:1px solid var(--line)}
-    .prose p{margin:0 0 12px;color:var(--ink-2)}
-    .prose strong{font-weight:600;color:var(--ink)}
+    main section{padding-top:72px}
+    main > section:first-child{padding-top:36px}
+    h2{position:relative;font-size:var(--fs-section);line-height:1.2;letter-spacing:-.005em;font-variation-settings:"opsz" 60;margin:0 0 24px;padding-bottom:10px}
+    /* A fern rule under each section title, drawn in the first time the section comes into view */
+    h2::after{content:"";position:absolute;left:0;right:0;bottom:0;height:1px;background:var(--fern);transform-origin:left}
+    .js h2::after{transform:scaleX(0);transition:transform 1.1s cubic-bezier(.2,.7,.2,1)}
+    .js h2.seen::after{transform:none}
+    /* Subsections in italic Newsreader, moss green */
+    h3{font:italic 400 var(--fs-title)/1.3 var(--serif);color:var(--moss);margin:0}
+    /* Subsections fold: a row with the title and a chevron, hairlines between
+       them. They all start open. */
+    .sub{border-top:1px solid var(--line)}
+    .sub:first-of-type{border-top:0}
+    .sub > summary{display:flex;align-items:center;gap:10px;padding:18px 0;cursor:pointer;list-style:none;font-size:inherit;color:inherit}
+    .sub:first-of-type > summary{padding-top:2px}
+    .sub > summary::-webkit-details-marker{display:none}
+    .sub > summary::after{content:"";margin-left:auto;width:8px;height:8px;border-right:1.5px solid var(--moss);border-bottom:1.5px solid var(--moss);transform:translateY(-3px) rotate(45deg);transition:transform .2s ease}
+    .sub[open] > summary::after{transform:translateY(2px) rotate(-135deg)}
+    .sub > summary:hover h3{color:var(--forest)}
+    .sub > summary:focus-visible{outline:2px solid var(--link-line);outline-offset:2px;border-radius:4px}
+    .sub[open]{padding-bottom:40px}
+    .sub[open] > summary{padding-bottom:16px}
+    /* About */
+    .prose{line-height:1.8}
+    .prose p{margin:0 0 16px}
     .prose p:last-child{margin-bottom:0}
+    .prose strong{font-weight:600}
+    /* Never leave one word alone on the last line of a paragraph */
+    p{text-wrap:pretty}
 
     /* Papers */
     .papers{list-style:none;margin:0;padding:0}
-    .papers li{display:grid;gap:2px;padding:14px 0;border-top:1px solid var(--line)}
+    .papers li{display:grid;gap:4px;padding:20px 0;border-top:1px solid var(--line)}
     .papers li:first-child{border-top:0;padding-top:0}
-    .p-title{font-weight:500;color:var(--ink);line-height:1.4}
-    .p-authors{font-size:14.5px;color:var(--muted)}
-    .p-authors strong{font-weight:500}
+    .p-title{font:500 var(--fs-title)/1.35 var(--serif);font-variation-settings:"opsz" 18;color:var(--ink)}
+    .p-authors{font-size:var(--fs-small);color:var(--muted);line-height:1.65}
+    .p-authors strong{font-weight:600;color:var(--ink)}
     /* Small, subtle tags under each paper */
-    .p-tags{display:flex;flex-wrap:wrap;gap:5px;margin-top:4px}
+    .p-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
     /* Tags and chips: light by default; the venue tag is filled (see the colour rules) */
-    .topics li,.p-tags > *{font-size:12.5px;line-height:1.6;padding:0 8px;border:1px solid var(--line);border-radius:5px;background:none;color:var(--muted)}
-    .p-tags .venue{background:var(--venue);border-color:var(--venue);color:var(--venue-text);font-weight:500}
-    .p-tags a{color:var(--link)}
-    .p-tags a{text-decoration:none}
+    .topics li,.p-tags > *{font-size:var(--fs-tag);line-height:1.6;padding:0 8px;border:1px solid var(--line);border-radius:5px;background:var(--chip);color:var(--muted)}
+    .p-tags .venue{background:var(--venue);border-color:var(--venue);color:var(--venue-text);font-weight:600}
+    .p-tags a{color:var(--link);text-decoration:none}
     /* A tag that opens the paper gets an arrow */
     .p-tags a::after{content:"";display:inline-block;width:.78em;height:.78em;margin-left:3px;vertical-align:-.05em;background:currentColor;-webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M5 11L11 5M6.5 5H11V9.5' fill='none' stroke='black' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") no-repeat center/contain;mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M5 11L11 5M6.5 5H11V9.5' fill='none' stroke='black' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") no-repeat center/contain}
     .p-tags a:hover{text-decoration:none;color:var(--link-hover);border-color:var(--link-line)}
-    .p-tags .status{font-style:italic;background:none;border-color:transparent;color:var(--muted);padding-left:2px}
-    .p-authors strong{color:var(--ink)}
-    .p-note{font-size:14.5px;color:var(--muted)}
-    details summary{cursor:pointer;color:var(--link);font-size:14.5px}
+    .p-tags .status{font-style:italic;background:none;border-color:transparent;color:var(--warm);padding-left:2px}
+    .p-note{font-size:var(--fs-small);color:var(--muted);line-height:1.5}
+    details summary{cursor:pointer;color:var(--link);font-size:var(--fs-small)}
     details summary:hover{color:var(--ink)}
-    details .more{font-size:15px;color:var(--ink-2);margin-top:4px}
-    details .more p{margin:0 0 8px}
-    .coursework summary{font-style:italic}
+    details .more{font-size:var(--fs-small);color:var(--muted);line-height:1.5;margin-top:4px}
 
-    /* Rows: news, experience, education, awards, ... */
+    /* Lists (Experience, Awards, the Updates page, Writing): the entry on the
+       left, the date on the right, hairlines between */
     .rows{list-style:none;margin:0;padding:0}
-    /* Every list reads as a timeline: the date first, in one column of the same width */
-    .rows li{display:grid;grid-template-columns:136px minmax(0,1fr);gap:20px;align-items:baseline;padding:12px 0;border-top:1px solid var(--line)}
+    .rows li{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:24px;align-items:baseline;padding:18px 0;border-top:1px solid var(--line)}
     .rows li:first-child{border-top:0;padding-top:0}
-    .when{color:var(--ink);font-weight:500;font-size:13.5px;font-variant-numeric:tabular-nums;white-space:nowrap}
+    .rows .what{grid-column:1;grid-row:1}
+    .rows .when{grid-column:2;grid-row:1;text-align:right}
+    /* Every date on the page looks the same */
+    .when,.dates{font:italic 400 var(--fs-small)/1.5 var(--serif);color:var(--moss);white-space:nowrap}
     .what{min-width:0}
-    .what b{font-weight:500;color:var(--ink)}
-    .what .org{color:var(--muted)}
-    /* Education: the degree and the university each on their own line */
-    .what .role{display:block;color:var(--ink-2)}
-    .what .txt{display:block;font-size:15px;color:var(--muted);line-height:1.5}
-    .news .what{color:var(--ink-2)}
-    /* "All updates" under the latest three on the home page */
-    .all-updates{margin:16px 0 0;font-size:15px}
+    /* The name of a thing in a row is a title, in Newsreader */
+    .what b{font:500 var(--fs-title)/1.35 var(--serif);font-variation-settings:"opsz" 18;color:var(--ink)}
+    .what .txt{display:block;font-size:var(--fs-small);color:var(--muted);line-height:1.65;margin-top:1px}
+    .news .what{font:400 var(--fs-body)/1.75 var(--sans);color:var(--ink)}
+    /* A small label above each update: Award, Paper, Role, ... */
+    .news .kind{display:block;font:italic 400 var(--fs-small)/1.5 var(--serif);color:var(--moss);margin-bottom:1px}
+    /* Home page updates: the label on the left and the date on the right on
+       one italic moss line, the text full width under it, hairlines between. */
+    .news-feed{list-style:none;margin:0;padding:0}
+    .news-feed li{padding:20px 0;border-top:1px solid var(--line)}
+    .news-feed li:first-child{border-top:0;padding-top:0}
+    .news-feed .nf-meta{display:flex;justify-content:space-between;gap:16px;font:italic 400 var(--fs-small)/1.5 var(--serif);color:var(--moss);margin-bottom:5px}
+    .news-feed .nf-meta .when{margin-left:auto}
+    .news-feed p{margin:0;font-size:var(--fs-body);line-height:1.75;color:var(--ink)}
+    /* "All updates" under the newest three, in the italic note voice */
+    .all-updates{margin:22px 0 0;font:italic 400 var(--fs-small)/1.5 var(--serif)}
+    .all-updates a{color:var(--moss);text-decoration-color:var(--fern)}
+    .all-updates a:hover{color:var(--forest)}
+
+    /* Education: two quiet cards side by side, a shade lighter than the page with a hairline border */
+    .edu{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:16px}
+    .edu-card{display:flex;flex-direction:column;gap:3px;padding:20px 22px;border-radius:8px;background:var(--card);border:1px solid var(--card-line)}
+    .edu-card .degree{font:500 var(--fs-title)/1.35 var(--serif);font-variation-settings:"opsz" 18;color:var(--ink);margin-top:4px}
+    .edu-card .school,.edu-card .grade{font-size:var(--fs-small);color:var(--muted);line-height:1.5}
+    .edu-card details{margin-top:6px}
 
     /* Contact, last */
-    #contact p{margin:0 0 10px;color:var(--ink-2)}
+    #contact p{margin:0 0 10px}
     /* Social accounts as a small row of icons */
     #contact .social{display:flex;align-items:center;gap:14px;margin-top:6px}
     #contact .social span{margin-right:2px}
     #contact .social a{color:var(--muted);text-decoration:none;display:inline-flex}
     #contact .social a:hover{color:var(--link)}
     #contact .social .icon{width:19px;height:19px}
-    footer{margin-top:64px;padding:0 0 40px;color:var(--muted);font-size:13px}
-    /* One small leaf between your name and the update date. Nowhere else. */
-    footer .leaf{display:inline-block;width:11px;height:11px;margin:0 9px;vertical-align:-1px;background:var(--link-line);-webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M20 4C11 4 5 9 5 16c0 1 .1 1.9.4 2.7C6.9 13.8 10.6 10 15 8c-3.6 2.7-6.6 6.4-8.4 11.2.8.5 1.8.8 2.9.8C16 20 20 13 20 4z'/%3E%3C/svg%3E") no-repeat center/contain;mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M20 4C11 4 5 9 5 16c0 1 .1 1.9.4 2.7C6.9 13.8 10.6 10 15 8c-3.6 2.7-6.6 6.4-8.4 11.2.8.5 1.8.8 2.9.8C16 20 20 13 20 4z'/%3E%3C/svg%3E") no-repeat center/contain}
+    footer{margin-top:88px;padding:0 0 48px;color:var(--muted);font-size:var(--fs-tag)}
+    /* A flower for the month between your name and the update date
+       (Microsoft Fluent Emoji, MIT licence, see assets/img/flowers/LICENSE.txt) */
+    footer .flower{width:20px;height:20px;margin:0 10px;vertical-align:-5px}
+
+    /* Small hover touches, only on devices with a pointer */
+    @media (hover:hover){
+      /* The download arrow nudges down */
+      .cv-btn svg{transition:transform .2s ease}
+      .cv-btn:hover svg{transform:translateY(2px)}
+      /* Link icons warm up, social icons lift a little */
+      .side-links .icon{transition:color .15s}
+      .side-links a:hover .icon,.side-links button:hover .icon{color:var(--warm)}
+      #contact .social a{transition:transform .2s ease,color .15s}
+      #contact .social a:hover{transform:translateY(-2px)}
+      /* The footer flower sways */
+      footer .flower{transform-origin:50% 90%}
+      footer:hover .flower{animation:sway 1.4s ease-in-out}
+    }
+    @keyframes sway{0%,100%{transform:rotate(0)}30%{transform:rotate(-14deg)}65%{transform:rotate(9deg)}}
+    @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
 
     @media (max-width:760px){
       /* Phones: the tabs become one row you can swipe sideways */
       .bar .wrap{gap:6px;padding-right:10px}
-      .bar nav{flex:1;min-width:0;margin-left:-6px;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch;font-size:14px;gap:2px}
+      .bar nav{flex:1;min-width:0;margin-left:0;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch;gap:2px}
       .bar nav::-webkit-scrollbar{display:none}
       .bar nav{-webkit-mask-image:linear-gradient(to right,transparent,#000 10px,#000 calc(100% - 18px),transparent);mask-image:linear-gradient(to right,transparent,#000 10px,#000 calc(100% - 18px),transparent)}
       .bar nav a{flex:none;padding:4px 9px}
@@ -195,7 +291,9 @@
       .side{position:static;padding-top:20px;padding-bottom:6px}
       .photo{width:121px;height:121px}
       .side-links{display:flex;flex-wrap:wrap;gap:8px 18px}
+      /* Phones: the date goes under the entry */
       .rows li{grid-template-columns:1fr;gap:2px}
+      .rows .when{grid-column:1;grid-row:2;text-align:left}
     }
     @media (max-width:420px){.wrap,.layout{padding:0 16px}}
   </style>
@@ -204,8 +302,10 @@
 {%- assign posts = site.posts %}
 <header class="bar" id="top">
   <div class="wrap">
+    {%- assign home = '/' | relative_url %}
+    {%- assign name_parts = site.title | split: " " %}
+    <a class="home" href="{{ home }}#top" aria-label="Home">{{ name_parts.first | slice: 0 }}{{ name_parts.last | slice: 0 }}</a>
     <nav aria-label="Sections">
-      {%- assign home = '/' | relative_url %}
       <a href="{{ home }}#about">About</a>
       <a href="{{ home }}#updates">Updates</a>
       <a href="{{ home }}#research">Research</a>
@@ -221,7 +321,7 @@
 </header>
 
 {%- if site.cover %}
-<figure class="cover" style="margin-top:0;margin-bottom:0"><img src="{{ site.cover | relative_url }}" alt="Yosemite Valley from Tunnel View at sunset" style="object-position: {{ site.cover_position | default: 'center' | escape }};"><figcaption>Tunnel View, Yosemite, 30 August 2025</figcaption></figure>
+<figure class="cover"><img src="{{ site.cover | relative_url }}" alt="Yosemite Valley from Tunnel View at sunset" style="object-position: {{ site.cover_position | default: 'center' | escape }};"><figcaption>Tunnel View, Yosemite, 30 August 2025</figcaption></figure>
 {%- endif %}
 
 {%- comment -%} Links in the left column. These ones from _config.yml are left off. {%- endcomment -%}
@@ -246,10 +346,11 @@
 <main>
   {{ content }}
   <footer>
-    © {{ site.time | date: "%Y" }} {{ site.title }}<span class="leaf" aria-hidden="true"></span>Updated {{ site.time | date: "%B %Y" }}
+    © {{ site.time | date: "%Y" }} {{ site.title }}{%- assign flowers = "blossom|cherry-blossom|tulip|hibiscus|sunflower|rose|lotus|hyacinth|white-flower|rosette|bouquet|cherry-blossom" | split: "|" %}{% assign month_index = site.time | date: "%-m" | minus: 1 %}<img class="flower" src="{{ '/assets/img/flowers/' | relative_url }}{{ flowers[month_index] }}.svg" alt="" width="20" height="20" data-flowers="{{ flowers | join: ',' }}">Updated {{ site.time | date: "%B %Y" }}
   </footer>
 </main>
 </div>
+
 
 <script>
   (function () {
@@ -278,27 +379,73 @@
     // a tab of their own (Education, Projects, ...) light up the tab above them.
     var tabs = {};
     document.querySelectorAll(".bar nav a").forEach(function (a) { tabs[a.hash.slice(1)] = a; });
-    var sections = Array.prototype.slice.call(document.querySelectorAll("main section"));
+    var sections = Array.prototype.slice.call(document.querySelectorAll("section[id]"));
     var current = null;
+    var motion = root.classList.contains("js");
+    var nav = document.querySelector(".bar nav");
+    // The gliding pill behind the current tab (only when motion is welcome)
+    var pill = null;
+    if (motion) {
+      pill = document.createElement("span");
+      pill.className = "pill"; pill.setAttribute("aria-hidden", "true");
+      nav.insertBefore(pill, nav.firstChild);
+    }
+    function movePill(id) {
+      if (!pill) return;
+      var a = id && tabs[id];
+      if (!a) { pill.style.opacity = 0; return; }
+      pill.style.width = a.offsetWidth + "px";
+      pill.style.height = a.offsetHeight + "px";
+      pill.style.transform = "translate(" + a.offsetLeft + "px," + a.offsetTop + "px)";
+      pill.style.opacity = 1;
+    }
     function mark() {
       var line = innerHeight * 0.35, id = null;
       for (var i = 0; i < sections.length; i++) {
         if (sections[i].getBoundingClientRect().top <= line && tabs[sections[i].id]) id = sections[i].id;
       }
-      if (document.getElementById("contact") && innerHeight + scrollY >= document.documentElement.scrollHeight - 4) id = "contact";
+      if (innerHeight + scrollY >= root.scrollHeight - 4) id = "contact";
       if (id === current) return;
       current = id;
       Object.keys(tabs).forEach(function (k) { tabs[k].classList.toggle("on", k === id); });
+      movePill(id);
       // On phones the tab row scrolls sideways: keep the current tab in view
-      var nav = document.querySelector(".bar nav");
-      if (id && nav && nav.scrollWidth > nav.clientWidth) {
+      if (id && nav.scrollWidth > nav.clientWidth) {
         var a = tabs[id];
         nav.scrollTo({ left: a.offsetLeft - nav.offsetLeft - 12, behavior: "smooth" });
       }
     }
     addEventListener("scroll", mark, { passive: true });
-    addEventListener("resize", mark);
+    addEventListener("resize", function () { mark(); movePill(current); });
     mark();
+
+    // A link to something inside a folded subsection (e.g. /#experience) opens it
+    function openTarget() {
+      var el = location.hash && document.getElementById(decodeURIComponent(location.hash.slice(1)));
+      var d = el && el.closest("details.sub");
+      if (d && !d.open) { d.open = true; el.scrollIntoView(); }
+    }
+    addEventListener("hashchange", openTarget);
+    openTarget();
+
+    // The footer flower follows the visitor's month (January to December)
+    var flower = document.querySelector("footer .flower");
+    if (flower) {
+      var names = flower.getAttribute("data-flowers").split(",");
+      flower.src = flower.src.replace(/[^/]+\.svg$/, names[new Date().getMonth()] + ".svg");
+    }
+
+    // Section titles draw their rule the first time they come into view
+    if (motion) {
+      var io = new IntersectionObserver(function (es) {
+        es.forEach(function (e) {
+          if (!e.isIntersecting) return;
+          e.target.classList.add("seen");
+          io.unobserve(e.target);
+        });
+      }, { rootMargin: "0px 0px -12% 0px" });
+      document.querySelectorAll("main h2").forEach(function (el) { io.observe(el); });
+    }
   })();
 </script>
 </body>

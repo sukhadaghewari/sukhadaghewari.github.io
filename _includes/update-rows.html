@@ -1,10 +1,21 @@
 {%- comment -%}
-  A list of updates from _data/news.yml, newest first.
-  Use as {% include update-rows.html items=news limit=4 %}; leave out limit to show all.
+  Updates from _data/news.yml, newest first.
+  Use as {% include update-rows.html items=news limit=3 style="stacked" %}.
+  Leave out limit to show all. style="stacked" is the home page look (no date
+  column); without it they are a dated list (the Updates page).
 {%- endcomment -%}
 {%- assign n = include.limit | default: include.items.size %}
-<ul class="rows news">
+{%- if include.style == "stacked" %}
+{%- comment -%} Home page: the label left and the date right on one italic line, the text full width under it. {%- endcomment -%}
+<ul class="news-feed">
   {%- for e in include.items limit: n %}
-  <li><span class="when">{% if e.date.size > 4 %}{{ e.date | append: "-01" | date: "%b %Y" }}{% else %}{{ e.date }}{% endif %}</span><span class="what">{{ e.text | markdownify | remove: "<p>" | remove: "</p>" | strip }}</span></li>
+  <li><div class="nf-meta">{% if e.kind %}<span class="kind">{{ e.kind }}</span>{% endif %}<span class="when">{% if e.date.size > 4 %}{{ e.date | append: "-01" | date: "%b %Y" }}{% else %}{{ e.date }}{% endif %}</span></div><p>{{ e.text | markdownify | remove: "<p>" | remove: "</p>" | strip }}</p></li>
   {%- endfor %}
 </ul>
+{%- else %}
+<ul class="rows news">
+  {%- for e in include.items limit: n %}
+  <li><span class="when">{% if e.date.size > 4 %}{{ e.date | append: "-01" | date: "%b %Y" }}{% else %}{{ e.date }}{% endif %}</span><span class="what">{% if e.kind %}<span class="kind">{{ e.kind }}</span>{% endif %}{{ e.text | markdownify | remove: "<p>" | remove: "</p>" | strip }}</span></li>
+  {%- endfor %}
+</ul>
+{%- endif %}
