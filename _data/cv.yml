@@ -9,7 +9,10 @@
 # Each entry:
 #   title:   the role, degree, competition or award
 #   org:     where, e.g. "TCS Research, Pune" (optional). In Experience
-#            and Education the org comes first, with the title under it.
+#            the role comes first with the org under it; in Education
+#            the degree comes first with the school under it.
+#   area:    the field, shown in brackets after the org, e.g.
+#            "Healthcare AI" (optional)
 #   dates:   "Sep 2021 – Mar 2023", "Jan 2019" or "Jul 2026 – present", in quotes
 #   text:    one or two sentences in grey (optional). Links work as usual:
 #            [*Project page*](https://...){:target="_blank" rel="noopener"}
@@ -19,11 +22,13 @@
 
 - section: Experience
   entries:
-    - org: "Independent researcher"
-      title: "Climate and AI, ML for Predicting Tropical Cyclone Rapid Intensification"
+    - org: "Tropical cyclone rapid intensification"
+      title: "Independent Researcher"
+      area: "Climate and AI"
       dates: "Jul 2026 – present"
     - org: "Oracle"
-      title: "Software Engineer 2, Healthcare AI"
+      title: "Software Engineer 2"
+      area: "Healthcare AI"
       dates: "May 2023 – Dec 2025"
     - org: "Oracle"
       title: "Software Development Intern"
@@ -32,10 +37,12 @@
       title: "Graduate Student Researcher"
       dates: "Oct 2021 – Jun 2022"
     - org: "TCS Research, Pune"
-      title: "Researcher, Machine Learning and Cybersecurity"
+      title: "Researcher"
+      area: "Machine Learning and Cybersecurity"
       dates: "Jul 2019 – May 2021"
     - org: "AlgoAnalytics"
-      title: "Intern, Machine Learning for Healthcare"
+      title: "Data Science Intern"
+      area: "Machine Learning for Healthcare"
       dates: "Jan 2019 – Jul 2019"
 
 - section: Education

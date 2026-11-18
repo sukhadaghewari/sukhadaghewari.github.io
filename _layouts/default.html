@@ -79,7 +79,8 @@
     </nav>
     {%- if show_cover %}
     {%- capture cover_style %}style="object-position: {{ site.cover_position | default: 'center' | escape }};"{% endcapture %}
-    <div class="site-cover"><img src="{{ site.cover | relative_url }}" alt="" {{ cover_style }}></div>
+    {% capture cover_srcset %}{% for c in site.cover_webp %}{{ site.baseurl }}{{ c }}{% unless forloop.last %}, {% endunless %}{% endfor %}{% endcapture %}
+    <div class="site-cover"><picture>{% if site.cover_webp %}<source type="image/webp" srcset="{{ cover_srcset }}" sizes="(min-width: 60rem) 60rem, 100vw">{% endif %}<img src="{{ site.cover | relative_url }}" alt="" {{ cover_style }}></picture></div>
     {%- endif %}
     {%- if page_kind == "is-post" %}
     {%- include post-rail.html %}

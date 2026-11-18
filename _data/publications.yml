@@ -31,8 +31,10 @@
 #   note:      one short line under the tags, e.g. a related patent.
 #              "Accepted" or "Accepted, to appear" becomes a small
 #              italic tag instead.
-#   selected, summary: not shown on the site right now. Kept so a
-#              short description is ready if you want one later.
+#   bibtex:    your own BibTeX for the BibTeX tag, after "bibtex: |".
+#              Without it, one is written from the fields above.
+#   summary:   three or four plain sentences, at most four lines on the
+#              page. A Summary tag opens it under the paper.
 # ---------------------------------------------------------------
 
 - title: "Can Multimodal LLMs Predict Rapid Intensification? A Leakage-Controlled Zero-Shot Benchmark for Tropical Cyclones"
@@ -41,11 +43,12 @@
   host: "WACV"
   year: 2027
   note: "Accepted, to appear"
-  selected: true
-  summary: |
-    We wanted to know whether off-the-shelf multimodal LLMs can predict rapid intensification without any training. We gave six commercial models the recent history of 140 storms, along with environmental data and infrared satellite images, and removed names, dates and locations so they couldn't simply remember what happened.
-
-    The best model did two to three times better than chance. The satellite images didn't clearly help, though, and a plain XGBoost model trained on older storms still beat every LLM.
+  summary: >-
+    A leakage-controlled, zero-shot benchmark asking whether multimodal LLMs
+    can predict rapid intensification (a 30+ kt rise in winds within 24 h). Six
+    commercial models saw 140 anonymized storms with environmental data, with
+    and without infrared imagery. The best reached 0.34 AUPRC (3x no-skill),
+    but images didn't clearly help and a trained XGBoost scored 0.44.
 
 - title: "Tropical Cyclone Rapid Intensification (RI) Prediction using Machine Learning"
   authors: [Sukhada Ghewari, Adway Mitra]
@@ -54,9 +57,12 @@
   host: "NeurIPS"
   year: 2026
   note: "Accepted, to appear"
-  selected: true
-  summary: |
-    A hands-on notebook that walks through predicting rapid intensification from start to finish, using real storm tracks, satellite images and reanalysis data. It shows how to treat RI as the rare event it is, build features a forecaster can make sense of, and check whether a model can really be trusted. The hope is to give forecasters more time to prepare before a storm suddenly strengthens.
+  summary: >-
+    A hands-on notebook that teaches rapid intensification prediction end to
+    end, with IBTrACS storm tracks, ERA5 reanalysis and satellite imagery. Its
+    pedagogy builds one idea at a time, from framing RI as a rare-event
+    problem, to features a forecaster can read, to checking whether a model
+    can be trusted on storms it has never seen.
 
 - title: "Which Information Matters for Rapid Intensification of Tropical Cyclones? A Global-Basin Feature Ablation Study"
   authors: [Sukhada Ghewari, Shardul Deshpande]
@@ -74,3 +80,9 @@
   year: 2021
   url: "https://ieeexplore.ieee.org/abstract/document/9738769"
   note: "This work also led to a patent granted in India (Patent No. 560163)."
+  summary: >-
+    Domain squatting means registering lookalike web addresses to fool people
+    into trusting them. We studied how it is used against online banking, and
+    built a domain name generation algorithm, a context-free grammar combined
+    with unsupervised learning, that predicts lookalike domains so banks can
+    register them defensively before attackers do.

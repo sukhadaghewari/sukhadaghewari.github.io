@@ -25,6 +25,12 @@
   <meta property="og:image" content="{{ site.photo | absolute_url }}">
   <meta name="twitter:card" content="summary">
   {%- endif %}
+  {%- if page.url == "/" %}
+  {%- comment -%} Tells search engines who this site is about, so your name links up with your other profiles. {%- endcomment %}
+  <script type="application/ld+json">
+    {"@context":"https://schema.org","@type":"Person","name":{{ site.title | jsonify }},"url":{{ '/' | absolute_url | jsonify }},{% if site.photo %}"image":{{ site.photo | absolute_url | jsonify }},{% endif %}"description":{{ site.tagline | jsonify }},"knowsAbout":{{ site.topics | jsonify }},"sameAs":{{ site.links | map: "url" | jsonify }}}
+  </script>
+  {%- endif %}
   <link rel="alternate" type="application/atom+xml" title="{{ site.title | escape }}" href="{{ '/feed.xml' | relative_url }}">
   <link rel="icon" href="{{ '/assets/favicon.svg' | relative_url }}" type="image/svg+xml">
   <script>
@@ -32,6 +38,7 @@
       var t; try { t = localStorage.getItem("theme"); } catch (e) {}
       if (t !== "light" && t !== "dark") t = matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
       document.documentElement.setAttribute("data-theme", t);
+      document.documentElement.classList.add("script");
       // Motion (the gliding tab, the rules drawing in) only when scripts run and motion is welcome
       if (!matchMedia("(prefers-reduced-motion: reduce)").matches && "IntersectionObserver" in window) document.documentElement.classList.add("js");
     })();
@@ -64,8 +71,8 @@
          21    Section   Newsreader 400, forest     About, Updates, Research, ...
          16    Title     Newsreader 500, ink        papers, places, degrees, awards
                Subsection  Newsreader italic, moss  Publications, Experience, ...
-         14.5  Body      Figtree 400, ink           sentences: About, Contact, updates
-         13    Small     Figtree 400, muted         authors, roles, schools, links,
+         15    Body      Figtree 400, ink           sentences: About, Contact, updates
+         13.5  Small     Figtree 400, muted         authors, roles, schools, links,
                                                     tabs, buttons (600)
                Note      Newsreader italic, moss    dates, update labels
          11.5  Tag       Figtree 400, muted         tags, footer
@@ -79,12 +86,12 @@
       --link:var(--sage-700); --link-hover:var(--sage-900); --link-line:var(--sage-300);
       --venue:var(--sage-700); --venue-text:var(--paper);
       --warm:#A9502F; /* 5.0 */ --warm-soft:rgba(169,80,47,.15);
-      --card:#FCFBF8; --card-line:#E2DED5; --chip:#F0EEE7; /* tag fill, a shade under the page */
+      --card:#FCFBF8; --card-line:#E2DED5; --chip:#FFFFFF; /* tag fill, white on the cream page */
       --forest:#1E3823; /* 11.9 name and section titles */
       --moss:#4E7355;   /* 5.0  subsection titles, dates, labels */
       --fern:var(--sage-300);
       /* Six sizes, nothing in between (see TYPE RULES) */
-      --fs-name:30px; --fs-section:21px; --fs-title:16px; --fs-body:14.5px; --fs-small:13px; --fs-tag:11.5px;
+      --fs-name:30px; --fs-section:21px; --fs-title:16px; --fs-body:15px; --fs-small:13.5px; --fs-tag:11.5px;
       --serif:"Newsreader",Georgia,serif; --sans:"Figtree",-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
     }
     :root[data-theme="dark"]{
@@ -98,7 +105,7 @@
       --link:var(--sage-200); --link-hover:var(--sage-100); --link-line:var(--sage-600);
       --venue:#4C6E52; --venue-text:#F0F6F0; /* 5.6 */
       --warm:#E0A386; /* 7.4 */ --warm-soft:rgba(224,163,134,.24);
-      --card:#2C302B; --card-line:#4A5047; --chip:#2E322C;
+      --card:#2C302B; --card-line:#4A5047; --chip:transparent; /* dark: tags are outlines only */
       --forest:#DCECDE; /* 13.0 */ --moss:#AECAB1; /* 9.2 */
       --fern:#5A745E;
     }
@@ -109,12 +116,12 @@
     a{color:var(--link);text-decoration:none}
     main a{text-decoration:underline;text-decoration-color:var(--link-line);text-decoration-thickness:1px;text-underline-offset:3px}
     a:hover{color:var(--link-hover);text-decoration-color:currentColor}
-    .wrap{max-width:46rem;margin:0 auto;padding:0 24px}
+    .wrap{max-width:60rem;margin:0 auto;padding:0 24px}
 
     /* Top bar */
     .bar{position:sticky;top:0;z-index:10;background:var(--paper);border-bottom:1px solid transparent}
     .bar.scrolled{border-bottom-color:var(--line)}
-    .bar .wrap{max-width:60rem;display:flex;align-items:center;gap:22px;height:58px}
+    .bar .wrap{display:flex;align-items:center;gap:22px;height:58px}
     /* Home: your initials on a sage tile, top left */
     .home{flex:none;display:grid;place-items:center;width:34px;height:34px;border-radius:9px;background:var(--venue);color:var(--venue-text);font:italic 500 var(--fs-title)/1 var(--serif);letter-spacing:.02em}
     .home:hover{color:var(--venue-text);filter:brightness(1.1)}
@@ -132,6 +139,7 @@
     :root[data-theme="dark"] .theme .moon,:root[data-theme="light"] .theme .sun{display:none}
 
     /* The cover photo: a short eased fade at the bottom and sides, so there is no milky band */
+    picture{display:contents}
     .cover{position:relative;max-width:60rem;margin:0 auto;height:200px;overflow:hidden}
     .cover img{width:100%;height:100%;object-fit:cover;display:block;
       -webkit-mask-image:linear-gradient(to bottom,#000 74%,rgba(0,0,0,.7) 86%,rgba(0,0,0,.3) 94%,transparent 100%),linear-gradient(to right,transparent,#000 3%,#000 97%,transparent);-webkit-mask-composite:source-in;
@@ -144,7 +152,9 @@
     .layout{max-width:60rem;margin:0 auto;padding:0 24px;display:grid;grid-template-columns:256px minmax(0,1fr);gap:44px;align-items:start}
     .layout > main{min-width:0;max-width:44rem}
     .side{position:sticky;top:76px;padding-top:36px;display:grid;gap:12px;justify-items:start}
-    .photo{width:145px;height:145px;border-radius:50%;object-fit:cover;margin:0 0 4px}
+    /* Your photo, a soft-cornered square, zoomed in a little so you sit in the middle */
+    picture.photo{display:block;width:196px;height:196px;border-radius:14px;overflow:hidden;margin:0 0 4px}
+    .photo img{display:block;width:100%;height:100%;object-fit:cover;object-position:center 30%;transform:scale(1.15);transform-origin:100% 38%}
     /* Headings in Newsreader, forest green */
     h1,h2{font-family:var(--serif);font-weight:400;color:var(--forest)}
     h1{font-size:var(--fs-name);line-height:1.15;letter-spacing:-.01em;font-variation-settings:"opsz" 72;margin:2px 0 0;white-space:nowrap}
@@ -197,9 +207,10 @@
 
     /* Papers */
     .papers{list-style:none;margin:0;padding:0}
-    .papers li{display:grid;gap:4px;padding:20px 0;border-top:1px solid var(--line)}
+    .papers li{position:relative;isolation:isolate;display:grid;gap:4px;padding:20px 0;border-top:1px solid var(--line)}
     .papers li:first-child{border-top:0;padding-top:0}
-    .p-title{font:500 var(--fs-title)/1.35 var(--serif);font-variation-settings:"opsz" 18;color:var(--ink)}
+    /* The name of a thing (a paper, a role, a degree) is a title in Newsreader */
+    .p-title,.bib-title,.what b,.edu-card .degree{font:500 var(--fs-title)/1.35 var(--serif);font-variation-settings:"opsz" 18;color:var(--ink)}
     .p-authors{font-size:var(--fs-small);color:var(--muted);line-height:1.65}
     .p-authors strong{font-weight:600;color:var(--ink)}
     /* Small, subtle tags under each paper */
@@ -207,12 +218,40 @@
     /* Tags and chips: light by default; the venue tag is filled (see the colour rules) */
     .topics li,.p-tags > *{font-size:var(--fs-tag);line-height:1.6;padding:0 8px;border:1px solid var(--line);border-radius:5px;background:var(--chip);color:var(--muted)}
     .p-tags .venue{background:var(--venue);border-color:var(--venue);color:var(--venue-text);font-weight:600}
-    .p-tags a{color:var(--link);text-decoration:none}
-    /* A tag that opens the paper gets an arrow */
-    .p-tags a::after{content:"";display:inline-block;width:.78em;height:.78em;margin-left:3px;vertical-align:-.05em;background:currentColor;-webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M5 11L11 5M6.5 5H11V9.5' fill='none' stroke='black' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") no-repeat center/contain;mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M5 11L11 5M6.5 5H11V9.5' fill='none' stroke='black' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") no-repeat center/contain}
-    .p-tags a:hover{text-decoration:none;color:var(--link-hover);border-color:var(--link-line)}
+    /* Tags you can click (a link, Summary, BibTeX) are green */
+    .p-tags a,.p-tags button{color:var(--link);text-decoration:none;font-family:inherit;cursor:pointer}
+    .p-tags a:hover,.p-tags button:hover{color:var(--link-hover);border-color:var(--link-line)}
+    /* A tag that opens a page (like the paper) gets a small diagonal arrow */
+    .p-tags a::after{--arrow:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M5 11L11 5M6.5 5H11V9.5' fill='none' stroke='black' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") no-repeat center/contain;content:"";display:inline-block;width:.78em;height:.78em;margin-left:3px;vertical-align:-.05em;background:currentColor;-webkit-mask:var(--arrow);mask:var(--arrow)}
+    /* The BibTeX tag opens a small panel with the entry and a Copy button */
+    dialog.bib{width:min(620px,calc(100vw - 32px));padding:0;border:1px solid var(--card-line);border-radius:14px;background:var(--card);color:var(--ink);box-shadow:0 24px 60px rgba(20,28,22,.18)}
+    dialog.bib::backdrop{background:rgba(20,28,22,.32)}
+    :root[data-theme="dark"] dialog.bib::backdrop{background:rgba(0,0,0,.55)}
+    .bib-head{display:flex;align-items:flex-start;gap:16px;padding:18px 20px 14px;border-bottom:1px solid var(--line)}
+    .bib-title{margin:0}
+    .bib-close{flex:none;margin-left:auto;padding:4px;border:0;background:none;color:var(--muted);cursor:pointer;display:grid;place-items:center;border-radius:5px}
+    .bib-close:hover{color:var(--ink)}
+    .bib-code{margin:0;padding:16px 20px;max-height:50vh;overflow:auto;white-space:pre-wrap;overflow-wrap:anywhere;font:400 var(--fs-tag)/1.7 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;color:var(--ink)}
+    .bib-copy{display:flex;justify-content:center;align-items:center;gap:8px;width:calc(100% - 40px);margin:0 20px 20px;padding:7px 13px;border-radius:5px;background:var(--venue);border:1px solid var(--venue);color:var(--venue-text);font:600 var(--fs-small)/1.4 var(--sans);cursor:pointer}
+    .bib-copy:hover{filter:brightness(1.08)}
     .p-tags .status{font-style:italic;background:none;border-color:transparent;color:var(--warm);padding-left:2px}
     .p-note{font-size:var(--fs-small);color:var(--muted);line-height:1.5}
+    /* A short summary under each paper. With scripts on, it starts closed and
+       the Summary tag (or a click anywhere on the row) opens it. */
+    .p-sum{margin:6px 0 0;font-size:var(--fs-small);line-height:1.65;color:var(--muted)}
+    .p-tags .sum-btn{display:none;align-items:center;gap:6px}
+    .p-tags .sum-btn::after{content:"";width:5px;height:5px;border-right:1.3px solid currentColor;border-bottom:1.3px solid currentColor;transform:translateY(-2px) rotate(45deg);transition:transform .2s ease}
+    .p-tags .sum-btn[aria-expanded="true"]::after{transform:translateY(1px) rotate(-135deg)}
+    .script .p-tags .sum-btn{display:inline-flex}
+    .script .p-sum{display:none}
+    .script .p-sum.open{display:block}
+    /* A faint tint behind the paper under the pointer */
+    @media (hover:hover){
+      .script .papers li.has-sum{cursor:pointer}
+      .papers li.has-sum::before{content:"";position:absolute;inset:0 -14px;border-radius:8px;background:color-mix(in srgb,var(--ink) 3.5%,transparent);opacity:0;transition:opacity .2s ease;z-index:-1}
+      .papers li.has-sum:first-child::before{top:-14px}
+      .script .papers li.has-sum:hover::before{opacity:1}
+    }
     details summary{cursor:pointer;color:var(--link);font-size:var(--fs-small)}
     details summary:hover{color:var(--ink)}
     details .more{font-size:var(--fs-small);color:var(--muted);line-height:1.5;margin-top:4px}
@@ -227,8 +266,6 @@
     /* Every date on the page looks the same */
     .when,.dates{font:italic 400 var(--fs-small)/1.5 var(--serif);color:var(--moss);white-space:nowrap}
     .what{min-width:0}
-    /* The name of a thing in a row is a title, in Newsreader */
-    .what b{font:500 var(--fs-title)/1.35 var(--serif);font-variation-settings:"opsz" 18;color:var(--ink)}
     .what .txt{display:block;font-size:var(--fs-small);color:var(--muted);line-height:1.65;margin-top:1px}
     .news .what{font:400 var(--fs-body)/1.75 var(--sans);color:var(--ink)}
     /* A small label above each update: Award, Paper, Role, ... */
@@ -249,26 +286,35 @@
     /* Education: two quiet cards side by side, a shade lighter than the page with a hairline border */
     .edu{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:16px}
     .edu-card{display:flex;flex-direction:column;gap:3px;padding:20px 22px;border-radius:8px;background:var(--card);border:1px solid var(--card-line)}
-    .edu-card .degree{font:500 var(--fs-title)/1.35 var(--serif);font-variation-settings:"opsz" 18;color:var(--ink);margin-top:4px}
+    .edu-card .degree{margin-top:4px}
     .edu-card .school,.edu-card .grade{font-size:var(--fs-small);color:var(--muted);line-height:1.5}
     .edu-card details{margin-top:6px}
 
     /* Contact, last */
     #contact p{margin:0 0 10px}
+    /* Your address in green, with a small green copy icon beside it that turns into a tick */
+    #contact .mail{color:var(--link)}
+    #contact .copy-mail{display:inline-grid;place-items:center;margin-left:2px;padding:2px;vertical-align:-2px;border:0;background:none;color:var(--link);cursor:pointer}
+    #contact .copy-mail:hover{color:var(--link-hover)}
+    #contact .copy-mail .i-done,#contact .copy-mail.copied .i-copy{display:none}
+    #contact .copy-mail.copied .i-done{display:block}
     /* Social accounts as a small row of icons */
-    #contact .social{display:flex;align-items:center;gap:14px;margin-top:6px}
+    #contact .social{display:flex;align-items:center;gap:12px;margin-top:6px}
     #contact .social span{margin-right:2px}
+    /* Each icon in its own brand colour; X is black, or white in dark mode */
     #contact .social a{color:var(--muted);text-decoration:none;display:inline-flex}
-    #contact .social a:hover{color:var(--link)}
-    #contact .social .icon{width:19px;height:19px}
+    #contact .social a[aria-label="LinkedIn"]{color:#0A66C2}
+    #contact .social a[aria-label="X"]{color:var(--ink)}
+    #contact .social a[aria-label="Bluesky"]{color:#1185FE}
+    #contact .social a:hover{filter:brightness(1.12)}
+    #contact .social .icon{width:16px;height:16px}
     footer{margin-top:84px;padding:0 0 48px;color:var(--muted);font-size:var(--fs-tag)}
     /* A small nature icon for the month between your name and the update date
        (Google Noto Emoji, Apache 2.0, see assets/img/months/LICENSE.txt) */
-    footer .month{width:20px;height:20px;margin:0 10px;vertical-align:-5px}
-    /* Hover the icon: it lifts a little, and "Hello November" fades in above it in a thin grey outline bubble */
+    footer .month{width:20px;height:20px;margin:0 10px;vertical-align:-5px;transition:transform .4s cubic-bezier(.22,.61,.36,1)}
+    /* Hover the icon: it lifts a little, and "Hello November!" fades in above it as an italic note, like the dates */
     footer .month-wrap{position:relative;display:inline-block}
-    footer .month{transition:transform .4s cubic-bezier(.22,.61,.36,1)}
-    footer .hello{position:absolute;left:50%;bottom:calc(100% + 8px);white-space:nowrap;padding:3px 10px;border:1px solid color-mix(in srgb,var(--muted) 45%,transparent);border-radius:999px;background:var(--paper);color:var(--ink);font-size:var(--fs-tag);opacity:0;pointer-events:none;
+    footer .hello{position:absolute;left:50%;bottom:calc(100% + 8px);white-space:nowrap;font:italic 400 var(--fs-small)/1.3 var(--serif);color:var(--warm);opacity:0;pointer-events:none;
       transform:translate(-50%,4px);transition:opacity .35s ease,transform .45s cubic-bezier(.22,.61,.36,1)}
     footer .month-wrap:hover .hello{opacity:1;transform:translate(-50%,0)}
 
@@ -277,10 +323,11 @@
       /* The download arrow nudges down */
       .cv-btn svg{transition:transform .2s ease}
       .cv-btn:hover svg{transform:translateY(2px)}
-      /* Link icons warm up, social icons lift a little */
-      .side-links .icon{transition:color .15s}
-      .side-links a:hover .icon,.side-links button:hover .icon{color:var(--warm)}
-      #contact .social a{transition:transform .2s ease,color .15s}
+      /* Link icons rise a little with a soft shadow; social icons lift too */
+      .side-links .icon{transition:transform .2s ease,filter .2s ease}
+      .side-links a:hover .icon,.side-links button:hover .icon{transform:translateY(-2px);filter:drop-shadow(0 3px 2px rgba(30,40,30,.22))}
+      :root[data-theme="dark"] .side-links a:hover .icon,:root[data-theme="dark"] .side-links button:hover .icon{filter:drop-shadow(0 3px 2px rgba(0,0,0,.5))}
+      #contact .social a{transition:transform .2s ease,filter .15s}
       #contact .social a:hover{transform:translateY(-2px)}
       /* The footer icon lifts gently */
       footer .month-wrap:hover .month{transform:translateY(-2px) scale(1.08)}
@@ -298,7 +345,7 @@
       .cover{height:150px}
       .layout{grid-template-columns:1fr;gap:0}
       .side{position:static;padding-top:20px;padding-bottom:6px}
-      .photo{width:121px;height:121px}
+      picture.photo{width:152px;height:152px;border-radius:12px}
       .side-links{display:flex;flex-wrap:wrap;gap:8px 18px}
       /* Phones: the date goes under the entry */
       .rows li{grid-template-columns:1fr;gap:2px}
@@ -330,14 +377,14 @@
 </header>
 
 {%- if site.cover %}
-<figure class="cover"><img src="{{ site.cover | relative_url }}" alt="Yosemite Valley from Tunnel View at sunset" style="object-position: {{ site.cover_position | default: 'center' | escape }};"><figcaption>Tunnel View, Yosemite, 30 August 2025</figcaption></figure>
+{% capture cover_srcset %}{% for c in site.cover_webp %}{{ site.baseurl }}{{ c }}{% unless forloop.last %}, {% endunless %}{% endfor %}{% endcapture %}<figure class="cover"><picture>{% if site.cover_webp %}<source type="image/webp" srcset="{{ cover_srcset }}" sizes="(min-width: 60rem) 60rem, 100vw">{% endif %}<img src="{{ site.cover | relative_url }}" alt="Yosemite Valley from Tunnel View at sunset" style="object-position: {{ site.cover_position | default: 'center' | escape }};"></picture><figcaption>Tunnel View, Yosemite, 30 August 2025</figcaption></figure>
 {%- endif %}
 
 {%- comment -%} Links in the left column. These ones from _config.yml are left off. {%- endcomment -%}
 {%- assign hidden_links = "OpenReview|Bluesky|X" | split: "|" %}
 <div class="layout">
 <aside class="side">
-  {%- if site.photo %}<img class="photo" src="{{ site.photo | relative_url }}" alt="Photo of {{ site.title | escape }}">{% endif %}
+  {%- if site.photo %}<picture class="photo">{% if site.photo_webp %}<source type="image/webp" srcset="{{ site.photo_webp | relative_url }}">{% endif %}<img src="{{ site.photo | relative_url }}" alt="Photo of {{ site.title | escape }}" width="196" height="196"></picture>{% endif %}
   <h1>{{ site.title }}</h1>
   <p class="tagline">{{ site.tagline }}</p>
   {%- if site.topics %}
@@ -360,6 +407,11 @@
 </main>
 </div>
 
+<dialog class="bib" id="bib" aria-labelledby="bib-title">
+  <div class="bib-head"><p class="bib-title" id="bib-title"></p><button class="bib-close" type="button" aria-label="Close"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div>
+  <pre class="bib-code" id="bib-code"></pre>
+  <button class="bib-copy" type="button">Copy BibTeX</button>
+</dialog>
 
 <script>
   (function () {
@@ -371,19 +423,68 @@
     });
     var bar = document.querySelector(".bar");
     addEventListener("scroll", function () { bar.classList.toggle("scrolled", scrollY > 8); }, { passive: true });
+    // Copies text, then calls done; calls fail if the browser won't allow it
+    function copyText(text, done, fail) {
+      if (navigator.clipboard) navigator.clipboard.writeText(text).then(done, fail);
+      else if (fail) fail();
+    }
+    // Email in the sidebar copies your address (or opens mail if copying isn't allowed)
     document.querySelectorAll(".copy").forEach(function (copy) {
       copy.addEventListener("click", function () {
         var li = copy.parentNode, addr = li.querySelector(".addr"), email = copy.getAttribute("data-email");
-        function done() {
-          if (!addr) return;
+        copyText(email, function () {
           addr.textContent = "Copied to clipboard";
           li.classList.add("copied");
           setTimeout(function () { addr.textContent = email; li.classList.remove("copied"); }, 1800);
-        }
-        if (navigator.clipboard) navigator.clipboard.writeText(email).then(done, function () { location.href = "mailto:" + email; });
-        else location.href = "mailto:" + email;
+        }, function () { location.href = "mailto:" + email; });
       });
     });
+    // Summary tags open the summary under their paper; so does a click on the row
+    function toggleSummary(b) {
+      var open = b.getAttribute("aria-expanded") !== "true";
+      b.setAttribute("aria-expanded", open);
+      document.getElementById(b.getAttribute("aria-controls")).classList.toggle("open", open);
+    }
+    document.querySelectorAll(".p-tags .sum-btn").forEach(function (b) {
+      b.addEventListener("click", function () { toggleSummary(b); });
+    });
+    document.querySelectorAll(".papers li.has-sum").forEach(function (li) {
+      li.addEventListener("click", function (e) {
+        if (e.target.closest("a,button") || String(getSelection()).length) return;
+        toggleSummary(li.querySelector(".sum-btn"));
+      });
+    });
+    // Copy beside the address in Contact
+    document.querySelectorAll(".copy-mail").forEach(function (b) {
+      b.addEventListener("click", function () {
+        copyText(b.getAttribute("data-email"), function () {
+          b.classList.add("copied"); b.setAttribute("aria-label", "Copied"); b.title = "Copied";
+          setTimeout(function () { b.classList.remove("copied"); b.setAttribute("aria-label", "Copy email address"); b.title = "Copy email address"; }, 1800);
+        });
+      });
+    });
+    // BibTeX opens a panel with the paper's entry and a Copy button.
+    // The cross, Esc or a click outside closes it.
+    var dlg = document.getElementById("bib"), bibCode = document.getElementById("bib-code"),
+        bibTitle = document.getElementById("bib-title"), bibCopy = dlg.querySelector(".bib-copy"), bibTimer;
+    document.querySelectorAll(".cite").forEach(function (b) {
+      b.addEventListener("click", function () {
+        var bib = b.getAttribute("data-bib");
+        if (!dlg.showModal) { copyText(bib, function () {}); return; } // very old browsers: just copy
+        bibTitle.textContent = b.closest("li").querySelector(".p-title").textContent;
+        bibCode.textContent = bib;
+        clearTimeout(bibTimer); bibCopy.textContent = "Copy BibTeX";
+        dlg.showModal();
+      });
+    });
+    bibCopy.addEventListener("click", function () {
+      copyText(bibCode.textContent, function () {
+        bibCopy.textContent = "Copied ✓";
+        bibTimer = setTimeout(function () { bibCopy.textContent = "Copy BibTeX"; }, 1800);
+      });
+    });
+    dlg.querySelector(".bib-close").addEventListener("click", function () { dlg.close(); });
+    dlg.addEventListener("click", function (e) { if (e.target === dlg) dlg.close(); });
     // Highlight the tab for the section you're reading. Sections without
     // a tab of their own (Education, Projects, ...) light up the tab above them.
     var tabs = {};

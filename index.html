@@ -10,7 +10,7 @@ permalink: /
     <h2>About</h2>
     <div class="prose">
       <p>I am an applied machine learning researcher and engineer working on climate, Earth observation, and health. Right now I work on extreme weather prediction, focusing on tropical cyclones, early warning, and satellite imagery. I like finding out whether an idea actually works, then building it into something people use, which is what draws me to applied interdisciplinary research.</p>
-      <p>I did my MS in Computer Science at UC San Diego and am now based in India. Before this, I built LLM systems for healthcare at Oracle and machine learning for cybersecurity at TCS Research. I also have a background in clinical NLP and AI fairness. <strong>I am currently applying to PhD programs and I am also open to research&nbsp;roles.</strong></p>
+      <p>I did my MS in Computer Science at UC San Diego and am now based in India. Before this, I built LLM systems for healthcare at Oracle and machine learning for cybersecurity at TCS Research. I also have a background in clinical NLP and AI fairness.<br><strong>I am currently applying to PhD programs and I am also open to research&nbsp;roles.</strong></p>
     </div>
   </section>
 
@@ -23,6 +23,9 @@ permalink: /
     {%- endif %}
   </section>
 
+  {%- comment -%} Used to write each paper's BibTeX (see below). {%- endcomment -%}
+  {%- assign lb = "{" %}{% assign rb = "}" %}
+  {%- assign stop = "a,an,the,can,which,when,what,how,on,of,for,in,to,using,is,are,do,does" | split: "," %}
   {%- assign papers = "" | split: "" %}
   {%- assign others = "" | split: "" %}
   {%- for p in site.data.publications %}
@@ -39,15 +42,28 @@ permalink: /
     <summary><h3 id="{{ g | slugify }}">{{ g }}</h3></summary>
     <ul class="papers">
       {%- for p in items %}
-      <li>
+      {%- assign sum_id = p.title | slugify | truncate: 40, "" | prepend: "sum-" %}
+      <li{% if p.summary %} class="has-sum"{% endif %}>
         <span class="p-title">{{ p.title }}</span>
         <span class="p-authors">{% for a in p.authors %}{% if a == site.title %}<strong>{{ a }}</strong>{% else %}{{ a }}{% endif %}{% unless forloop.last %}, {% endunless %}{% endfor %}</span>
         {%- comment -%} "Accepted" notes become a small tag; other notes stay as a line. {%- endcomment -%}
         {%- assign status = nil %}{% assign note = p.note %}
         {%- if p.note contains "to appear" %}{% assign status = "To appear" %}{% assign note = nil %}
         {%- elsif p.note == "Accepted" %}{% assign status = "Accepted" %}{% assign note = nil %}{% endif %}
+        {%- comment -%} BibTeX for the BibTeX tag: written from the fields above, unless the paper has its own bibtex. {%- endcomment -%}
+        {%- assign kw = "" %}{% assign words = p.title | downcase | replace: ":", " " | replace: "?", " " | replace: "(", " " | replace: ")", " " | replace: ",", " " | replace: "-", " " | split: " " %}
+        {%- for w in words %}{% unless stop contains w %}{% assign kw = w %}{% break %}{% endunless %}{% endfor %}
+        {%- assign last1 = p.authors.first | split: " " | last | downcase %}
+        {%- capture bib %}{% if p.bibtex %}{{ p.bibtex }}{% else %}@inproceedings{{ lb }}{{ last1 }}{{ p.year }}{{ kw }},
+  title     = {{ lb }}{{ p.title }}{{ rb }},
+  author    = {{ lb }}{% for a in p.authors %}{% assign parts = a | split: " " %}{{ parts | last }}, {{ parts | pop | join: " " }}{% unless forloop.last %} and {% endunless %}{% endfor %}{{ rb }},
+  booktitle = {{ lb }}{{ p.venue }}{% if p.host %} at {{ p.host }} {{ p.year }}{% endif %}{{ rb }},
+  year      = {{ lb }}{{ p.year }}{{ rb }}{% if p.url %},
+  url       = {{ lb }}{{ p.url }}{{ rb }}{% endif %}
+{{ rb }}{% endif %}{% endcapture %}
         {%- assign kind = p.type | default: "Paper" %}
-        <span class="p-tags">{% if p.host %}<span class="venue">{{ p.host }} {{ p.year }}</span><span>{{ p.short | default: p.venue }}</span>{% else %}<span class="venue">{{ p.short | default: p.venue }} {{ p.year }}</span>{% endif %}{% if p.url %}<a href="{{ p.url }}" target="_blank" rel="noopener">{{ kind }}</a>{% else %}<span>{{ kind }}</span>{% endif %}{% for l in p.links %}<a href="{{ l.url }}" target="_blank" rel="noopener">{{ l.name }}</a>{% endfor %}{% if status %}<span class="status">{{ status }}</span>{% endif %}</span>
+        <span class="p-tags">{% if p.host %}<span class="venue">{{ p.host }} {{ p.year }}</span><span>{{ p.short | default: p.venue }}</span>{% else %}<span class="venue">{{ p.short | default: p.venue }} {{ p.year }}</span>{% endif %}{% if p.url %}<a href="{{ p.url }}" target="_blank" rel="noopener">{{ kind }}</a>{% else %}<span>{{ kind }}</span>{% endif %}{% for l in p.links %}<a href="{{ l.url }}" target="_blank" rel="noopener">{{ l.name }}</a>{% endfor %}{% if p.summary %}<button class="sum-btn" type="button" aria-expanded="false" aria-controls="{{ sum_id }}">Summary</button>{% endif %}<button class="cite" type="button" data-bib="{{ bib | strip | escape }}">BibTeX</button>{% if status %}<span class="status">{{ status }}</span>{% endif %}</span>
+        {%- if p.summary %}<p class="p-sum" id="{{ sum_id }}">{{ p.summary }}</p>{% endif %}
         {%- if note %}<span class="p-note">{{ note }}</span>{% endif %}
       </li>
       {%- endfor %}
@@ -60,7 +76,7 @@ permalink: /
   {%- comment -%}
     Background, from _data/cv.yml. Every subsection starts open and can be
     folded. Education is two cards; everything else is a list with the date
-    on the right: the place (or the award) as the title, details under it.
+    on the right: the role (or the award) as the title, the place under it.
   {%- endcomment -%}
   <section id="background">
     <h2>Background</h2>
@@ -82,8 +98,9 @@ permalink: /
     {%- else %}
     <ul class="rows">
       {%- for e in s.entries %}
-      {%- comment -%} Awards lead with the award; Experience and the rest lead with the place. {%- endcomment -%}
-      {%- if s.section == "Awards" %}{% assign head = e.title %}{% assign sub = e.org %}{% else %}{% assign head = e.org | default: e.title %}{% assign sub = e.title %}{% if head == sub %}{% assign sub = nil %}{% endif %}{% endif %}
+      {%- comment -%} Awards lead with the award and Experience with the role; the rest lead with the place. {%- endcomment -%}
+      {%- if s.section == "Awards" or s.section == "Experience" %}{% assign head = e.title %}{% assign sub = e.org %}{% else %}{% assign head = e.org | default: e.title %}{% assign sub = e.title %}{% if head == sub %}{% assign sub = nil %}{% endif %}{% endif %}
+      {%- if e.area and sub %}{% assign sub = sub | append: " (" | append: e.area | append: ")" %}{% endif %}
       <li>
         <span class="when">{{ e.dates }}</span>
         <div class="what"><b>{{ head }}</b>{% if sub %}<span class="txt">{{ sub }}</span>{% endif %}{% if e.text %}<span class="txt">{{ e.text | markdownify | remove: "<p>" | remove: "</p>" | strip }}</span>{% endif %}</div>
@@ -109,7 +126,7 @@ permalink: /
 
   <section id="contact">
     <h2>Contact</h2>
-    {%- if site.email %}<p>The best way to reach me is by email at <a href="mailto:{{ site.email }}"><em>{{ site.email }}</em></a>.</p>{% endif %}
+    {%- if site.email %}<p>The best way to reach me is by email at <span class="mail">{{ site.email }}</span>. <button class="copy-mail" type="button" data-email="{{ site.email }}" aria-label="Copy email address" title="Copy email address"><svg class="i-copy" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V6a2 2 0 0 1 2-2h9"/></svg><svg class="i-done" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></button></p>{% endif %}
     {%- comment -%} Social accounts, in this order. {%- endcomment -%}
     {%- assign social_names = "LinkedIn|X|Bluesky" | split: "|" %}
     {%- assign social = "" | split: "" %}

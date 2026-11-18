@@ -60,6 +60,12 @@ cover: /assets/img/cover.jpg
 # or a percentage from the top, e.g. "center 40%".
 cover_position: "center 58%"
 
+# Smaller WebP copies of the photo and cover, so the page loads fast.
+# When you upload a new photo or cover, delete its line here, or the
+# old picture keeps showing.
+photo_webp: /assets/img/photo.webp
+cover_webp: [/assets/img/cover-1000.webp 1000w, /assets/img/cover-2000.webp 2000w]
+
 # Tabs at the top of every page
 nav:
   - name: Home

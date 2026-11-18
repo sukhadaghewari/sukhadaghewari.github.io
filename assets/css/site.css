@@ -98,6 +98,7 @@ strong,b{font-weight:600}
 [data-theme="dark"] .theme-toggle .sun{display:block}
 
 /* ---------- Cover strip (Writing page) ---------- */
+picture{display:contents}
 .site-cover{grid-area:cover;margin:0;position:relative;z-index:1}
 .site-cover img{display:block;width:100%;aspect-ratio:9/2.277;object-fit:cover;border-radius:12px;background:var(--wash)}
 .has-cover .content{padding-top:40px}
@@ -213,7 +214,7 @@ strong,b{font-weight:600}
   .is-blog .wrap{grid-template-areas:"nav" "side" "main"}
   .has-cover.is-blog .wrap{grid-template-areas:"cover" "side" "main"}
   .rail .topic-list{flex-direction:row;flex-wrap:wrap;gap:8px}
-  .rail.blog-rail,.rail.research-rail{margin:0 0 30px;padding:0 0 22px;border-top:0;border-bottom:1px solid var(--line);gap:22px}
+  .rail.blog-rail{margin:0 0 30px;padding:0 0 22px;border-top:0;border-bottom:1px solid var(--line);gap:22px}
   .is-post .wrap{grid-template-areas:"nav" "main"}
   .post-rail{display:none}
   .tabs{gap:20px;margin-bottom:28px}
