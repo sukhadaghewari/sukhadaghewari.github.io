@@ -54,8 +54,8 @@
        lightness, so nothing clashes.
        Few colours, each used the same way everywhere.
        - Forest green: your name and the section titles.
-       - Sage: links (with a soft fern underline), and the one filled box
-         style used for the home button, the Download CV button and the
+       - Sage: links (with a soft fern underline), the ring around SG, and
+         the one filled box style used for the Download CV button and the
          active tab.
        - Soft sage: the venue tags (WACV 2027, ...), a pale fill with dark
          green text, so they mark the venue without jumping out.
@@ -99,19 +99,20 @@
       --serif:"Newsreader",Georgia,serif; --sans:"Figtree",-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
     }
     :root[data-theme="dark"]{
-      /* Deep olive charcoal with crisp, bright text. Main text and headings
-         lead, everything else one step softer. The greens stay on the same
-         sage hue as light mode. Numbers are contrast on the page. */
+      /* Deep olive charcoal with crisp cream text; your name and the section
+         titles are cream too. Everything else is one step softer. Links and
+         labels stay on the same sage hue as light mode. Numbers are contrast
+         on the page. */
       --sage-100:#DCECDE; /* link hover */
       --sage-200:#B2D3B7; /* 9.9  links */
       --sage-600:#5E7E64; /*      link underline */
-      --paper:#20231F; --ink:#F1F1EB; /* 14.0 */ --muted:#B9BBB1; /* 8.2 */ --line:#434940;
+      --paper:#20231F; --ink:#EFEEE7; /* 13.7 */ --muted:#B4B9AB; /* 7.9 */ --line:#41473D;
       --link:var(--sage-200); --link-hover:var(--sage-100); --link-line:var(--sage-600);
       --venue:#4C6E52; --venue-text:#F0F6F0; /* 5.6 */
       --tag-venue:#384A3B; --tag-venue-text:#DCECDE; /* 7.7 */
       --warm:#E0A386; /* 7.4 */ --warm-soft:rgba(224,163,134,.24);
-      --card:#2C302B; --card-line:#4A5047; --chip:transparent; /* dark: tags are outlines only */
-      --forest:#DCECDE; /* 13.0 */ --moss:#AECAB1; /* 9.2 */
+      --card:#292E27; --card-line:#41473D; --chip:transparent; /* dark: tags are outlines only */
+      --forest:#EFEEE7; /* 13.7 cream, same as the text */ --moss:#AECAB1; /* 9.2 */
       --fern:#5A745E;
     }
     *{box-sizing:border-box}
@@ -127,9 +128,10 @@
     .bar{position:sticky;top:0;z-index:10;background:var(--paper);border-bottom:1px solid transparent}
     .bar.scrolled{border-bottom-color:var(--line)}
     .bar .wrap{display:flex;align-items:center;gap:22px;height:58px}
-    /* Home: your initials on a sage tile, top left */
-    .home{flex:none;display:grid;place-items:center;width:34px;height:34px;border-radius:9px;background:var(--venue);color:var(--venue-text);font:italic 500 var(--fs-title)/1 var(--serif);letter-spacing:.02em}
-    .home:hover{color:var(--venue-text);filter:brightness(1.1)}
+    /* Home: your initials in a thin sage ring, like a small seal, top left */
+    .home{flex:none;display:grid;place-items:center;width:36px;height:36px;border-radius:50%;border:1.5px solid var(--link);color:var(--forest);font:italic 500 var(--fs-body)/1 var(--serif);letter-spacing:.01em;text-decoration:none;transition:background-color .2s ease}
+    :root[data-theme="dark"] .home{border-color:var(--moss)}
+    .home:hover{color:var(--forest);background:color-mix(in srgb,var(--link) 10%,transparent)}
     .bar nav{position:relative;display:flex;gap:4px;margin-left:auto;font-size:var(--fs-small)}
     .bar nav a{position:relative;z-index:1;color:var(--muted);padding:4px 10px;border:1px solid transparent;border-radius:5px;transition:background-color .15s,color .15s}
     .bar nav a:hover{color:var(--ink)}
@@ -560,6 +562,24 @@
     }
     addEventListener("hashchange", openTarget);
     openTarget();
+
+    // The SG button: on the home page, glide back to the top in a fraction of
+    // a second, however far down you are (the page's own smooth scroll is slow
+    // over a long page). On other pages it simply opens the home page.
+    document.querySelector(".home").addEventListener("click", function (e) {
+      if (this.pathname !== location.pathname) return;
+      e.preventDefault();
+      var start = scrollY, t0 = null, dur = Math.min(420, 160 + start / 12);
+      root.style.scrollBehavior = "auto";
+      function done() { root.style.scrollBehavior = ""; if (location.hash) history.replaceState(null, "", location.pathname); }
+      if (!motion || start < 2) { scrollTo(0, 0); done(); return; }
+      requestAnimationFrame(function step(t) {
+        if (t0 === null) t0 = t;
+        var p = Math.min(1, (t - t0) / dur);
+        scrollTo(0, start * Math.pow(1 - p, 3));
+        if (p < 1) requestAnimationFrame(step); else done();
+      });
+    });
 
     // The footer icon follows the visitor's month (January to December)
     var icon = document.querySelector("footer .month");
