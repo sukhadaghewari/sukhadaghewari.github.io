@@ -319,11 +319,14 @@
     /* A small nature icon for the month between your name and the update date
        (Google Noto Emoji, Apache 2.0, see assets/img/months/LICENSE.txt) */
     footer .month{width:20px;height:20px;margin:0 10px;vertical-align:-5px;transition:transform .4s cubic-bezier(.22,.61,.36,1)}
-    /* Hover the icon: it lifts a little, and "Hello November!" fades in above it as an italic note, like the dates */
+    /* Hover the icon: it lifts a little, and "Hello November!" pops up above
+       it in a tiny rounded speech bubble with a little tail */
     footer .month-wrap{position:relative;display:inline-block}
-    footer .hello{position:absolute;left:50%;bottom:calc(100% + 8px);white-space:nowrap;font:italic 400 var(--fs-small)/1.3 var(--serif);color:var(--warm);opacity:0;pointer-events:none;
-      transform:translate(-50%,4px);transition:opacity .35s ease,transform .45s cubic-bezier(.22,.61,.36,1)}
-    footer .month-wrap:hover .hello{opacity:1;transform:translate(-50%,0)}
+    footer .hello{position:absolute;left:50%;bottom:calc(100% + 9px);white-space:nowrap;font:italic 400 var(--fs-tag)/1.2 var(--serif);color:var(--warm);
+      padding:3px 9px 4px;border-radius:999px;background:var(--card);border:1px solid var(--warm-soft);opacity:0;pointer-events:none;
+      transform:translate(-50%,5px) scale(.85);transform-origin:50% 100%;transition:opacity .25s ease,transform .45s cubic-bezier(.34,1.56,.64,1)}
+    footer .hello::after{content:"";position:absolute;left:50%;top:100%;width:7px;height:7px;margin:-4px 0 0 -4px;background:var(--card);border-right:1px solid var(--warm-soft);border-bottom:1px solid var(--warm-soft);transform:rotate(45deg)}
+    footer .month-wrap:hover .hello{opacity:1;transform:translate(-50%,0) scale(1)}
 
     /* Small hover touches, only on devices with a pointer */
     @media (hover:hover){
@@ -406,7 +409,7 @@
   {%- endif %}
   <ul class="side-links">
     {%- if site.email %}<li class="email"><button class="copy" type="button" data-email="{{ site.email }}" aria-describedby="email-addr">{% include link-icon.html name="Email" %}<span>Email</span></button><span class="addr" id="email-addr" role="status">{{ site.email }}</span></li>{% endif %}
-    {%- for l in site.links %}{% unless hidden_links contains l.name %}<li><a href="{{ l.url }}" target="_blank" rel="noopener">{% include link-icon.html name=l.name %}{{ l.name | replace: "Google ", '<span class="long">Google </span>' }}</a></li>{% endunless %}{% endfor %}
+    {%- for l in site.links %}{% unless hidden_links contains l.name %}<li><a href="{{ l.url }}" target="_blank" rel="noopener">{% include link-icon.html name=l.name %}<span>{{ l.name | replace: "Google ", '<span class="long">Google </span>' }}</span></a></li>{% endunless %}{% endfor %}
   </ul>
 </aside>
 
