@@ -389,7 +389,7 @@
 {%- endif %}
 
 {%- comment -%} Links in the left column. These ones from _config.yml are left off. {%- endcomment -%}
-{%- assign hidden_links = "OpenReview|Bluesky|X" | split: "|" %}
+{%- assign hidden_links = "OpenReview|Bluesky|X|LinkedIn" | split: "|" %}
 <div class="layout">
 <aside class="side">
   {%- if site.photo %}<picture class="photo">{% if site.photo_webp %}<source type="image/webp" srcset="{{ site.photo_webp | relative_url }}">{% endif %}<img src="{{ site.photo | relative_url }}" alt="Photo of {{ site.title | escape }}" width="196" height="196"></picture>{% endif %}
