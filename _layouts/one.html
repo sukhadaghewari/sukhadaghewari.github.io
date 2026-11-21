@@ -354,7 +354,10 @@
       .layout{grid-template-columns:1fr;gap:0}
       .side{position:static;padding-top:20px;padding-bottom:6px}
       picture.photo{width:152px;height:152px;border-radius:12px}
-      .side-links{display:flex;flex-wrap:wrap;gap:8px 18px}
+      /* Phones: the links fit on one line, with "Google Scholar" shortened to "Scholar" */
+      .side-links{display:flex;flex-wrap:wrap;gap:8px 14px}
+      .side-links a,.side-links button{gap:6px}
+      .side-links .long{display:none}
       /* Phones: the date goes under the entry */
       .rows li{grid-template-columns:1fr;gap:2px}
       .rows .when{grid-column:1;grid-row:2;text-align:left}
@@ -403,7 +406,7 @@
   {%- endif %}
   <ul class="side-links">
     {%- if site.email %}<li class="email"><button class="copy" type="button" data-email="{{ site.email }}" aria-describedby="email-addr">{% include link-icon.html name="Email" %}<span>Email</span></button><span class="addr" id="email-addr" role="status">{{ site.email }}</span></li>{% endif %}
-    {%- for l in site.links %}{% unless hidden_links contains l.name %}<li><a href="{{ l.url }}" target="_blank" rel="noopener">{% include link-icon.html name=l.name %}{{ l.name }}</a></li>{% endunless %}{% endfor %}
+    {%- for l in site.links %}{% unless hidden_links contains l.name %}<li><a href="{{ l.url }}" target="_blank" rel="noopener">{% include link-icon.html name=l.name %}{{ l.name | replace: "Google ", '<span class="long">Google </span>' }}</a></li>{% endunless %}{% endfor %}
   </ul>
 </aside>
 
