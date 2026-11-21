@@ -3,7 +3,7 @@ layout: one
 permalink: /
 ---
 {%- comment -%}
-  The home page sections. The frame around them (top bar, Yosemite cover,
+  The home page sections. The frame around them (top bar, faint Yosemite view,
   sidebar, footer, colours) is in _layouts/one.html.
 {%- endcomment -%}
   <section id="about">
@@ -62,7 +62,7 @@ permalink: /
   url       = {{ lb }}{{ p.url }}{{ rb }}{% endif %}
 {{ rb }}{% endif %}{% endcapture %}
         {%- assign kind = p.type | default: "Paper" %}
-        <span class="p-tags">{% if p.host %}<span class="venue">{{ p.host }} {{ p.year }}</span><span>{{ p.short | default: p.venue }}</span>{% else %}<span class="venue">{{ p.short | default: p.venue }} {{ p.year }}</span>{% endif %}{% if p.url %}<a href="{{ p.url }}" target="_blank" rel="noopener">{{ kind }}</a>{% else %}<span>{{ kind }}</span>{% endif %}{% for l in p.links %}<a href="{{ l.url }}" target="_blank" rel="noopener">{{ l.name }}</a>{% endfor %}{% if p.summary %}<button class="sum-btn" type="button" aria-expanded="false" aria-controls="{{ sum_id }}">Summary</button>{% endif %}<button class="cite" type="button" data-bib="{{ bib | strip | escape }}">BibTeX</button>{% if status %}<span class="status">{{ status }}</span>{% endif %}</span>
+        <span class="p-tags">{% if p.host %}<span class="venue">{{ p.host }} {{ p.year }}</span><span>{{ p.short | default: p.venue }}</span>{% else %}<span class="venue">{{ p.short | default: p.venue }} {{ p.year }}</span>{% endif %}{% if p.url %}<a href="{{ p.url }}" target="_blank" rel="noopener">{{ kind }}</a>{% else %}<span>{{ kind }}</span>{% endif %}{% for l in p.links %}<a href="{{ l.url }}" target="_blank" rel="noopener">{{ l.name }}</a>{% endfor %}{% if p.summary %}<button class="sum-btn" type="button" aria-expanded="false" aria-controls="{{ sum_id }}">Summary</button>{% endif %}{% if p.cite %}<button class="cite" type="button" data-bib="{{ bib | strip | escape }}">BibTeX</button>{% endif %}{% if status %}<span class="status">{{ status }}</span>{% endif %}</span>
         {%- if p.summary %}<p class="p-sum" id="{{ sum_id }}">{{ p.summary }}</p>{% endif %}
         {%- if note %}<span class="p-note">{{ note }}</span>{% endif %}
       </li>

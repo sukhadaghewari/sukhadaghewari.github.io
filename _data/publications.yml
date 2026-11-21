@@ -31,7 +31,8 @@
 #   note:      one short line under the tags, e.g. a related patent.
 #              "Accepted" or "Accepted, to appear" becomes a small
 #              italic tag instead.
-#   bibtex:    your own BibTeX for the BibTeX tag, after "bibtex: |".
+#   cite:      true shows a BibTeX tag.
+#   bibtex:    your own BibTeX for that tag, after "bibtex: |".
 #              Without it, one is written from the fields above.
 #   summary:   three or four plain sentences, at most four lines on the
 #              page. A Summary tag opens it under the paper.
@@ -79,6 +80,7 @@
   short: "APWG eCrime"
   year: 2021
   url: "https://ieeexplore.ieee.org/abstract/document/9738769"
+  cite: true
   note: "This work also led to a patent granted in India (Patent No. 560163)."
   summary: >-
     Domain squatting means registering lookalike web addresses to fool people

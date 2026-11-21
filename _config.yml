@@ -5,7 +5,7 @@
 # ---------------------------------------------------------------
 
 title: Sukhada Ghewari
-tagline: Applied machine learning for social and environmental good
+tagline: Applied ML researcher and engineer solving real-world problems in climate and health
 description: >-
   Machine learning researcher and engineer building AI for people and the
   planet, from extreme-weather early warning to forest monitoring and health.
@@ -51,10 +51,9 @@ photo: /assets/img/photo.jpg
 # Upload it as assets/cv.pdf. Delete this line to hide the button.
 cv_pdf: /assets/cv.pdf
 
-# Cover photo: the wide strip at the top of the home page, with your
-# photo overlapping it.
-# Upload yours as assets/img/cover.jpg, then change ".svg" to ".jpg"
-# on the next line. Put a # at the start of the line to hide the cover.
+# Cover photo: shown very faintly behind the top of the home page.
+# Upload yours as assets/img/cover.jpg. Put a # at the start of the next
+# line to hide it.
 cover: /assets/img/cover.jpg
 # Which part of the photo to keep when it's cropped: top, center or bottom,
 # or a percentage from the top, e.g. "center 40%".

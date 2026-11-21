@@ -1,6 +1,6 @@
 {%- comment -%}
   The frame shared by the home page and the Updates page: the top bar,
-  the Yosemite cover, the sidebar and the footer. The sections
+  the faint Yosemite view, the sidebar and the footer. The sections
   themselves are in index.html and updates.html. Everything comes from
   these files, so nothing is written twice:
     _config.yml             name, tagline, topics, photo, cover, links
@@ -14,6 +14,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="format-detection" content="email=no">
   <title>{% if page.title %}{{ page.title }} · {{ site.title }}{% else %}{{ site.title }} · {{ site.tagline }}{% endif %}</title>
   <meta name="description" content="{{ site.description | strip_newlines | escape }}">
   <link rel="canonical" href="{{ page.url | absolute_url }}">
@@ -54,8 +55,10 @@
        Few colours, each used the same way everywhere.
        - Forest green: your name and the section titles.
        - Sage: links (with a soft fern underline), and the one filled box
-         style used for the home button, the venue tags (WACV 2027, ...),
-         the Download CV button and the active tab.
+         style used for the home button, the Download CV button and the
+         active tab.
+       - Soft sage: the venue tags (WACV 2027, ...), a pale fill with dark
+         green text, so they mark the venue without jumping out.
        - Moss: subsection titles, dates and update labels, all in italic.
        - Fern: the rule under each section title, and link underlines.
        - Text: --ink for main text, --muted for everything secondary.
@@ -85,6 +88,7 @@
       --paper:#F8F7F2; --ink:#232622; --muted:#676B64; --line:#E5E1D9;
       --link:var(--sage-700); --link-hover:var(--sage-900); --link-line:var(--sage-300);
       --venue:var(--sage-700); --venue-text:var(--paper);
+      --tag-venue:#D3E2D5; --tag-venue-text:#2C4430; /* 7.9 */
       --warm:#A9502F; /* 5.0 */ --warm-soft:rgba(169,80,47,.15);
       --card:#FCFBF8; --card-line:#E2DED5; --chip:#FFFFFF; /* tag fill, white on the cream page */
       --forest:#1E3823; /* 11.9 name and section titles */
@@ -104,6 +108,7 @@
       --paper:#20231F; --ink:#F1F1EB; /* 14.0 */ --muted:#B9BBB1; /* 8.2 */ --line:#434940;
       --link:var(--sage-200); --link-hover:var(--sage-100); --link-line:var(--sage-600);
       --venue:#4C6E52; --venue-text:#F0F6F0; /* 5.6 */
+      --tag-venue:#384A3B; --tag-venue-text:#DCECDE; /* 7.7 */
       --warm:#E0A386; /* 7.4 */ --warm-soft:rgba(224,163,134,.24);
       --card:#2C302B; --card-line:#4A5047; --chip:transparent; /* dark: tags are outlines only */
       --forest:#DCECDE; /* 13.0 */ --moss:#AECAB1; /* 9.2 */
@@ -138,17 +143,16 @@
     .theme:hover{color:var(--ink)}
     :root[data-theme="dark"] .theme .moon,:root[data-theme="light"] .theme .sun{display:none}
 
-    /* The cover photo: a short eased fade at the bottom and sides, so there is no milky band */
+    /* The Yosemite view, very faint behind your sidebar and About, fading
+       into the page by Updates. It scrolls away, so the rest reads on a clean page. */
     picture{display:contents}
-    .cover{position:relative;max-width:60rem;margin:0 auto;height:200px;overflow:hidden}
-    .cover img{width:100%;height:100%;object-fit:cover;display:block;
-      -webkit-mask-image:linear-gradient(to bottom,#000 74%,rgba(0,0,0,.7) 86%,rgba(0,0,0,.3) 94%,transparent 100%),linear-gradient(to right,transparent,#000 3%,#000 97%,transparent);-webkit-mask-composite:source-in;
-      mask-image:linear-gradient(to bottom,#000 74%,rgba(0,0,0,.7) 86%,rgba(0,0,0,.3) 94%,transparent 100%),linear-gradient(to right,transparent,#000 3%,#000 97%,transparent);mask-composite:intersect;filter:saturate(.85) contrast(.97)}
-    :root[data-theme="dark"] .cover img{opacity:.55}
-    /* Caption in the bottom-right corner, on the fade */
-    .cover figcaption{position:absolute;bottom:6px;right:16px;font-size:12px;color:var(--muted);letter-spacing:.01em}
+    body{position:relative;isolation:isolate}
+    .backdrop{position:absolute;left:0;right:0;top:58px;height:620px;z-index:-1;overflow:hidden;pointer-events:none}
+    .backdrop img{display:block;width:100%;height:100%;object-fit:cover;opacity:.19;
+      -webkit-mask-image:linear-gradient(to bottom,#000 40%,transparent);mask-image:linear-gradient(to bottom,#000 40%,transparent)}
+    :root[data-theme="dark"] .backdrop img{opacity:.14}
 
-    /* Two columns under the cover: you on the left, everything else on the right */
+    /* Two columns: you on the left, everything else on the right */
     .layout{max-width:60rem;margin:0 auto;padding:0 24px;display:grid;grid-template-columns:256px minmax(0,1fr);gap:44px;align-items:start}
     .layout > main{min-width:0;max-width:44rem}
     .side{position:sticky;top:76px;padding-top:36px;display:grid;gap:12px;justify-items:start}
@@ -172,8 +176,9 @@
     .side-links .addr{position:absolute;left:78px;top:50%;transform:translateY(-50%);white-space:nowrap;padding:2px 8px;border:1px solid var(--line);border-radius:4px;background:var(--paper);color:var(--ink);font-size:var(--fs-tag);opacity:0;pointer-events:none;transition:opacity .15s;z-index:5}
     .side-links .email:hover .addr,.side-links .email:focus-within .addr,.side-links .email.copied .addr{opacity:1}
     /* One medium gap between every section, and before the footer */
-    main section{padding-top:84px}
-    main > section:first-child{padding-top:36px}
+    main section{padding-top:96px}
+    /* A little room under the top bar before your photo and About */
+    .side,main > section:first-child{padding-top:48px}
     h2{position:relative;font-size:var(--fs-section);line-height:1.2;letter-spacing:-.005em;font-variation-settings:"opsz" 60;margin:0 0 24px;padding-bottom:10px}
     /* A fern rule under each section title, drawn in the first time the section comes into view */
     h2::after{content:"";position:absolute;left:0;right:0;bottom:0;height:1px;background:var(--fern);transform-origin:left}
@@ -217,7 +222,7 @@
     .p-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
     /* Tags and chips: light by default; the venue tag is filled (see the colour rules) */
     .topics li,.p-tags > *{font-size:var(--fs-tag);line-height:1.6;padding:0 8px;border:1px solid var(--line);border-radius:5px;background:var(--chip);color:var(--muted)}
-    .p-tags .venue{background:var(--venue);border-color:var(--venue);color:var(--venue-text);font-weight:600}
+    .p-tags .venue{background:var(--tag-venue);border-color:var(--tag-venue);color:var(--tag-venue-text);font-weight:600}
     /* Tags you can click (a link, Summary, BibTeX) are green */
     .p-tags a,.p-tags button{color:var(--link);text-decoration:none;font-family:inherit;cursor:pointer}
     .p-tags a:hover,.p-tags button:hover{color:var(--link-hover);border-color:var(--link-line)}
@@ -294,6 +299,8 @@
     #contact p{margin:0 0 10px}
     /* Your address in green, with a small green copy icon beside it that turns into a tick */
     #contact .mail{color:var(--link)}
+    /* Stops phones from turning the address into an underlined mail link */
+    #contact .mail a{color:inherit !important;text-decoration:none !important;pointer-events:none}
     #contact .copy-mail{display:inline-grid;place-items:center;margin-left:2px;padding:2px;vertical-align:-2px;border:0;background:none;color:var(--link);cursor:pointer}
     #contact .copy-mail:hover{color:var(--link-hover)}
     #contact .copy-mail .i-done,#contact .copy-mail.copied .i-copy{display:none}
@@ -308,7 +315,7 @@
     #contact .social a[aria-label="Bluesky"]{color:#1185FE}
     #contact .social a:hover{filter:brightness(1.12)}
     #contact .social .icon{width:16px;height:16px}
-    footer{margin-top:84px;padding:0 0 48px;color:var(--muted);font-size:var(--fs-tag)}
+    footer{margin-top:96px;padding:0 0 48px;color:var(--muted);font-size:var(--fs-tag)}
     /* A small nature icon for the month between your name and the update date
        (Google Noto Emoji, Apache 2.0, see assets/img/months/LICENSE.txt) */
     footer .month{width:20px;height:20px;margin:0 10px;vertical-align:-5px;transition:transform .4s cubic-bezier(.22,.61,.36,1)}
@@ -339,10 +346,11 @@
       .bar .wrap{gap:6px;padding-right:10px}
       .bar nav{flex:1;min-width:0;margin-left:0;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch;gap:2px}
       .bar nav::-webkit-scrollbar{display:none}
-      .bar nav{-webkit-mask-image:linear-gradient(to right,transparent,#000 10px,#000 calc(100% - 18px),transparent);mask-image:linear-gradient(to right,transparent,#000 10px,#000 calc(100% - 18px),transparent)}
+      /* An edge fades only on a side with more tabs to swipe to, so About starts crisp */
+      .bar nav{--fade-l:0px;--fade-r:18px;-webkit-mask-image:linear-gradient(to right,transparent,#000 var(--fade-l),#000 calc(100% - var(--fade-r)),transparent);mask-image:linear-gradient(to right,transparent,#000 var(--fade-l),#000 calc(100% - var(--fade-r)),transparent)}
       .bar nav a{flex:none;padding:4px 9px}
       .theme{flex:none}
-      .cover{height:150px}
+      .backdrop{height:460px}
       .layout{grid-template-columns:1fr;gap:0}
       .side{position:static;padding-top:20px;padding-bottom:6px}
       picture.photo{width:152px;height:152px;border-radius:12px}
@@ -377,7 +385,7 @@
 </header>
 
 {%- if site.cover %}
-{% capture cover_srcset %}{% for c in site.cover_webp %}{{ site.baseurl }}{{ c }}{% unless forloop.last %}, {% endunless %}{% endfor %}{% endcapture %}<figure class="cover"><picture>{% if site.cover_webp %}<source type="image/webp" srcset="{{ cover_srcset }}" sizes="(min-width: 60rem) 60rem, 100vw">{% endif %}<img src="{{ site.cover | relative_url }}" alt="Yosemite Valley from Tunnel View at sunset" style="object-position: {{ site.cover_position | default: 'center' | escape }};"></picture><figcaption>Tunnel View, Yosemite, 30 August 2025</figcaption></figure>
+{% capture cover_srcset %}{% for c in site.cover_webp %}{{ site.baseurl }}{{ c }}{% unless forloop.last %}, {% endunless %}{% endfor %}{% endcapture %}<div class="backdrop" aria-hidden="true"><picture>{% if site.cover_webp %}<source type="image/webp" srcset="{{ cover_srcset }}" sizes="100vw">{% endif %}<img src="{{ site.cover | relative_url }}" alt="" style="object-position: {{ site.cover_position | default: 'center' | escape }};"></picture></div>
 {%- endif %}
 
 {%- comment -%} Links in the left column. These ones from _config.yml are left off. {%- endcomment -%}
@@ -428,7 +436,7 @@
       if (navigator.clipboard) navigator.clipboard.writeText(text).then(done, fail);
       else if (fail) fail();
     }
-    // Email in the sidebar copies your address (or opens mail if copying isn't allowed)
+    // Email in the sidebar copies your address; the address shows on hover either way
     document.querySelectorAll(".copy").forEach(function (copy) {
       copy.addEventListener("click", function () {
         var li = copy.parentNode, addr = li.querySelector(".addr"), email = copy.getAttribute("data-email");
@@ -436,7 +444,7 @@
           addr.textContent = "Copied to clipboard";
           li.classList.add("copied");
           setTimeout(function () { addr.textContent = email; li.classList.remove("copied"); }, 1800);
-        }, function () { location.href = "mailto:" + email; });
+        });
       });
     });
     // Summary tags open the summary under their paper; so does a click on the row
@@ -493,6 +501,15 @@
     var current = null;
     var motion = root.classList.contains("js");
     var nav = document.querySelector(".bar nav");
+    // Phones: fade the tab row's edges only where there are more tabs to swipe to
+    function navEdges() {
+      var left = nav.scrollLeft > 2, right = nav.scrollLeft + nav.clientWidth < nav.scrollWidth - 2;
+      nav.style.setProperty("--fade-l", left ? "10px" : "0px");
+      nav.style.setProperty("--fade-r", right ? "18px" : "0px");
+    }
+    nav.addEventListener("scroll", navEdges, { passive: true });
+    addEventListener("resize", navEdges);
+    navEdges();
     // The gliding pill behind the current tab (only when motion is welcome)
     var pill = null;
     if (motion) {
