@@ -129,7 +129,7 @@
     .bar.scrolled{border-bottom-color:var(--line)}
     .bar .wrap{display:flex;align-items:center;gap:22px;height:58px}
     /* Home: your initials on a sage tile, top left */
-    .home{flex:none;display:grid;place-items:center;width:34px;height:34px;border-radius:9px;background:var(--venue);color:var(--venue-text);font:italic 500 var(--fs-title)/1 var(--serif);letter-spacing:.02em}
+    .home{flex:none;display:grid;place-items:center;width:34px;height:34px;border-radius:9px;background:var(--venue);color:var(--venue-text);font:500 var(--fs-title)/1 var(--serif);letter-spacing:.02em}
     .home:hover{color:var(--venue-text);filter:brightness(1.1)}
     .bar nav{position:relative;display:flex;gap:4px;margin-left:auto;font-size:var(--fs-small)}
     .bar nav a{position:relative;z-index:1;color:var(--muted);padding:4px 10px;border:1px solid transparent;border-radius:5px;transition:background-color .15s,color .15s}
@@ -149,16 +149,17 @@
     picture{display:contents}
     body{position:relative;isolation:isolate}
     .backdrop{position:absolute;left:0;right:0;top:58px;height:620px;z-index:-1;overflow:hidden;pointer-events:none}
-    .backdrop img{display:block;width:100%;height:100%;object-fit:cover;opacity:.19;
+    .backdrop img{display:block;width:100%;height:100%;object-fit:cover;opacity:.209;
       -webkit-mask-image:linear-gradient(to bottom,#000 40%,transparent);mask-image:linear-gradient(to bottom,#000 40%,transparent)}
-    :root[data-theme="dark"] .backdrop img{opacity:.14}
+    :root[data-theme="dark"] .backdrop img{opacity:.154}
 
     /* Two columns: you on the left, everything else on the right */
     .layout{max-width:60rem;margin:0 auto;padding:0 24px;display:grid;grid-template-columns:256px minmax(0,1fr);gap:44px;align-items:start}
     .layout > main{min-width:0;max-width:44rem}
-    .side{position:sticky;top:76px;padding-top:36px;display:grid;gap:12px;justify-items:start}
+    /* --side-top: set by the script so a sidebar taller than the window scrolls until its last link shows, then holds */
+    .side{position:sticky;top:var(--side-top,76px);padding-top:36px;display:grid;gap:12px;justify-items:start}
     /* Your photo, a soft-cornered square, zoomed in a little so you sit in the middle */
-    picture.photo{display:block;width:196px;height:196px;border-radius:14px;overflow:hidden;margin:0 0 4px}
+    picture.photo{display:block;width:185px;height:185px;border-radius:14px;overflow:hidden;margin:0 0 4px}
     .photo img{display:block;width:100%;height:100%;object-fit:cover;object-position:center 30%;transform:scale(1.15);transform-origin:100% 38%}
     /* Headings in Newsreader, forest green */
     h1,h2{font-family:var(--serif);font-weight:400;color:var(--forest)}
@@ -328,6 +329,13 @@
       transform:translate(-50%,5px) scale(.85);transform-origin:50% 100%;transition:opacity .25s ease,transform .45s cubic-bezier(.34,1.56,.64,1)}
     footer .hello::after{content:"";position:absolute;left:50%;top:100%;width:7px;height:7px;margin:-4px 0 0 -4px;background:var(--card);border-right:1px solid var(--warm-soft);border-bottom:1px solid var(--warm-soft);transform:rotate(45deg)}
     footer .month-wrap:hover .hello{opacity:1;transform:translate(-50%,0) scale(1)}
+    /* Hover your photo and it says hi, in the same little bubble */
+    .photo-wrap{position:relative;display:block;width:fit-content}
+    .photo-wrap .hello{position:absolute;left:50%;bottom:calc(100% + 9px);white-space:nowrap;font:italic 400 var(--fs-tag)/1.2 var(--serif);color:var(--warm);
+      padding:3px 9px 4px;border-radius:999px;background:var(--card);border:1px solid var(--warm-soft);opacity:0;pointer-events:none;z-index:5;
+      transform:translate(-50%,5px) scale(.85);transform-origin:50% 100%;transition:opacity .25s ease,transform .45s cubic-bezier(.34,1.56,.64,1)}
+    .photo-wrap .hello::after{content:"";position:absolute;left:50%;top:100%;width:7px;height:7px;margin:-4px 0 0 -4px;background:var(--card);border-right:1px solid var(--warm-soft);border-bottom:1px solid var(--warm-soft);transform:rotate(45deg)}
+    .photo-wrap:hover .hello{opacity:1;transform:translate(-50%,0) scale(1)}
 
     /* Small hover touches, only on devices with a pointer */
     @media (hover:hover){
@@ -357,7 +365,7 @@
       .backdrop{height:460px}
       .layout{grid-template-columns:1fr;gap:0}
       .side{position:static;padding-top:20px;padding-bottom:6px}
-      picture.photo{width:152px;height:152px;border-radius:12px}
+      picture.photo{width:144px;height:144px;border-radius:12px}
       /* Phones: the links fit on one line, with "Google Scholar" shortened to "Scholar" */
       .side-links{display:flex;flex-wrap:wrap;gap:8px 14px}
       .side-links a,.side-links button{gap:6px}
@@ -399,7 +407,7 @@
 {%- assign hidden_links = "OpenReview|Bluesky|X|LinkedIn" | split: "|" %}
 <div class="layout">
 <aside class="side">
-  {%- if site.photo %}<picture class="photo">{% if site.photo_webp %}<source type="image/webp" srcset="{{ site.photo_webp | relative_url }}">{% endif %}<img src="{{ site.photo | relative_url }}" alt="Photo of {{ site.title | escape }}" width="196" height="196"></picture>{% endif %}
+  {%- if site.photo %}<span class="photo-wrap"><picture class="photo">{% if site.photo_webp %}<source type="image/webp" srcset="{{ site.photo_webp | relative_url }}">{% endif %}<img src="{{ site.photo | relative_url }}" alt="Photo of {{ site.title | escape }}" width="185" height="185"></picture><span class="hello" aria-hidden="true">Hi, I'm {{ site.title | split: " " | first }} 👋</span></span>{% endif %}
   <h1>{{ site.title }}</h1>
   <p class="tagline">{{ site.tagline }}</p>
   {%- if site.topics %}
@@ -517,6 +525,12 @@
     nav.addEventListener("scroll", navEdges, { passive: true });
     addEventListener("resize", navEdges);
     navEdges();
+    // Short windows: let the sidebar scroll until its last link is in view, then hold it there
+    var side = document.querySelector(".side");
+    function fitSide() { side.style.setProperty("--side-top", Math.min(76, innerHeight - side.offsetHeight - 12) + "px"); }
+    addEventListener("resize", fitSide);
+    if (window.ResizeObserver) new ResizeObserver(fitSide).observe(side);
+    fitSide();
     // The gliding pill behind the current tab (only when motion is welcome)
     var pill = null;
     if (motion) {
