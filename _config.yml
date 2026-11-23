@@ -13,7 +13,6 @@ description: >-
 # Small tags under your name on the home page
 topics:
   - Climate & extreme weather
-  - Earth observation
   - Health & clinical AI
   - AI for social impact
 
@@ -29,7 +28,7 @@ substack: "https://substack.com/@sukhada14"
 # To remove one, delete both of its lines.
 links:
   - name: Google Scholar
-    url: "https://scholar.google.com/citations?hl=en&user=oeQF_3gAAAAJ"
+    url: "https://scholar.google.com/citations?user=lER7fPQAAAAJ&hl=en&oi=ao"
   - name: OpenReview
     url: "https://openreview.net/profile?id=%7ESukhada_Ghewari1"
   - name: GitHub
