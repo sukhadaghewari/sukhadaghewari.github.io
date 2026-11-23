@@ -329,13 +329,7 @@
       transform:translate(-50%,5px) scale(.85);transform-origin:50% 100%;transition:opacity .25s ease,transform .45s cubic-bezier(.34,1.56,.64,1)}
     footer .hello::after{content:"";position:absolute;left:50%;top:100%;width:7px;height:7px;margin:-4px 0 0 -4px;background:var(--card);border-right:1px solid var(--warm-soft);border-bottom:1px solid var(--warm-soft);transform:rotate(45deg)}
     footer .month-wrap:hover .hello{opacity:1;transform:translate(-50%,0) scale(1)}
-    /* Hover your photo and it says hi, in the same little bubble */
     .photo-wrap{position:relative;display:block;width:fit-content}
-    .photo-wrap .hello{position:absolute;left:50%;bottom:calc(100% + 9px);white-space:nowrap;font:italic 400 var(--fs-tag)/1.2 var(--serif);color:var(--warm);
-      padding:3px 9px 4px;border-radius:999px;background:var(--card);border:1px solid var(--warm-soft);opacity:0;pointer-events:none;z-index:5;
-      transform:translate(-50%,5px) scale(.85);transform-origin:50% 100%;transition:opacity .25s ease,transform .45s cubic-bezier(.34,1.56,.64,1)}
-    .photo-wrap .hello::after{content:"";position:absolute;left:50%;top:100%;width:7px;height:7px;margin:-4px 0 0 -4px;background:var(--card);border-right:1px solid var(--warm-soft);border-bottom:1px solid var(--warm-soft);transform:rotate(45deg)}
-    .photo-wrap:hover .hello{opacity:1;transform:translate(-50%,0) scale(1)}
 
     /* Small hover touches, only on devices with a pointer */
     @media (hover:hover){
@@ -366,10 +360,6 @@
       .layout{grid-template-columns:1fr;gap:0}
       .side{position:static;padding-top:20px;padding-bottom:6px}
       picture.photo{width:144px;height:144px;border-radius:12px}
-      /* Phones: the photo's hello sits to its right, clear of the top bar */
-      .photo-wrap .hello{left:calc(100% + 12px);bottom:auto;top:22px;transform:translateX(-5px) scale(.85);transform-origin:0 50%}
-      .photo-wrap .hello::after{left:0;top:50%;transform:rotate(135deg)}
-      .photo-wrap:hover .hello{transform:none}
       /* Phones: the links fit on one line, with "Google Scholar" shortened to "Scholar" */
       .side-links{display:flex;flex-wrap:wrap;gap:8px 14px}
       .side-links a,.side-links button{gap:6px}
@@ -411,7 +401,7 @@
 {%- assign hidden_links = "OpenReview|Bluesky|X|LinkedIn" | split: "|" %}
 <div class="layout">
 <aside class="side">
-  {%- if site.photo %}<span class="photo-wrap"><picture class="photo">{% if site.photo_webp %}<source type="image/webp" srcset="{{ site.photo_webp | relative_url }}">{% endif %}<img src="{{ site.photo | relative_url }}" alt="Photo of {{ site.title | escape }}" width="185" height="185"></picture><span class="hello" aria-hidden="true">Hi, I'm {{ site.title | split: " " | first }} 👋</span></span>{% endif %}
+  {%- if site.photo %}<span class="photo-wrap"><picture class="photo">{% if site.photo_webp %}<source type="image/webp" srcset="{{ site.photo_webp | relative_url }}">{% endif %}<img src="{{ site.photo | relative_url }}" alt="Photo of {{ site.title | escape }}" width="185" height="185"></picture></span>{% endif %}
   <h1>{{ site.title }}</h1>
   <p class="tagline">{{ site.tagline }}</p>
   {%- if site.topics %}
